@@ -471,7 +471,7 @@ ul {
     display: grid;
     grid-template-columns: 171px repeat(7, 1fr);
     gap: 54px;
-    background-color: #adadad;
+    background-color: var(--color-white);
     padding: 24px 12px;
     border-top-left-radius: 19px;
     border-top-right-radius: 19px;
