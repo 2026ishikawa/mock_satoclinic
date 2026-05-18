@@ -418,7 +418,7 @@ ul {
   font-weight: 700;
 }
 
-@media screen and (max-width:1023px) {
+@media (max-width:1023px) {
     .hero-content h1 {
     background-position: 60% 0;
     top: 40px;
@@ -453,6 +453,12 @@ ul {
   color: var(--color-deep-green);
 }
 
+@media (max-width:1023px)  {
+  .section-header {
+  margin-bottom: 50px;
+}
+}
+
 /* Schedule Section*/
 .section-schedule {
   padding: 50px 0 100px;
@@ -476,6 +482,7 @@ ul {
   gap: 15px;
   max-width: 1090px;
   width: 100%;
+  border-radius: 16px;
 }
 
 .schedule-table-new {
@@ -648,7 +655,6 @@ ul {
 @media (max-width: 1023px) {
   .schedule-box {
     padding: 30px 20px;
-    border-radius: 20px;
   }
 
   .schedule-table-new {
@@ -703,7 +709,6 @@ ul {
     text-align: center;
     padding: 20px 40px;
     font-size: 24px;
-    width: 100%;
     max-width: 320px;
     justify-content: center;
   }
@@ -751,7 +756,7 @@ ul {
 
 /* News Section */
 .section-news {
-  padding: 100px 0 150px;
+  margin: 100px 0 150px;
 }
 
 .news-layout {
@@ -1606,6 +1611,7 @@ ul {
 @media screen and (max-width: 1023px) {
   .staffRow {
     flex-wrap: wrap;
+    justify-content: space-around;
   }
 }
 
@@ -1731,6 +1737,7 @@ ul {
   height: fit-content;
   padding: 30px 25px;
   gap: 10px;
+  border-radius: 16px;
 }
 
 .schedule-table-new.for-access {
@@ -1828,6 +1835,34 @@ ul {
   margin-bottom: 10px;
 }
 
+/* tablet Styles for Access */
+@media (max-width: 1023px) {
+  .access-left {
+    width: 100%;
+  }
+  .header-utility {
+    width: 100%;
+  }
+  .schedule-box.for-access {
+    max-width: 800px;
+  }
+  .schedule-table-new.for-access {
+    max-width: 800px;
+  }
+  .access-content {
+    width: 100%;
+  }
+  .map-placeholder {
+    margin: 0 auto;
+    max-width: 800px;
+  }
+  .access-info {
+    max-width: 800px;
+    width: 100%;
+    margin: 0 auto;
+  }
+}
+
 /* Footer */
 .footer {
   background-color: var(--color-pale-beige);
@@ -1907,14 +1942,33 @@ ul {
   font-weight: 500;
 }
 
+/* tablet Styles for Footer */
+@media (max-width: 1023px) {
+  .footer-container {
+    padding: 30px 80px 10px
+  }
+}
+
 /* Tablet Styles */
 @media (min-width: 768px) {
   .desktop-nav {
-    display: block;
+    display: none;
   }
 
   .hamburger {
-    display: none;
+    display: block;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 10px;
+  }
+
+  .mobile-menu {
+    max-width: 768px;
+    width: 60%;
   }
 
   .logo {
