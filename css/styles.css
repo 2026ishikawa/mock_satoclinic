@@ -281,7 +281,7 @@ ul {
   width: 100%;
   max-width: 390px;
   height: 100vh;
-  background-color: #adadad;
+  background-color: var(--color-pale-beige);
   z-index: 1000;
   transition: right 0.3s ease-in-out;
   overflow-y: auto;
@@ -299,10 +299,12 @@ ul {
 }
 
 .mobile-menu-header .logo {
-  background-color: #adadad;
-  padding: 5px 20px;
-  font-size: 14px;
-  border: 1px solid rgba(255, 255, 255, 0.3);
+  background-image: url(../images/Logo.png);
+  background-size: contain;
+  background-repeat: no-repeat;
+  width: 40%;
+  max-width: 160px;
+  height: 50px;
 }
 
 .close-btn {
@@ -326,7 +328,7 @@ ul {
 }
 
 .mobile-nav a {
-  color: #fff;
+  color: var(--font-main-color);
   font-weight: 700;
   font-size: 18px;
   transition: opacity 0.3s;
@@ -348,7 +350,7 @@ ul {
   display: flex;
   align-items: center;
   gap: 5px;
-  background-color: #808080;
+  background-color: var(--font-main-color);
   color: #fff;
   padding: 15px 40px;
   border-radius: 8px;
