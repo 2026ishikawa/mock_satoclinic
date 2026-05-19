@@ -1127,12 +1127,18 @@ ul {
       gap: 25px;
     }
     .director-content .director-image {
-      height: 370px;
+      height: 500px;
     }
     .director-text h3 {
       font-size: 24px;
       margin-bottom: 10px;
     }
+}
+
+@media (max-width: 560px) {
+  .director-content .director-image {
+    height: 370px;
+  }
 }
 
 
@@ -1169,7 +1175,6 @@ ul {
 .medical-description {
   max-width: 100%;
   text-align: left;
-  padding: 10px;
   letter-spacing: normal;
 }
 
@@ -1377,38 +1382,30 @@ ul {
   .container-medical {
     padding: 0 20px;
   }
-
   .medical-contents {
+    gap: 20px;
+  }
+  .medical-cards-grid {
     gap: 10px;
   }
-
-  .medical-description {
-    padding: 10px;
-  }
-
   .medical-description p {
     font-size: 16px;
     line-height: 26px;
   }
-
   .medical-card {
     padding: 15px 20px;
   }
-
   .medical-card h3 {
     font-size: 20px;
   }
-
   .medical-card-subtitle {
     font-size: 12px;
   }
-
   .medical-card-icon,
   .icon-circle {
     width: 28px;
     height: 28px;
   }
-
   .medical-list-btn {
     font-size: 18px;
     padding: 15px 40px;
@@ -1499,7 +1496,7 @@ ul {
   transform: translateX(6px);
 }
 
-/* Mobile Styles for About */
+/* tablet Styles for About */
 @media (max-width: 1023px) {
     .about-text p {
         width: 65%;
@@ -1511,6 +1508,39 @@ ul {
         top: 220px;
     }
 }
+
+/* Mobile Styles for About */
+@media (max-width: 767px) {
+  .section-about {
+    padding: 50px 0;
+  }
+  .section-about .about-bg {
+    width: 100%;
+    border-radius: 3px 3px 0 0 ;
+  }
+  .about-content .about-image {
+    height: fit-content;
+  }
+  .about-content {
+    flex-direction: column-reverse;
+    gap: 30px;
+  }
+  .about-text {
+    width: auto;
+    height: auto;
+    position: static;
+  }
+  .about-text p {
+    position: static;
+    width: 100%;
+    font-size: 16px;
+    line-height: 1.6;
+  }
+  .about-btn {
+    position: static;
+  }
+}
+
 
 /* section-staff */
 .section-staff {
@@ -1661,7 +1691,7 @@ ul {
   }
 
   .jpName {
-    font-size: 15px;
+    font-size: 18px;
     font-weight: 700;
   }
 
@@ -1673,19 +1703,37 @@ ul {
 
   .spec,
   .bio {
-    font-size: 14px;
-    line-height: 20px;
+    font-size: 15px;
+    line-height: 1.5;
     color: var(--font-main-color);
   }
 }
 
-/* section-staff for tablet*/
+/* tablet for section-staff */
 @media screen and (max-width: 1023px) {
   .staffRow {
     flex-wrap: wrap;
     justify-content: space-around;
   }
 }
+
+/* Mobile for section-staff */
+@media screen and (max-width: 767px) {
+  .section-staff {
+    padding: 0 0 50px;
+  }
+  .section-staff .staff-bg {
+    width: 100%;
+    border-radius: 0 0 3px 3px;
+  }
+  .staffRow {
+    gap: 30px;
+  }
+  .staffCard {
+    gap: 15px;
+  }
+}
+
 
 /* Gallery Section */
 .gallery {
@@ -1745,9 +1793,8 @@ ul {
 /* 767px以下 */
 @media (max-width: 767px) {
   .gallery {
-    height: 180px;
-    margin-top: 80px;
-    margin-bottom: 80px;
+    height: 220px;
+    margin: 100px 0;
   }
 
   .galleryTrack {
@@ -1909,8 +1956,13 @@ ul {
 
 /* tablet Styles for Access */
 @media (max-width: 1023px) {
+    .access-wrapper {
+    flex-direction: column-reverse;
+    gap: 40px;
+  }
   .access-left {
-    width: 100%;
+    width: 90%;
+    margin: 0 auto;
   }
   .header-utility {
     width: 100%;
@@ -1922,7 +1974,8 @@ ul {
     max-width: 800px;
   }
   .access-content {
-    width: 100%;
+    width: 90%;
+    margin: 0 auto;
   }
   .map-placeholder {
     margin: 0 auto;
@@ -1933,7 +1986,71 @@ ul {
     width: 100%;
     margin: 0 auto;
   }
+  .reservation-tel-btn.for-access {
+    font-size: 20px;
+    min-width: fit-content;
+  }
+  .reservation-web-btn.for-access {
+    font-size: 20px;
+    min-width: fit-content;
+  }
 }
+
+/* Mobile Styles for Access */
+@media (max-width: 767px) {
+  .section-access {
+    padding: 30px 0 100px;
+  }
+  .header-utility {
+    gap: 15px;
+  }
+  .reservation-buttons.for-access {
+    gap: 20px;
+    flex-direction: row;
+  }
+  .schedule-box.for-access {
+    padding: 10px;
+  }
+  .schedule-box.for-access {
+    padding: 10px 10px;
+    gap: 5px;
+  }
+  .schedule-row.for-access {
+    padding: 5px 10px;
+  }
+  .schedule-row.schedule-row-last.for-access {
+    padding: 5px 10px;
+  }
+  .schedule-cell.for-access {
+    font-size: 14px;
+  }
+  .schedule-text.for-access {
+    gap: 0;
+  }
+}
+
+@media (max-width: 567px) {
+    .reservation-buttons.for-access {
+    gap: 20px;
+    flex-direction: column;
+  }
+    .reservation-tel-btn.for-access {
+    min-width: 270px;
+  }
+  .reservation-web-btn.for-access {
+    min-width: 270px;
+  }
+  .map-container {
+    height: 250px;
+  }
+  .access-left {
+    width: 100%;
+  }
+  .access-content {
+    width: 100%;
+  }
+}
+
 
 /* Footer */
 .footer {
@@ -2005,7 +2122,7 @@ ul {
 
 .footer-bottom {
   border-top: 1px solid var(--font-sub-color);
-  padding-top: 20px;
+  padding: 20px 0;
   text-align: center;
 }
 
@@ -2019,9 +2136,10 @@ ul {
   .footer-container {
     padding: 30px 80px 10px
   }
+
 }
 
-/* Tablet Styles */
+/* Tablet Styles for Footer*/
 @media (min-width: 768px) and (max-width: 1023px) {
   .desktop-nav {
     display: none;
@@ -2037,71 +2155,87 @@ ul {
     cursor: pointer;
     padding: 10px;
   }
-
   .mobile-menu {
     max-width: 768px;
     width: 60%;
   }
-
-  .logo {
-    padding: 0 5px;
-    font-size: 20px;
+    .footer-container {
+    padding: 0 20px;
+  }
+  .footer-content {
+    flex-direction: column;
+    gap: 20px;
+  }
+  .footer-logo {
+    padding: 20px 0 0;
+  }
+  .footer-info .postal-code,
+  .footer-info .address {
+    font-size: 16px;
   }
 }
+
+/* Mobile Styles for Footer*/
+@media (max-width:767px) {
+  .footer-logo {
+    padding: 20px 0 0;
+    width: 150px;
+  }
+    .footer-container {
+    padding: 0 20px;
+  }
+
+  .footer-content {
+    flex-direction: column;
+    gap: 5px;
+    margin: 0 auto 50px;
+  }
+
+  .footer-info .postal-code,
+  .footer-info .address {
+    font-size: 14px;
+  }
+
+  .footer-bottom {
+    padding: 10px 0;
+  }
+}
+
+
 
 /* Mobile Styles */
 @media (max-width: 767px) {
   .container {
     padding: 0 10px;
   }
-
   .header-container {
     padding: 15px 20px;
   }
-
-  .logo {
-    padding: 8px 20px;
-    font-size: 14px;
-  }
-
   .section-header {
     margin-bottom: 30px;
   }
-
   .section-subtitle {
     font-size: 16px;
     margin-bottom: 0;
   }
-
   .section-title {
     font-size: 28px;
   }
-
-  .about-content {
-    grid-template-columns: 1fr;
-    gap: 30px;
-  }
-
-  .about-image,
   .director-image {
     height: 200px;
   }
-
   .services-grid {
     grid-template-columns: 1fr;
     gap: 20px;
   }
-
   .news-item {
     flex-direction: column;
     align-items: flex-start;
     gap: 10px;
   }
-
   .news-date {
     min-width: auto;
   }
-
   .schedule-table {
     font-size: 14px;
   }
@@ -2111,36 +2245,13 @@ ul {
     padding: 10px 5px;
   }
 
-  .map-container {
-    height: 250px;
-  }
-
   .map-placeholder {
     font-size: 20px;
-  }
-
-  .footer-container {
-    padding: 0 20px;
-  }
-
-  .footer-content {
-    flex-direction: column;
-    gap: 20px;
-  }
-
-  .footer-logo {
-    padding: 5px 20px;
-    font-size: 14px;
-  }
-
-  .footer-info .postal-code,
-  .footer-info .address {
-    font-size: 12px;
   }
 
   .back-to-top {
     right: 10px;
     top: 10px;
-    transform: scale(0.5);
+    /* transform: scale(0.7); */
   }
 }
