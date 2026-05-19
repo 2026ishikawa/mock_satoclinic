@@ -382,7 +382,7 @@ ul {
 }
 
 .reservation-btn:hover {
-  background-color: #6a6a6a;
+  background-color: var(--font-sub-color);
 }
 
 /* Hero Section */
@@ -397,7 +397,7 @@ ul {
   background-position: center;
   background-repeat: no-repeat;
   /* background-attachment: fixed; */
-  background-color: #ddd;
+  background-color: var(--color-white);
   height: 80vh;
   width: 95vw;
   max-width: 1360px;
@@ -420,9 +420,12 @@ ul {
   font-weight: 700;
 }
 
+/* tablet Styles for Hero*/
 @media (max-width:1023px) {
+  .hero-content {
+    background-position: 65%;
+  }
     .hero-content h1 {
-    background-position: 60% 0;
     top: 40px;
     left: 50px;
     font-size: 36px;
@@ -430,6 +433,26 @@ ul {
     font-weight: 700;
   }
 }
+
+/* Mobile Styles for Hero*/
+@media (max-width: 767px) {
+    .hero {
+      padding: 0 0 50px;
+  }
+
+  .hero-content {
+    width: 100vw;
+    border: none;
+    border-radius: 0 0 3px 3px;
+  }
+
+  .hero-content h1 {
+    font-size: 22px;
+    top: 120px;
+    left: 20px;
+  }
+}
+
 
 /* Section */
 .section-white {
@@ -718,41 +741,50 @@ ul {
 
 /* Mobile Styles for Schedule */
 @media (max-width: 767px) {
+  .section-schedule {
+    padding: 0 0 50px;
+  }
+  .schedule-contents {
+    gap: 40px;
+  }
+  .schedule-box {
+      padding: 10px 15px;
+      gap: 5px;
+    }
   .schedule-header {
     grid-template-columns: 80px repeat(7, 1fr);
     gap: 5px;
     padding: 12px 6px;
-    font-size: 12px;
+    font-size: 14px;
   }
-
   .schedule-row {
     grid-template-columns: 80px repeat(7, 1fr);
     gap: 5px;
     padding: 12px 6px;
   }
-
   .schedule-cell {
-    font-size: 12px;
+    font-size: 14px;
   }
-
   .schedule-cell-label {
-    font-size: 10px;
+    font-size: 14px;
     padding-left: 5px;
   }
-
-  .schedule-text p {
-    font-size: 12px;
+  .schedule-text {
+    gap: 0;
   }
-
+  .schedule-text p {
+    font-size: 14px;
+  }
   .reservation-buttons {
     flex-direction: column;
-    gap: 30px;
+    gap: 20px;
   }
 
   .reservation-tel-btn,
   .reservation-web-btn {
-    padding: 15px 30px;
-    font-size: 16px;
+    padding: 15px 50px;
+    font-size: 20px;
+    min-width: 290px;
   }
 }
 
@@ -806,7 +838,7 @@ ul {
 
 .news-item-new {
   display: flex;
-  align-items: center;
+  align-items: flex-end;
   justify-content: space-between;
   padding: 15px 10px;
   border-bottom: 2px solid var(--border-dashed);
@@ -873,6 +905,7 @@ ul {
   width: 50px;
   height: 20px;
   transition: transform 0.3s;
+  margin-bottom: 5px;
 }
 
 .news-item-new:hover .news-arrow {
@@ -905,7 +938,7 @@ ul {
   transform: translateX(6px);
 }
 
-/* Mobile Styles for News */
+/* tablet Styles for News */
 @media (max-width: 1023px) {
   .news-layout {
     flex-direction: column;
@@ -950,32 +983,39 @@ ul {
   }
 }
 
+/* Mobile Styles for News */
 @media (max-width: 767px) {
+  .section-news {
+    margin: 50px 0;
+}
+.news-contentmlp-right {
+  gap: 40px;
+}
+    .news-item-new {
+      align-items: flex-end;
+      padding: 10px 5px;
+    }
   .news-date-new {
-    font-size: 14px;
+    font-size: 16px;
   }
-
   .news-tag-new {
     font-size: 12px;
     padding: 4px 12px;
     min-width: 80px;
   }
-
   .news-title-new {
-    font-size: 16px;
+    font-size: 18px;
   }
-
   .news-list-btn {
     font-size: 16px;
     padding: 12px 25px;
     gap: 30px;
+    margin: 0 auto;
   }
-
   .news-arrow {
     width: 40px;
     height: 16px;
   }
-
   .news-arrow svg {
     width: 40px;
     height: 16px;
@@ -1069,6 +1109,32 @@ ul {
     font-size: 16px;
   }
 }
+
+/* Mobile Styles for Director */
+@media (max-width: 767px) {
+  .section-director {
+    margin: 0 auto 50px;
+  }
+  .section-director .container {
+        padding: 50px 10px;
+    }
+    .section-director .decorative-bg {
+      width: 100%;
+      border-radius: 3px;
+    }
+    .director-content {
+      grid-template-columns: 1fr;
+      gap: 25px;
+    }
+    .director-content .director-image {
+      height: 370px;
+    }
+    .director-text h3 {
+      font-size: 24px;
+      margin-bottom: 10px;
+    }
+}
+
 
 /* Services Section */
 .section-service {
@@ -1254,7 +1320,7 @@ ul {
   transform: translateX(6px);
 }
 
-/* Mobile Styles for Medical Info */
+/* tablet Styles for Medical Info */
 @media (max-width: 1200px) {
   .medical-cards-grid {
     grid-template-columns: repeat(2, 1fr);
@@ -1299,31 +1365,34 @@ ul {
   }
 
   .medical-card-content {
-    flex-direction: column;
-    gap: 15px;
+    gap: 10px;
   }
 }
 
+/* Mobile Styles for Medical Info */
 @media (max-width: 767px) {
+  .section-service {
+    margin: 0 auto 50px;
+  }
   .container-medical {
     padding: 0 20px;
   }
 
   .medical-contents {
-    gap: 50px;
+    gap: 10px;
   }
 
   .medical-description {
-    padding: 5px;
+    padding: 10px;
   }
 
   .medical-description p {
-    font-size: 15px;
+    font-size: 16px;
     line-height: 26px;
   }
 
   .medical-card {
-    padding: 25px 30px;
+    padding: 15px 20px;
   }
 
   .medical-card h3 {
@@ -1344,6 +1413,7 @@ ul {
     font-size: 18px;
     padding: 15px 40px;
     gap: 30px;
+    margin: 30px auto 0;
   }
 }
 
@@ -1982,7 +2052,7 @@ ul {
 /* Mobile Styles */
 @media (max-width: 767px) {
   .container {
-    padding: 0 15px;
+    padding: 0 10px;
   }
 
   .header-container {
@@ -1994,32 +2064,20 @@ ul {
     font-size: 14px;
   }
 
-  .hero {
-    height: 80vh;
-  }
-
-  .hero-content h1 {
-    font-size: 32px;
-  }
-
-  .section {
-    padding: 50px 0;
-  }
-
   .section-header {
-    margin-bottom: 40px;
+    margin-bottom: 30px;
   }
 
   .section-subtitle {
     font-size: 16px;
+    margin-bottom: 0;
   }
 
   .section-title {
     font-size: 28px;
   }
 
-  .about-content,
-  .director-content {
+  .about-content {
     grid-template-columns: 1fr;
     gap: 30px;
   }
