@@ -69,3 +69,28 @@ window.addEventListener('scroll', () => {
         backToTop.style.opacity = '0.7';
     }
 });
+
+
+
+// faq アコーディオン　↓
+
+document.addEventListener("DOMContentLoaded", () => {
+  const accordions = document.querySelectorAll(".accordion");
+
+  accordions.forEach((accordion) => {
+    const button = accordion.querySelector(".accordion-button");
+    const content = accordion.querySelector(".accordion-content");
+
+    button.addEventListener("click", () => {
+      const isOpen = accordion.classList.contains("is-open");
+
+      if (isOpen) {
+        accordion.classList.remove("is-open");
+        content.style.maxHeight = null;
+      } else {
+        accordion.classList.add("is-open");
+        content.style.maxHeight = content.scrollHeight + "px";
+      }
+    });
+  });
+});
