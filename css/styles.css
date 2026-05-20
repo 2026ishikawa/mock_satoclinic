@@ -2256,29 +2256,36 @@ ul {
   }
 }
 
-------------------------
-/* faq page */
-
-.container {
+/* ----- faq page -----*/
+.faq-page {
+.container.for-faq {
   width: min(1120px, calc(100% - 80px));
-  margin: 0 auto;
+  padding: 0 0 0 50px;
+  margin: 0;
+  max-width: 270px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 /* hero */
 .page-hero {
   padding: 120px 0 100px;
+  background-color: var(--color-off-white);
 }
 
 .en-title {
   margin: 0 0 4px;
-  color: #888;
+  color: var(--font-sub-color);
   font-size: 16px;
+  text-align: center;
 }
 
 h1 {
   margin: 0;
   font-size: 36px;
   line-height: 1.3;
+  text-align: center;
 }
 
 /* lead */
@@ -2355,51 +2362,84 @@ h1 {
 
 .accordion {
   margin-bottom: 18px;
+  border: 1px solid #333;
+  border-radius: 6px;
+  background: #fff;
+  overflow: hidden;
 }
 
 .accordion-button {
   width: 100%;
   min-height: 70px;
-  padding: 18px 24px 18px 32px;
+  padding: 18px 28px;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: 24px;
   text-align: left;
   font-weight: 700;
-  border: 1px solid #333;
-  border-radius: 5px;
+  border: none;
   background: #fff;
   cursor: pointer;
 }
 
-.icon {
+.accordion-question {
+  display: flex;
+  align-items: flex-start;
+  gap: 24px;
+}
+
+.q-label,
+.a-label {
+  flex: 0 0 auto;
+  color: #00803d;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 1.6;
+}
+
+.question-text {
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 1.6;
+}
+
+.accordion-icon {
   position: relative;
   flex: 0 0 auto;
-  width: 24px;
-  height: 24px;
-  border: 3px solid #333;
+  width: 26px;
+  height: 26px;
+  border: 3px solid #00803d;
   border-radius: 50%;
 }
 
-.icon::before,
-.icon::after {
+.accordion-icon::before,
+.accordion-icon::after {
   content: "";
   position: absolute;
   top: 50%;
   left: 50%;
-  width: 12px;
-  height: 2px;
-  background: #333;
+  width: 13px;
+  height: 3px;
+  background: #00803d;
   transform: translate(-50%, -50%);
 }
 
-.icon::after {
+.accordion-icon::after {
   transform: translate(-50%, -50%) rotate(90deg);
-  transition: 0.2s;
 }
 
-.accordion.is-open .icon::after {
-  transform: translate(-50%, -50%) rotate(0deg);
+.accordion.is-open .accordion-icon {
+  border-color: #333;
+}
+
+.accordion.is-open .accordion-icon::before,
+.accordion.is-open .accordion-icon::after {
+  background: #333;
+}
+
+.accordion.is-open .accordion-icon::after {
+  opacity: 0;
 }
 
 .accordion-content {
@@ -2408,13 +2448,24 @@ h1 {
   transition: max-height 0.25s ease;
 }
 
-.accordion-content p {
+.accordion-content::before {
+  content: "";
+  display: block;
+  margin: 0 28px;
+  border-top: 1px dashed #333;
+}
+
+.accordion-answer {
+  padding: 18px 28px 28px;
+  display: flex;
+  align-items: flex-start;
+  gap: 24px;
+}
+
+.accordion-answer p {
   margin: 0;
-  padding: 18px 28px 24px;
-  background: #fff;
-  border: 1px solid #333;
-  border-top: none;
-  border-radius: 0 0 5px 5px;
+  font-size: 20px;
+  line-height: 1.7;
 }
 
 /* info */
@@ -2486,10 +2537,12 @@ h1 {
   content: "☎";
   margin-right: 8px;
 }
+}
 
 /* tablet: 768px - 1022px */
 @media screen and (max-width: 1023px) and (min-width: 768px) {
-  .container {
+  .faq-page {
+.container {
     width: calc(100% - 48px);
   }
 
@@ -2508,10 +2561,13 @@ h1 {
   .large-btn {
     width: 320px;
   }
+
+  }
 }
 
 /* smartphone: 767px以下 */
 @media screen and (max-width: 767px) {
+.faq-page {
   .container {
     width: calc(100% - 16px);
   }
@@ -2572,13 +2628,15 @@ h1 {
 
   .accordion {
     margin-bottom: 10px;
+    border-radius: 5px;
   }
 
   .accordion-button {
     min-height: 56px;
-    padding: 12px 8px 12px 12px;
+    padding: 12px 14px;
     font-size: 14px;
     line-height: 1.4;
+    gap: 12px;
   }
 
   .icon {
@@ -2591,8 +2649,49 @@ h1 {
     font-size: 14px;
   }
 
+  .accordion-question {
+    gap: 12px;
+  }
+
   .info-section {
     padding: 54px 0 50px;
+  }
+
+  .q-label,
+  .a-label {
+    font-size: 16px;
+    line-height: 1.5;
+  }
+
+  .question-text {
+    font-size: 14px;
+    line-height: 1.5;
+  }
+
+  .accordion-icon {
+    width: 22px;
+    height: 22px;
+    border-width: 2px;
+  }
+
+  .accordion-icon::before,
+  .accordion-icon::after {
+    width: 11px;
+    height: 2px;
+  }
+
+  .accordion-content::before {
+    margin: 0 14px;
+  }
+
+  .accordion-answer {
+    padding: 14px 14px 18px;
+    gap: 12px;
+  }
+
+  .accordion-answer p {
+    font-size: 14px;
+    line-height: 1.7;
   }
 
   .info-box {
@@ -2633,4 +2732,5 @@ h1 {
     height: 48px;
     font-size: 18px;
   }
+}
 }
