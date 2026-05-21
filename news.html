@@ -1,0 +1,329 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>佐藤医院</title>
+    <link rel="stylesheet" href="./css/styles.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Roboto:wght@700&family=Fredoka:wght@400&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <!-- Header -->
+    <header class="header">
+      <div class="header-container">
+        <a href="index.html">
+          <img
+          src="./images/Logo.png"
+          alt="logo"
+          width="200"
+          height="auto"
+          class="logo"
+        />
+        </a>
+        <!-- Desktop Navigation -->
+        <div class="desktop-navi">
+          <div class="navi-area">
+            <!-- Top Navigation -->
+            <div class="nav-top">
+              <a href="#access" class="nav-top-item">
+                <img
+                  src="./images/Header/icon_schedule.png"
+                  alt="診療時間のアイコン"
+                  width="22"
+                  height="22"
+                />
+                <span>診療時間</span>
+              </a>
+              <a href="#access" class="nav-top-item">
+                <div class="map-marker-icon"></div>
+                <span>アクセス</span>
+              </a>
+              <a href="faq.html" class="nav-top-item">
+                <img
+                  src="./images/Header/icon_faq.png"
+                  alt="?"
+                  width="20"
+                  height="20"
+                />
+                <span>よくある質問</span>
+              </a>
+            </div>
+
+            <!-- Main Navigation -->
+            <div class="nav-main">
+              <a href="#about">当院について</a>
+              <a href="#director">院長挨拶</a>
+              <a href="#services">診療案内</a>
+              <a href="#news">お知らせ</a>
+            </div>
+          </div>
+
+          <!-- Action Buttons -->
+          <div class="header-actions">
+            <a href="tel:0123-456-789" class="header-tel-btn">
+              <img
+                src="./images/Header/icon_phone_wh.png"
+                alt=""
+                width="18"
+                height="18"
+              />
+              <span>0123-456-789</span>
+            </a>
+            <a href="#reservation" class="header-reserve-btn">Web予約</a>
+          </div>
+        </div>
+
+        <!-- Mobile Hamburger -->
+        <button class="hamburger" id="hamburger" aria-label="メニュー">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </header>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobileMenu">
+      <div class="mobile-menu-header">
+        <div class="logo"></div>
+        <button class="close-btn" id="closeBtn" aria-label="閉じる">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+            <path
+              d="M18 6L6 18"
+              stroke="black"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+            <path
+              d="M6 6L18 18"
+              stroke="black"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+        </button>
+      </div>
+      <nav class="mobile-nav">
+        <ul>
+          <li><a href="#top">トップ</a></li>
+          <li><a href="#about">当院について</a></li>
+          <li><a href="#director">医長挨拶</a></li>
+          <li><a href="#services">診療案内</a></li>
+          <li><a href="#news">お知らせ</a></li>
+          <li><a href="#access">診療時間・アクセス</a></li>
+          <li><a href="faq.html">よくある質問</a></li>
+        </ul>
+      </nav>
+      <div class="mobile-menu-actions">
+        <a href="tel:0123-456-789" class="tel-btn">
+          <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
+            <path
+              d="M21.9993 16.4712V19.7831C22.0006 20.0906 21.9375 20.3949 21.814 20.6766C21.6906 20.9583 21.5096 21.2112 21.2826 21.419C21.0556 21.6269 20.7876 21.7851 20.4958 21.8836C20.2039 21.9821 19.8947 22.0187 19.5879 21.991C16.1841 21.6219 12.9145 20.4611 10.0418 18.6019C7.36914 16.9069 5.10319 14.6455 3.40487 11.9781C1.53545 9.09809 0.372066 5.81909 0.00897833 2.40675C-0.0186639 2.10146 0.0176892 1.79378 0.115723 1.50329C0.213756 1.2128 0.371322 0.94586 0.578389 0.719472C0.785455 0.493085 1.03749 0.312208 1.31843 0.188357C1.59938 0.0645062 1.90309 0.000395695 2.21023 0.000107032H5.52869C6.06551 -0.00516598 6.58594 0.184556 6.99297 0.533909C7.4 0.883262 7.66586 1.36841 7.74099 1.89892C7.88106 2.9588 8.14081 3.99946 8.5153 5.00106C8.66413 5.39619 8.69634 5.82562 8.60812 6.23847C8.51989 6.65131 8.31494 7.03026 8.01753 7.33042L6.61272 8.73245C8.18739 11.4963 10.4803 13.7847 13.2496 15.3562L14.6545 13.9542C14.9552 13.6574 15.3349 13.4528 15.7486 13.3648C16.1622 13.2767 16.5925 13.3089 16.9884 13.4574C17.992 13.8312 19.0348 14.0904 20.0967 14.2302C20.6341 14.3058 21.1248 14.576 21.4756 14.9892C21.8264 15.4024 22.0128 15.9298 21.9993 16.4712Z"
+              fill="white"
+            />
+          </svg>
+          <span>0123-456-789</span>
+        </a>
+        <a href="#reservation" class="reservation-btn">Webで予約する</a>
+      </div>
+    </div>
+
+
+ <main>
+      <section class="sc-news-hero" aria-labelledby="sc-news-page-title">
+        <div class="sc-news-container">
+          <h1 class="sc-news-page-title" id="sc-news-page-title">
+            <span class="sc-news-page-title__en">News</span>
+            <span class="sc-news-page-title__ja">お知らせ</span>
+          </h1>
+        </div>
+      </section>
+
+      <div class="sc-news-breadcrumb" aria-label="パンくずリスト">
+        <div class="sc-news-container sc-news-breadcrumb__inner">
+          <a href="#sc-news-top">ホーム</a>
+          <span>&gt;</span>
+          <span>お知らせ</span>
+        </div>
+      </div>
+
+      <section class="sc-news-main" id="sc-news-list-section">
+        <div class="sc-news-container sc-news-main-grid">
+          <div>
+            <div class="sc-news-list">
+              <a class="sc-news-card" href="#">
+                <time class="sc-news-card__date" datetime="2026-01-28">2026.01.28</time>
+                <span class="sc-news-card__tag">お知らせ</span>
+                <span class="sc-news-card__title">インフルエンザ予防接種について</span>
+                <span class="sc-news-card__arrow" aria-hidden="true">→</span>
+              </a>
+              <a class="sc-news-card" href="#">
+                <time class="sc-news-card__date" datetime="2026-01-28">2026.01.28</time>
+                <span class="sc-news-card__tag">お知らせ</span>
+                <span class="sc-news-card__title">年末年始の休診について</span>
+                <span class="sc-news-card__arrow" aria-hidden="true">→</span>
+              </a>
+              <a class="sc-news-card" href="#">
+                <time class="sc-news-card__date" datetime="2026-01-28">2026.01.28</time>
+                <span class="sc-news-card__tag">お知らせ</span>
+                <span class="sc-news-card__title">健康診断のご案内</span>
+                <span class="sc-news-card__arrow" aria-hidden="true">→</span>
+              </a>
+              <a class="sc-news-card" href="#">
+                <time class="sc-news-card__date" datetime="2026-01-28">2026.01.28</time>
+                <span class="sc-news-card__tag">お知らせ</span>
+                <span class="sc-news-card__title">新型コロナウイルス対策について</span>
+                <span class="sc-news-card__arrow" aria-hidden="true">→</span>
+              </a>
+              <a class="sc-news-card" href="#">
+                <time class="sc-news-card__date" datetime="2026-01-28">2026.01.28</time>
+                <span class="sc-news-card__tag">お知らせ</span>
+                <span class="sc-news-card__title">オンライン診療の導入について</span>
+                <span class="sc-news-card__arrow" aria-hidden="true">→</span>
+              </a>
+            </div>
+
+            <nav class="sc-news-pagination" aria-label="ページネーション">
+              <a href="#" aria-label="前のページ">‹</a>
+              <span class="sc-news-pagination__num is-active" aria-current="page">1</span>
+              <a class="sc-news-pagination__num" href="#">2</a>
+              <a href="#" aria-label="次のページ">›</a>
+            </nav>
+          </div>
+
+          <aside class="sc-news-sidebar" aria-label="サイドバー">
+            <section class="sc-news-side-block">
+              <h2 class="sc-news-side-block__title">カテゴリ</h2>
+              <ul class="sc-news-side-list">
+                <li><a href="#">お知らせ</a></li>
+                <li><a href="#">緊急</a></li>
+                <li><a href="#">休診</a></li>
+                <li><a href="#">コラム</a></li>
+              </ul>
+            </section>
+
+            <section class="sc-news-side-block">
+              <h2 class="sc-news-side-block__title">アーカイブ</h2>
+              <ul class="sc-news-side-list">
+                <li><a href="#">2026年(5)</a></li>
+                <li><a href="#">2025年(0)</a></li>
+                <li><a href="#">2024年(0)</a></li>
+              </ul>
+            </section>
+          </aside>
+        </div>
+      </section>
+
+
+    <!-- Schedule Section -->
+    <section class="section section-white section-schedule" id="access">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-subtitle">Schedule</span>
+          <h2 class="section-title">診療時間</h2>
+        </div>
+
+        <div class="schedule-contents">
+          <!-- Schedule Table Box -->
+          <div class="schedule-box">
+            <div class="schedule-table-new">
+              <!-- Header -->
+              <div class="schedule-header">
+                <div class="schedule-cell schedule-cell-label">診療時間</div>
+                <div class="schedule-cell">月</div>
+                <div class="schedule-cell">火</div>
+                <div class="schedule-cell">水</div>
+                <div class="schedule-cell">木</div>
+                <div class="schedule-cell">金</div>
+                <div class="schedule-cell">土</div>
+                <div class="schedule-cell">日</div>
+              </div>
+
+              <!-- Row 1: 9:00~12:00 -->
+              <div class="schedule-row">
+                <div class="schedule-cell schedule-cell-label">9:00~12:00</div>
+                <div class="schedule-cell">●</div>
+                <div class="schedule-cell">●</div>
+                <div class="schedule-cell">●</div>
+                <div class="schedule-cell schedule-cell-slash">／</div>
+                <div class="schedule-cell">●</div>
+                <div class="schedule-cell">●</div>
+                <div class="schedule-cell schedule-cell-slash">／</div>
+              </div>
+
+              <!-- Row 2: 14:00~19:00 -->
+              <div class="schedule-row schedule-row-last">
+                <div class="schedule-cell schedule-cell-label">14:00~19:00</div>
+                <div class="schedule-cell">●</div>
+                <div class="schedule-cell">●</div>
+                <div class="schedule-cell">●</div>
+                <div class="schedule-cell schedule-cell-slash">／</div>
+                <div class="schedule-cell">●</div>
+                <div class="schedule-cell schedule-cell-slash">／</div>
+                <div class="schedule-cell schedule-cell-slash">／</div>
+              </div>
+            </div>
+
+            <!-- Schedule Text -->
+            <div class="schedule-text">
+              <p>受付時間：9 時～12 時 / 13～18 時</p>
+              <p>休診日：木曜・土曜午後・日曜</p>
+            </div>
+          </div>
+
+          <!-- Reservation Buttons -->
+          <div class="reservation-buttons">
+            <a href="tel:0123-456-789" class="reservation-tel-btn">
+              <svg width="30" height="30" viewBox="0 0 30 30" fill="none">
+                <path
+                  d="M29.9991 22.4608V26.977C30.0008 27.3962 29.9147 27.8112 29.7464 28.1954C29.5781 28.5795 29.3313 28.9243 29.0218 29.2078C28.7122 29.4912 28.3467 29.707 27.9488 29.8413C27.5508 29.9756 27.1292 30.0255 26.7108 29.9878C22.0692 29.4844 17.6106 27.9015 13.6934 25.3662C10.0488 23.0549 6.95889 19.9711 4.64301 16.3338C2.09379 12.4065 0.507362 7.93512 0.0122432 3.28192C-0.0254508 2.86563 0.0241216 2.44607 0.157804 2.04994C0.291486 1.65381 0.506348 1.28981 0.788712 0.981099C1.07108 0.672388 1.41475 0.425738 1.79786 0.25685C2.18097 0.087963 2.59512 0.000539584 3.01394 0.000145952H7.53912C8.27115 -0.00704452 8.98083 0.251667 9.53587 0.728058C10.0909 1.20445 10.4534 1.86601 10.5559 2.58944C10.7469 4.03473 11.1011 5.45381 11.6118 6.81962C11.8147 7.35844 11.8586 7.94403 11.7383 8.507C11.618 9.06997 11.3386 9.58672 10.933 9.99602L9.01734 11.9079C11.1646 15.6767 14.2914 18.7973 18.0677 20.9403L19.9833 19.0284C20.3935 18.6237 20.9112 18.3448 21.4753 18.2247C22.0394 18.1046 22.6262 18.1485 23.1661 18.351C24.5346 18.8607 25.9565 19.2142 27.4046 19.4048C28.1374 19.508 28.8065 19.8763 29.2849 20.4398C29.7633 21.0032 30.0174 21.7225 29.9991 22.4608Z"
+                  fill="white"
+                />
+              </svg>
+              <span>0123-456-789</span>
+            </a>
+            <a href="#reservation" class="reservation-web-btn">Webで予約する</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="footer-container">
+        <div class="footer-content">
+          <div class="footer-logo">
+            <a href="#top">
+              <img src="images/Logo.png" alt="ロゴ" width="220" height="70" />
+            </a>
+          </div>
+          <div class="footer-info">
+            <p class="postal-code">〒000-0000</p>
+            <p class="address">東京都台東区上野0 丁目 0 - 0</p>
+          </div>
+        </div>
+        <button class="back-to-top" id="backToTop">
+          <span>TOP</span>
+          <svg width="12" height="56" viewBox="0 0 12 56" fill="none">
+            <path
+              d="M1.4502 0.0255165C1.83339 -0.054681 2.24841 0.054198 2.5459 0.351688L11.6484 9.45423C12.1171 9.92287 12.1171 10.6828 11.6484 11.1515C11.1798 11.62 10.4198 11.6201 9.95117 11.1515L2.40039 3.59974V54.0011C2.40039 54.6638 1.86286 55.2012 1.2002 55.2013C0.537433 55.2013 -2.89702e-08 54.6639 0 54.0011V1.19934C0.000189083 0.536743 0.53755 0.000125872 1.2002 0.000125901C1.28591 0.000141025 1.36957 0.00842028 1.4502 0.0255165Z"
+              fill="#444"
+            />
+          </svg>
+        </button>
+        <div class="footer-bottom">
+          <p>&copy; 2026 佐藤医院 All rights reserved.</p>
+        </div>
+      </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+  </body>
+</html>
