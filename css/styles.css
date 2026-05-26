@@ -3242,6 +3242,8 @@ h1 {
 .medical-info-container {
   width: min(calc(100% - 96px), var(--medical-info-content-width));
   margin-inline: auto;
+  max-width: 1240px;
+  margin: 0 auto;
 }
 
 .medical-info-contain {
@@ -3262,37 +3264,34 @@ h1 {
 
 .medical-info-section-kicker {
   margin: 0 0 4px;
-  color: #8f8f8f;
-  font-size: 15px;
-  font-weight: 700;
-  letter-spacing: .01em;
+  color: var(--font-sub-color);
+  font-size: 16px;
 }
 
 .medical-info-section-kicker--center {
   text-align: center;
 }
 
-.medical-info-page-title,
-.medical-info-schedule__title {
+.medical-info-page-title {
   margin: 0;
-  color: var(--medical-info-black);
-  font-size: 38px;
+  color: var(--font-main-color);
+  font-size: 36px;
   line-height: 1.25;
   letter-spacing: .04em;
 }
 
 .medical-info-breadcrumb-area {
   padding-top: 20px;
+  background-color: var(--color-white);
+  border-top: 1px solid var(--border-dashed);
 }
 
 .medical-info-breadcrumb {
   display: flex;
   gap: 12px;
-  margin: 0;
-  padding: 0;
+  padding: 0 0 15px 10px;
   list-style: none;
-  color: #9a9a9a;
-  font-size: 12px;
+  font-size: 14px;
 }
 
 .medical-info-breadcrumb li + li::before {
@@ -3301,20 +3300,21 @@ h1 {
 }
 
 .medical-info-overview {
-  padding: 30px 0 70px;
+  padding: 0 0 80px;
+  background-color: var(--color-white);
 }
 
 .medical-info-lead {
-  margin: 0 0 34px;
-  font-size: 15px;
-  font-weight: 700;
-  line-height: 1.9;
+  margin: 0 0 40px;
+  font-size: 18px;
+  padding: 0 0 0 20px;
 }
 
 .medical-info-category-nav__list {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 16px 14px;
+  padding: 0 20px;
 }
 
 .medical-info-category-nav a {
@@ -3323,26 +3323,24 @@ h1 {
   grid-template-columns: auto 1fr auto;
   align-items: center;
   gap: 12px;
-  padding: 12px 16px;
-  border: 1px solid #bdbdbd;
-  border-radius: var(--medical-info-radius-sm);
+  padding: 15px 30px;
+  border: 1px solid var(--font-sub-color);
+  border-radius: 8px;
+  background-color: var(--color-white);
 }
 
-.medical-info-category-nav a:hover {
-  border-color: var(--medical-info-green);
-}
 
 .medical-info-category-nav strong {
   display: block;
-  font-size: 14px;
-  line-height: 1.35;
+  font-size: 18px;
+  line-height: 1.5;
 }
 
 .medical-info-category-nav small {
   display: block;
   color: var(--medical-info-gray);
-  font-size: 9px;
-  line-height: 1.4;
+  font-size: 10px;
+  line-height: 1.5;
 }
 
 .medical-info-icon {
@@ -3351,16 +3349,71 @@ h1 {
   line-height: 1;
 }
 
+.medical-info-icon_1 {
+    width: 25px;
+    height: 25px;
+    background-image: url(../images/Medical_info/icon_General-Internal-Medicine.png);
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+.medical-info-icon_2 {
+    width: 25px;
+    height: 25px;
+    background-image: url(../images/Medical_info/icon_Lifestyle-related-diseases.png);
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+.medical-info-icon_3 {
+    width: 25px;
+    height: 25px;
+    background-image: url(../images/Medical_info/icon_Digestive-system-examination.png);
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+.medical-info-icon_4 {
+    width: 25px;
+    height: 25px;
+    background-image: url(../images/Medical_info/icon_Respiratory-examination.png);
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+.medical-info-icon_5 {
+    width: 25px;
+    height: 25px;
+    background-image: url(../images/Medical_info/icon_Health.png);
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+.medical-info-icon_6 {
+    width: 25px;
+    height: 25px;
+    background-image: url(../images/Medical_info/icon_vaccination.png);
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+.medical-info-icon_7 {
+    width: 25px;
+    height: 25px;
+    background-image: url(../images/Medical_info/icon_smoking.png);
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
 .medical-info-category-nav__arrow {
   width: 20px;
   height: 20px;
-  display: inline-grid;
+  display: grid;
   place-items: center;
-  border-radius: 999px;
-  color: var(--medical-info-white);
-  background: var(--medical-info-green);
-  font-size: 18px;
-  line-height: 1;
+  color: #fff;
+  font-size: 10px;
+  border-radius: 50%;
+  background: var(--color-deep-green);
 }
 
 .medical-info-services {
@@ -3373,12 +3426,14 @@ h1 {
   grid-template-columns: minmax(0, 1fr) 320px;
   align-items: center;
   gap: clamp(48px, 8vw, 92px);
-  padding: 56px 0;
+  padding: 50px 20px;
   border-bottom: 1px solid #dddddd;
+  max-width: 1240px;
+  margin: 0 auto;
 }
 
-.medical-info-service-card:first-child {
-  border-top: 1px solid #dddddd;
+.medical-info-service-card:last-child {
+  border-bottom: none;
 }
 
 .medical-info-service-card__kicker {
