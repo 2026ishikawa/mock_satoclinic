@@ -58,7 +58,7 @@
             <div class="nav-main">
               <a href="#about">当院について</a>
               <a href="#director">院長挨拶</a>
-              <a href="medical-info.html">診療案内</a>
+              <a href="#services">診療案内</a>
               <a href="#news">お知らせ</a>
             </div>
           </div>
@@ -115,7 +115,7 @@
           <li><a href="index.html">トップ</a></li>
           <li><a href="#about">当院について</a></li>
           <li><a href="#director">医長挨拶</a></li>
-          <li><a href="medical-info.html">診療案内</a></li>
+          <li><a href="#services">診療案内</a></li>
           <li><a href="news.html">お知らせ</a></li>
           <li><a href="#access">診療時間・アクセス</a></li>
           <li><a href="faq.html">よくある質問</a></li>
@@ -136,264 +136,104 @@
     </div>
 
 
-  <main class="faq-page">
-    <section class="page-hero">
-      <div class="container for-faq">
-        <p class="en-title">FAQ</p>
-        <h1>よくある質問</h1>
+  <main id="medical-info-main">
+<section class="medical-info-hero" aria-labelledby="medical-info-page-title">
+      <div class="medical-info-contain">
+        <p class="medical-info-section-kicker">Medical info</p>
+        <h1 class="medical-info-page-title" id="medical-info-page-title">診療案内</h1>
       </div>
     </section>
 
-    <section class="lead-section">
-      <div class="container">
-        <nav class="breadcrumb">
-          <a href="index.html">ホーム</a>
-          <span>＞</span>
-          <span>よくある質問</span>
+    <div class="medical-info-container medical-info-breadcrumb-area" aria-label="パンくずリスト">
+      <ol class="medical-info-breadcrumb">
+        <li><a href="#top">ホーム</a></li>
+        <li aria-current="page">診療案内</li>
+      </ol>
+    </div>
+
+    <section class="medical-info-overview" aria-labelledby="medical-info-overview-title">
+      <div class="medical-info-container">
+        <h2 class="medical-info-visually-hidden" id="medical-info-overview-title">診療内容の概要</h2>
+        <p class="medical-info-lead">当院では、地域の皆様の健康を支えるため、幅広い内科診療を行っております。<br>日常的な体調管理から、各種の検査や治療に至るまで、どんなお悩みもお気軽にご相談ください。</p>
+
+        <nav class="medical-info-category-nav" aria-label="診療メニュー">
+          <ul class="medical-info-category-nav__list">
+            <li><a href="#general-internal-medicine"><span class="medical-info-icon" aria-hidden="true">♧</span><span><strong>一般内科診療</strong><small>General Internal Medicine</small></span><span class="medical-info-category-nav__arrow" aria-hidden="true">›</span></a></li>
+            <li><a href="#lifestyle-diseases"><span class="medical-info-icon" aria-hidden="true">▣</span><span><strong>生活習慣病の診断・治療</strong><small>Lifestyle-related diseases</small></span><span class="medical-info-category-nav__arrow" aria-hidden="true">›</span></a></li>
+            <li><a href="#digestive-examination"><span class="medical-info-icon" aria-hidden="true">♟</span><span><strong>消化器系の診察</strong><small>Digestive system examination</small></span><span class="medical-info-category-nav__arrow" aria-hidden="true">›</span></a></li>
+            <li><a href="#respiratory-examination"><span class="medical-info-icon" aria-hidden="true">◖◗</span><span><strong>呼吸器系の診察</strong><small>Respiratory examination</small></span><span class="medical-info-category-nav__arrow" aria-hidden="true">›</span></a></li>
+            <li><a href="#health-checkups"><span class="medical-info-icon" aria-hidden="true">♥</span><span><strong>健康診断・各種検査</strong><small>Health checkups and other tests</small></span><span class="medical-info-category-nav__arrow" aria-hidden="true">›</span></a></li>
+            <li><a href="#vaccination"><span class="medical-info-icon" aria-hidden="true">⌁</span><span><strong>予防接種</strong><small>vaccination</small></span><span class="medical-info-category-nav__arrow" aria-hidden="true">›</span></a></li>
+            <li><a href="#smoking-cessation"><span class="medical-info-icon" aria-hidden="true">⌿</span><span><strong>禁煙外来</strong><small>Smoking cessation outpatient clinic</small></span><span class="medical-info-category-nav__arrow" aria-hidden="true">›</span></a></li>
+          </ul>
         </nav>
-
-        <p class="lead-text">
-          当院に関するご質問をまとめました。<br>
-          その他のご不明点がございましたら、スタッフまでお気軽にお問い合わせください。
-        </p>
-
-        <div class="category-nav">
-          <a href="#faq-medical">診察について <span>▼</span></a>
-          <a href="#faq-vaccine">予防接種・健康診断について <span>▼</span></a>
-          <a href="#faq-payment">お支払いについて <span>▼</span></a>
-          <a href="#faq-other">その他 <span>▼</span></a>
-        </div>
       </div>
     </section>
 
-    <section class="faq-area">
-      <div class="container faq-container">
-
-        <section class="faq-group" id="faq-medical">
-          <h2>診察について</h2>
-
-          <div class="accordion">
-            <button class="accordion-button" type="button">
-              <span class="accordion-question">
-                <span class="q-label">Q.</span>
-                <span class="question-text">診察は予約制ですか？</span>
-              </span>
-              <span class="accordion-icon"></span>
-            </button>
-
-            <div class="accordion-content">
-              <div class="accordion-answer">
-                <span class="a-label">A.</span>
-                <p>
-                  一般診療は予約なしでも受け付けていますが、予約優先制となっております。予防接種や健康診断などは完全予約制です。お電話またはWeb 予約をご利用ください。
-                </p>
-              </div>
-            </div>
+    <section class="medical-info-services" aria-label="診療内容の詳細">
+      <div class="medical-info-container">
+        <article class="medical-info-service-card" id="general-internal-medicine">
+          <div class="medical-info-service-card__body">
+            <p class="medical-info-service-card__kicker">General Internal Medicine</p>
+            <h2 class="medical-info-service-card__title"><span class="medical-info-icon" aria-hidden="true">♧</span>一般内科診療</h2>
+            <p>風邪や発熱、喉の痛み、頭痛、腹痛などの症状を中心に、一般的な内科疾患の診療を行っています。また、原因不明の不調や軽い症状であっても、早期診断に努めております。</p>
           </div>
+          <img src="assets/images/internal-medicine.jpg" width="360" height="224" alt="医師が診察室で患者に説明している様子" loading="lazy">
+        </article>
 
-          <div class="accordion">
-            <button class="accordion-button" type="button">
-              <span class="accordion-question">
-                <span class="q-label">Q.</span>
-                <span class="question-text">初診時に必要なものは何ですか？</span>
-              </span>
-              <span class="accordion-icon"></span>
-            </button>
-
-            <div class="accordion-content">
-              <div class="accordion-answer">
-                <span class="a-label">A.</span>
-                <p>
-                  健康保険証、お薬手帳（お持ちの方）、診療情報提供書（紹介状）があればご持参ください。また、問診票を事前にご記入いただけると受付がスムーズです。
-                </p>
-              </div>
-            </div>
+        <article class="medical-info-service-card" id="lifestyle-diseases">
+          <div class="medical-info-service-card__body">
+            <p class="medical-info-service-card__kicker">Lifestyle-related diseases</p>
+            <h2 class="medical-info-service-card__title"><span class="medical-info-icon" aria-hidden="true">▣</span>生活習慣病の診断・治療</h2>
+            <p>高血圧症、糖尿病、脂質異常症（高コレステロール血症）、メタボリック症候群など、生活習慣病の診断と治療を行います。病気の進行を予防し、健康維持のための生活指導や薬物療法を行います。</p>
           </div>
+          <img src="assets/images/lifestyle.jpg" width="360" height="224" alt="生活習慣病に関する資料とタブレット端末" loading="lazy">
+        </article>
 
-                    <div class="accordion">
-            <button class="accordion-button" type="button">
-              <span class="accordion-question">
-                <span class="q-label">Q.</span>
-                <span class="question-text">診察時間はどれくらいかかりますか？</span>
-              </span>
-              <span class="accordion-icon"></span>
-            </button>
-
-            <div class="accordion-content">
-              <div class="accordion-answer">
-                <span class="a-label">A.</span>
-                <p>
-                  症状や混雑状況によりますが、目安として30 分～1時間程度です。事前に混雑状況をお問い合わせいただくことをお勧めします。
-                </p>
-              </div>
-            </div>
+        <article class="medical-info-service-card" id="digestive-examination">
+          <div class="medical-info-service-card__body">
+            <p class="medical-info-service-card__kicker">Digestive system examination</p>
+            <h2 class="medical-info-service-card__title"><span class="medical-info-icon" aria-hidden="true">♟</span>消化器系の診察</h2>
+            <p>胃痛、胃もたれ、胸やけ、便秘、下痢などの消化器系の不調に対応しています。必要に応じて胃カメラや超音波検査などを実施し、胃腸の健康をサポートします。</p>
           </div>
-        </section>
+          <img src="assets/images/digestive.jpg" width="360" height="224" alt="診察室で相談を受ける女性医師" loading="lazy">
+        </article>
 
-        <section class="faq-group" id="faq-vaccine">
-          <h2>予防接種・健康診断について</h2>
-
-          <div class="accordion">
-            <button class="accordion-button" type="button">
-              <span class="accordion-question">
-                <span class="q-label">Q.</span>
-                <span class="question-text">インフルエンザの予防接種はいつから受けられますか？</span>
-              </span>
-              <span class="accordion-icon"></span>
-            </button>
-
-            <div class="accordion-content">
-              <div class="accordion-answer">
-                <span class="a-label">A.</span>
-                <p>
-                  例年10月中旬頃から接種を開始します。予約受付は9月末から行っておりますので、詳しくはお知らせをご確認ください。
-                </p>
-              </div>
-            </div>
+        <article class="medical-info-service-card" id="respiratory-examination">
+          <div class="medical-info-service-card__body">
+            <p class="medical-info-service-card__kicker">Respiratory examination</p>
+            <h2 class="medical-info-service-card__title"><span class="medical-info-icon" aria-hidden="true">◖◗</span>呼吸器系の診察</h2>
+            <p>咳、息切れ、胸の痛みなど、呼吸器系の症状について診察を行っています。季節性の喘息やアレルギー性鼻炎、慢性閉塞性肺疾患（COPD）などにも対応し、適切な治療と予防をサポートします。</p>
           </div>
+          <img src="assets/images/respiratory.jpg" width="360" height="224" alt="胸にハートのモチーフを持つ人物" loading="lazy">
+        </article>
 
-          <div class="accordion">
-            <button class="accordion-button" type="button">
-              <span class="accordion-question">
-                <span class="q-label">Q.</span>
-                <span class="question-text">健康診断はどのような内容がありますか？</span>
-              </span>
-              <span class="accordion-icon"></span>
-            </button>
-
-            <div class="accordion-content">
-              <div class="accordion-answer">
-                <span class="a-label">A.</span>
-                <p>
-                  一般的な健康診断から生活習慣病予防検診まで対応しております。採血、尿検査、心電図、胸部レントゲンなどが含まれます。詳しくはスタッフまでお問い合わせください。
-                </p>
-              </div>
-            </div>
+        <article class="medical-info-service-card" id="health-checkups">
+          <div class="medical-info-service-card__body">
+            <p class="medical-info-service-card__kicker">Health checkups and other tests</p>
+            <h2 class="medical-info-service-card__title"><span class="medical-info-icon" aria-hidden="true">♥</span>健康診断・各種検査</h2>
+            <p>定期健康診断をはじめ、血液検査、尿検査、心電図、超音波検査、レントゲン検査などを行い、病気の早期発見と予防に努めます。異常が見つかった場合は、経過観察や専門治療へとつなげてまいります。</p>
           </div>
+          <img src="assets/images/checkup.jpg" width="360" height="224" alt="医師が検査結果の書類を確認している様子" loading="lazy">
+        </article>
 
-          <div class="accordion">
-            <button class="accordion-button" type="button">
-              <span class="accordion-question">
-                <span class="q-label">Q.</span>
-                <span class="question-text">子どもの予防接種も対応していますか？</span>
-              </span>
-              <span class="accordion-icon"></span>
-            </button>
-
-            <div class="accordion-content">
-              <div class="accordion-answer">
-                <span class="a-label">A.</span>
-                <p>
-                  当院では、小児用の予防接種（例：MR ワクチン、ヒブワクチンなど）も実施しております。スケジュールについてはお問い合わせください。
-                </p>
-              </div>
-            </div>
+        <article class="medical-info-service-card" id="vaccination">
+          <div class="medical-info-service-card__body">
+            <p class="medical-info-service-card__kicker">Vaccination</p>
+            <h2 class="medical-info-service-card__title"><span class="medical-info-icon" aria-hidden="true">⌁</span>予防接種</h2>
+            <p>インフルエンザや肺炎球菌などの各種予防接種を行っています。定期的な接種で感染予防と体調管理を支援いたします。予防接種は予約制となりますので、事前にお問い合わせください。</p>
           </div>
-        </section>
+          <img src="assets/images/vaccination.jpg" width="360" height="224" alt="子どもが医師から予防接種を受けている様子" loading="lazy">
+        </article>
 
-        <section class="faq-group" id="faq-payment">
-          <h2>お支払いについて</h2>
-
-          <div class="accordion">
-            <button class="accordion-button" type="button">
-              <span class="accordion-question">
-                <span class="q-label">Q.</span>
-                <span class="question-text">支払いにクレジットカードは使えますか？</span>
-              </span>
-              <span class="accordion-icon"></span>
-            </button>
-
-            <div class="accordion-content">
-              <div class="accordion-answer">
-                <span class="a-label">A.</span>
-                <p>
-                  はい、当院では現金、クレジットカード（一部カードを除く）、電子マネーに対応しております。詳しくは受付にてお尋ねください。
-                </p>
-              </div>
-            </div>
+        <article class="medical-info-service-card" id="smoking-cessation">
+          <div class="medical-info-service-card__body">
+            <p class="medical-info-service-card__kicker">Smoking cessation outpatient clinic</p>
+            <h2 class="medical-info-service-card__title"><span class="medical-info-icon" aria-hidden="true">⌿</span>禁煙外来</h2>
+            <p>禁煙をご希望の方に、禁煙治療をサポートを行っています。必要に応じて、ニコチン依存症の治療薬を使用し、無理なく禁煙が継続できるようお手伝いいたします。</p>
           </div>
-
-          <div class="accordion">
-            <button class="accordion-button" type="button">
-              <span class="accordion-question">
-                <span class="q-label">Q.</span>
-                <span class="question-text">医療費控除に必要な領収書を再発行してもらえますか？</span>
-              </span>
-              <span class="accordion-icon"></span>
-            </button>
-
-            <div class="accordion-content">
-              <div class="accordion-answer">
-                <span class="a-label">A.</span>
-                <p>
-                  はい、再発行可能です。ただし、再発行には日数をいただく場合がありますのでご了承ください。
-                </p>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <section class="faq-group" id="faq-other">
-          <h2>その他</h2>
-
-          <div class="accordion">
-            <button class="accordion-button" type="button">
-              <span class="accordion-question">
-                <span class="q-label">Q.</span>
-                <span class="question-text">駐車場はありますか？</span>
-              </span>
-              <span class="accordion-icon"></span>
-            </button>
-
-            <div class="accordion-content">
-              <div class="accordion-answer">
-                <span class="a-label">A.</span>
-                <p>
-                  はい、当院専用の無料駐車場が10台分ございます。満車の場合は近隣のコインパーキングをご利用ください。
-                </p>
-              </div>
-            </div>
-          </div>
-
-          <div class="accordion">
-            <button class="accordion-button" type="button">
-              <span class="accordion-question">
-                <span class="q-label">Q.</span>
-                <span class="question-text">車椅子での利用は可能ですか？</span>
-              </span>
-              <span class="accordion-icon"></span>
-            </button>
-
-            <div class="accordion-content">
-              <div class="accordion-answer">
-                <span class="a-label">A.</span>
-                <p>
-                  可能です。エントランスはバリアフリー設計となっており、スロープもご用意しております。また、院内には車椅子で移動可能なスペースを確保しています。
-                </p>
-              </div>
-            </div>
-          </div>
-
-          <div class="accordion">
-            <button class="accordion-button" type="button">
-              <span class="accordion-question">
-                <span class="q-label">Q.</span>
-                <span class="question-text">病院内での待ち時間にWi-Fi は使えますか？</span>
-              </span>
-              <span class="accordion-icon"></span>
-            </button>
-
-            <div class="accordion-content">
-              <div class="accordion-answer">
-                <span class="a-label">A.</span>
-                <p>
-                  はい、当院では無料Wi-Fi を提供しております。パスワードは受付でお知らせいたします。
-                </p>
-              </div>
-            </div>
-          </div>
-        </section>
-
+          <img src="assets/images/smoking.jpg" width="360" height="224" alt="医療スタッフが折れたタバコを持っている様子" loading="lazy">
+        </article>
       </div>
     </section>
 

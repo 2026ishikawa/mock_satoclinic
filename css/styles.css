@@ -2305,6 +2305,7 @@ h1 {
 .lead-text {
   margin: 0 0 50px;
   font-size: 18px;
+  padding: 0 0 0 10px;
 }
 
 .category-nav {
@@ -2512,7 +2513,7 @@ h1 {
   }
 
   .page-hero {
-    padding: 38px 0 34px;
+    padding: 40px 0 50px;
   }
 
   .en-title {
@@ -2981,10 +2982,6 @@ h1 {
         width: min(calc(100% - 80px), var(--sc-news-container-tab));
       }
 
-      .sc-news-header {
-        height: 112px;
-      }
-
       .sc-news-header__inner {
         width: min(calc(100% - 70px), var(--sc-news-container-tab));
       }
@@ -3008,10 +3005,6 @@ h1 {
 
       .sc-news-menu-button {
         display: block;
-      }
-
-      .sc-news-hero {
-        height: 218px;
       }
 
       .sc-news-page-title__en {
@@ -3131,7 +3124,7 @@ h1 {
       }
 
       .sc-news-hero {
-        padding: 38px 0 34px;
+        padding: 40px 0 50px;
       }
 
       .sc-news-page-title__en {
@@ -3218,3 +3211,364 @@ h1 {
       }
 
     }
+
+
+    /* ----- medical-info ページ----- */
+.medical-info-skip-link {
+  position: fixed;
+  top: 12px;
+  left: 12px;
+  z-index: 1000;
+  transform: translateY(-160%);
+  padding: 10px 14px;
+  color: var(--medical-info-white);
+  background: var(--medical-info-green-dark);
+  border-radius: 999px;
+  font-weight: 700;
+}
+
+.medical-info-visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.medical-info-container {
+  width: min(calc(100% - 96px), var(--medical-info-content-width));
+  margin-inline: auto;
+}
+
+.medical-info-contain {
+    padding: 0 0 0 50px;
+  max-width: 270px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0;
+}
+
+
+
+.medical-info-hero {
+  padding: 120px 0 100px;
+  background-color: var(--color-off-white);
+}
+
+.medical-info-section-kicker {
+  margin: 0 0 4px;
+  color: #8f8f8f;
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: .01em;
+}
+
+.medical-info-section-kicker--center {
+  text-align: center;
+}
+
+.medical-info-page-title,
+.medical-info-schedule__title {
+  margin: 0;
+  color: var(--medical-info-black);
+  font-size: 38px;
+  line-height: 1.25;
+  letter-spacing: .04em;
+}
+
+.medical-info-breadcrumb-area {
+  padding-top: 20px;
+}
+
+.medical-info-breadcrumb {
+  display: flex;
+  gap: 12px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  color: #9a9a9a;
+  font-size: 12px;
+}
+
+.medical-info-breadcrumb li + li::before {
+  content: ">";
+  margin-right: 12px;
+}
+
+.medical-info-overview {
+  padding: 30px 0 70px;
+}
+
+.medical-info-lead {
+  margin: 0 0 34px;
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 1.9;
+}
+
+.medical-info-category-nav__list {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 16px 14px;
+}
+
+.medical-info-category-nav a {
+  min-height: 64px;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  border: 1px solid #bdbdbd;
+  border-radius: var(--medical-info-radius-sm);
+}
+
+.medical-info-category-nav a:hover {
+  border-color: var(--medical-info-green);
+}
+
+.medical-info-category-nav strong {
+  display: block;
+  font-size: 14px;
+  line-height: 1.35;
+}
+
+.medical-info-category-nav small {
+  display: block;
+  color: var(--medical-info-gray);
+  font-size: 9px;
+  line-height: 1.4;
+}
+
+.medical-info-icon {
+  color: #606060;
+  font-size: 22px;
+  line-height: 1;
+}
+
+.medical-info-category-nav__arrow {
+  width: 20px;
+  height: 20px;
+  display: inline-grid;
+  place-items: center;
+  border-radius: 999px;
+  color: var(--medical-info-white);
+  background: var(--medical-info-green);
+  font-size: 18px;
+  line-height: 1;
+}
+
+.medical-info-services {
+  padding: 34px 0 118px;
+  background: var(--medical-info-bg);
+}
+
+.medical-info-service-card {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 320px;
+  align-items: center;
+  gap: clamp(48px, 8vw, 92px);
+  padding: 56px 0;
+  border-bottom: 1px solid #dddddd;
+}
+
+.medical-info-service-card:first-child {
+  border-top: 1px solid #dddddd;
+}
+
+.medical-info-service-card__kicker {
+  margin: 0 0 2px;
+  color: #5f5f5f;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 17px;
+  font-weight: 700;
+  line-height: 1.5;
+}
+
+.medical-info-service-card__title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0 0 22px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid #d8d8d8;
+  font-size: 26px;
+  line-height: 1.45;
+}
+
+.medical-info-service-card__body p:last-child {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 2;
+}
+
+.medical-info-service-card img {
+  width: 320px;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+  border-radius: var(--medical-info-radius-sm);
+  box-shadow: 0 6px 20px rgb(0 0 0 / 10%);
+}
+
+@media (max-width: 1023px) {
+  .medical-info-container {
+    width: min(calc(100% - 80px), 850px);
+  }
+
+  .medical-info-hero {
+    padding: 82px 0 88px;
+  }
+
+  .medical-info-page-title {
+    font-size: 34px;
+  }
+
+  .medical-info-category-nav__list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 18px;
+  }
+
+  .medical-info-category-nav a {
+    min-height: 72px;
+    padding-inline: 22px;
+  }
+
+  .medical-info-category-nav strong {
+    font-size: 16px;
+  }
+
+  .medical-info-category-nav small {
+    font-size: 10px;
+  }
+
+  .medical-info-services {
+    padding-bottom: 86px;
+  }
+
+  .medical-info-service-card {
+    grid-template-columns: minmax(0, 1fr) 310px;
+    gap: 44px;
+    padding: 42px 0;
+  }
+
+  .medical-info-service-card__title {
+    font-size: 23px;
+  }
+
+  .medical-info-service-card img {
+    width: 310px;
+  }
+}
+
+@media (max-width: 767px) {
+  body.medical-info-page {
+    font-size: 15px;
+    line-height: 1.85;
+  }
+
+  .medical-info-container {
+    width: calc(100% - 32px);
+  }
+
+  .medical-info-header__inner {
+    width: calc(100% - 28px);
+    min-height: 54px;
+    gap: 12px;
+  }
+
+  .medical-info-logo__mark {
+    width: 30px;
+    height: 30px;
+    border-width: 3px;
+    border-radius: 10px;
+  }
+
+  .medical-info-hero {
+    padding: 48px 0 58px;
+  }
+
+  .medical-info-section-kicker {
+    font-size: 13px;
+  }
+
+  .medical-info-page-title {
+    font-size: 30px;
+  }
+
+  .medical-info-breadcrumb-area {
+    padding-top: 16px;
+  }
+
+  .medical-info-overview {
+    padding: 22px 0 48px;
+  }
+
+  .medical-info-lead {
+    margin-bottom: 26px;
+    font-size: 13px;
+  }
+
+  .medical-info-category-nav__list {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  .medical-info-category-nav a {
+    min-height: 58px;
+    padding: 10px 14px;
+  }
+
+  .medical-info-category-nav strong {
+    font-size: 14px;
+  }
+
+  .medical-info-services {
+    padding: 28px 0 66px;
+  }
+
+  .medical-info-service-card {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    align-items: stretch;
+    padding: 32px 0;
+  }
+
+  .medical-info-service-card__kicker {
+    font-size: 13px;
+  }
+
+  .medical-info-service-card__title {
+    margin-bottom: 14px;
+    padding-bottom: 8px;
+    font-size: 20px;
+  }
+
+  .medical-info-service-card__body p:last-child {
+    font-size: 13px;
+    line-height: 1.95;
+  }
+
+  .medical-info-service-card img {
+    order: 2;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    transition-duration: .01ms !important;
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+}
