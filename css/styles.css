@@ -742,7 +742,7 @@ ul {
 /* Mobile Styles for Schedule */
 @media (max-width: 767px) {
   .section-schedule {
-    padding: 0 0 50px;
+    padding: 50px 0 50px;
   }
   .schedule-contents {
     gap: 40px;
@@ -2847,6 +2847,12 @@ h1 {
         gap: 8px;
         border-bottom: 1px solid var(--border-dashed);
         padding: 20px 0;
+        transition: background-color 0.3s, border-color 0.3s, transform 0.3, opacity 0.8;
+    }
+
+    .sc-news-card:hover {
+      background-color: rgba(128, 128, 128, 0.05);
+      opacity: 0.8;
     }
 
     .sc-news-card__meta {
@@ -2860,9 +2866,9 @@ h1 {
       justify-content: space-between;
     }
 
-.sc-news-card__meta {
-  gap: 8px; /* date と tag の間 */
-}
+    .sc-news-card__meta {
+      gap: 8px; /* date と tag の間 */
+    }
 
     .sc-news-card:first-child {
       border-top: 0;
@@ -2895,6 +2901,7 @@ h1 {
       font-size: 20px;
       white-space: nowrap;
       text-overflow: ellipsis;
+      font-weight: 500;
     }
 
     .sc-news-card__arrow {
@@ -2902,17 +2909,23 @@ h1 {
       font-size: 32px;
       font-weight: 400;
       line-height: 1;
+      transition: transform 0.3s;
+    }
+
+    .sc-news-card:hover .sc-news-card__arrow {
+      transform: translateX(6px);
     }
 
     .sc-news-pagination {
       display: flex;
       justify-content: center;
       align-items: center;
-      gap: 34px;
-      margin-top: 72px;
+      gap: 25px;
+      margin-top: 80px;
       font-size: 20px;
       line-height: 1;
     }
+
 
     .sc-news-pagination__num {
       display: inline-grid;
@@ -2925,8 +2938,8 @@ h1 {
     }
 
     .sc-news-pagination__num.is-active {
-      color: var(--sc-news-white);
-      background: var(--sc-news-green);
+      color: var(--color-white);
+      background: var(--color-deep-green);
     }
 
     .sc-news-sidebar {
@@ -2938,7 +2951,7 @@ h1 {
     .sc-news-side-block__title {
       margin: 0 0 18px;
       padding-bottom: 4px;
-      border-bottom: 2px dotted #999999;
+      border-bottom: 2px dotted var(--border-dashed);
       font-size: 27px;
       line-height: 1.25;
       font-weight: 800;
@@ -2953,6 +2966,14 @@ h1 {
       list-style: none;
       font-size: 16px;
       font-weight: 700;
+    }
+
+    .sc-news-side-list a {
+      transition: .3s;
+    }
+
+    .sc-news-side-list a:hover {
+      opacity: 0.8;
     }
 
 
@@ -3005,10 +3026,6 @@ h1 {
       .sc-news-breadcrumb__inner {
         height: 68px;
         font-size: 14px;
-      }
-
-      .sc-news-main {
-        padding: 86px 0 90px;
       }
 
       .sc-news-main-grid {
@@ -3070,9 +3087,8 @@ h1 {
 
 
     @media (max-width: 767px) {
-      .sc-news-container,
-      .sc-news-header__inner {
-        width: calc(100% - 56px);
+      .sc-news-main {
+        padding: 0 30px 100px;
       }
 
       .sc-news-header {
@@ -3120,7 +3136,7 @@ h1 {
       }
 
       .sc-news-hero {
-        height: 115px;
+        padding: 38px 0 34px;
       }
 
       .sc-news-page-title__en {
@@ -3133,15 +3149,7 @@ h1 {
       }
 
       .sc-news-breadcrumb__inner {
-        width: 100%;
-        height: 44px;
-        padding-inline: 10px;
-        gap: 12px;
-        font-size: 12px;
-      }
-
-      .sc-news-main {
-        padding: 39px 0 72px;
+        padding: 10px 0 30px 20px;
       }
 
       .sc-news-main-grid {
@@ -3175,7 +3183,6 @@ h1 {
         grid-column: 1 / 4;
         grid-row: 2;
         align-self: start;
-        padding-bottom: 16px;
         font-size: 17px;
         white-space: nowrap;
       }
@@ -3188,8 +3195,8 @@ h1 {
       }
 
       .sc-news-pagination {
-        margin-top: 64px;
-        gap: 32px;
+        margin-top: 60px;
+        gap: 25px;
         font-size: 20px;
       }
 
@@ -3198,26 +3205,25 @@ h1 {
         height: 25px;
       }
 
-      .sc-news-pagination__num.is-active {
-        color: #555555;
-        background: #d7d7d7;
-      }
-
       .sc-news-sidebar {
-        margin-top: 68px;
+        margin-top: 60px;
         display: grid;
         gap: 52px;
       }
 
+      .sc-news-side-block {
+        max-width: 50%;
+      }
+
       .sc-news-side-block__title {
         display: inline-block;
-        min-width: 172px;
-        margin-bottom: 13px;
-        font-size: 28px;
+        min-width: 180px;
+        margin-bottom: 20px;
+        font-size: 30px;
       }
 
       .sc-news-side-list {
-        gap: 4px;
+        gap: 10px;
         font-size: 18px;
       }
     }
