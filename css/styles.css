@@ -2960,12 +2960,11 @@ h1 {
 
     .sc-news-side-list {
       display: grid;
-      gap: 8px;
+      gap: 5px;
       margin: 0;
       padding: 0;
       list-style: none;
       font-size: 16px;
-      font-weight: 700;
     }
 
     .sc-news-side-list a {
@@ -3079,10 +3078,6 @@ h1 {
         font-size: 24px;
       }
 
-      .sc-news-side-list {
-        gap: 12px;
-        font-size: 17px;
-      }
     }
 
 
@@ -3222,8 +3217,4 @@ h1 {
         font-size: 30px;
       }
 
-      .sc-news-side-list {
-        gap: 10px;
-        font-size: 18px;
-      }
     }
