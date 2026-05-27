@@ -2518,7 +2518,7 @@ h1 {
 
   .en-title {
     text-align: center;
-    font-size: 13px;
+    font-size: 14px;
   }
 
   h1 {
@@ -3065,22 +3065,28 @@ h1 {
 }
 
 .medical-info-container {
-  width: min(calc(100% - 96px));
   margin-inline: auto;
+  margin: 0 auto;
+}
+
+.medical-lead {
+  background-color: var(--color-white);
+  border-top: 1px solid var(--border-dashed);
+}
+
+.medical-wrapper {
   max-width: 1240px;
   margin: 0 auto;
 }
 
 .medical-info-contain {
   padding: 0 0 0 50px;
-  max-width: 270px;
   display: flex;
   flex-direction: column;
   align-items: center;
   margin: 0;
+  width: fit-content;
 }
-
-
 
 .medical-info-hero {
   padding: 120px 0 100px;
@@ -3091,6 +3097,7 @@ h1 {
   margin: 0 0 4px;
   color: var(--font-sub-color);
   font-size: 16px;
+  font-family: "Fredoka", sans-serif;
 }
 
 .medical-info-section-kicker--center {
@@ -3107,14 +3114,12 @@ h1 {
 
 .medical-info-breadcrumb-area {
   padding-top: 20px;
-  background-color: var(--color-white);
-  border-top: 1px solid var(--border-dashed);
 }
 
 .medical-info-breadcrumb {
   display: flex;
   gap: 12px;
-  padding: 0 0 15px 10px;
+  padding: 0 0 0 10px;
   list-style: none;
   font-size: 14px;
 }
@@ -3126,13 +3131,12 @@ h1 {
 
 .medical-info-overview {
   padding: 0 0 80px;
-  background-color: var(--color-white);
 }
 
 .medical-info-lead {
   margin: 0 0 40px;
   font-size: 18px;
-  padding: 0 0 0 20px;
+  padding: 25px 0 0 20px;
 }
 
 .medical-info-category-nav__list {
@@ -3241,17 +3245,16 @@ h1 {
 }
 
 .medical-info-services {
-  padding: 34px 0 118px;
-  background: var(--medical-info-bg);
+  padding: 50px 0 70px;
+  background-color: var(--color-off-white);
 }
 
 .medical-info-service-card {
   display: grid;
+  align-items: start;
   grid-template-columns: minmax(0, 1fr) 320px;
-  align-items: center;
-  gap: clamp(48px, 8vw, 92px);
-  padding: 50px 20px;
-  border-bottom: 1px solid #dddddd;
+  gap: clamp(48px, 5vw, 92px);
+  padding: 0 20px 80px;
   max-width: 1240px;
   margin: 0 auto;
 }
@@ -3262,10 +3265,10 @@ h1 {
 
 .medical-info-service-card__kicker {
   margin: 0 0 2px;
-  color: #5f5f5f;
-  font-family: Georgia, "Times New Roman", serif;
-  font-size: 17px;
-  font-weight: 700;
+  color: var(--font-sub-color);
+  font-family: "Fredoka", sans-serif;
+  font-size: 20px;
+  font-weight: 500;
   line-height: 1.5;
 }
 
@@ -3273,32 +3276,29 @@ h1 {
   display: flex;
   align-items: center;
   gap: 8px;
-  margin: 0 0 22px;
-  padding-bottom: 14px;
-  border-bottom: 1px solid #d8d8d8;
-  font-size: 26px;
-  line-height: 1.45;
+  margin: 0 0 10px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid var(--border-dashed);
+  font-size: 25px;
+  line-height: 1.5;
 }
 
 .medical-info-service-card__body p:last-child {
   margin: 0;
-  font-size: 15px;
-  font-weight: 700;
-  line-height: 2;
+  font-size: 16px;
+  line-height: 1.7;
 }
 
 .medical-info-service-card img {
   width: 320px;
+  height: auto;
   aspect-ratio: 16 / 10;
   object-fit: cover;
-  border-radius: var(--medical-info-radius-sm);
-  box-shadow: 0 6px 20px rgb(0 0 0 / 10%);
+  border-radius: 8px;
+  box-shadow: 0 5px 10px rgb(0 0 0 / 5%);
 }
 
 @media (max-width: 1023px) {
-  .medical-info-container {
-    width: min(calc(100% - 80px), 850px);
-  }
 
   .medical-info-hero {
     padding: 82px 0 88px;
@@ -3323,7 +3323,7 @@ h1 {
   }
 
   .medical-info-category-nav small {
-    font-size: 10px;
+    font-size: 12px;
   }
 
   .medical-info-services {
@@ -3332,8 +3332,6 @@ h1 {
 
   .medical-info-service-card {
     grid-template-columns: minmax(0, 1fr) 310px;
-    gap: 44px;
-    padding: 42px 0;
   }
 
   .medical-info-service-card__title {
@@ -3351,10 +3349,6 @@ h1 {
     line-height: 1.85;
   }
 
-  .medical-info-container {
-    width: calc(100% - 32px);
-  }
-
   .medical-info-header__inner {
     width: calc(100% - 28px);
     min-height: 54px;
@@ -3369,15 +3363,15 @@ h1 {
   }
 
   .medical-info-hero {
-    padding: 48px 0 58px;
+    padding: 40px 0 50px;
   }
 
   .medical-info-section-kicker {
-    font-size: 13px;
+    font-size: 14px;
   }
 
   .medical-info-page-title {
-    font-size: 30px;
+    font-size: 24px;
   }
 
   .medical-info-breadcrumb-area {
@@ -3385,12 +3379,13 @@ h1 {
   }
 
   .medical-info-overview {
-    padding: 22px 0 48px;
+    padding: 20px 0 50px;
   }
 
   .medical-info-lead {
-    margin-bottom: 26px;
-    font-size: 13px;
+    margin-bottom: 40px;
+    font-size: 16px;
+    line-height: 1.5;
   }
 
   .medical-info-category-nav__list {
@@ -3404,23 +3399,23 @@ h1 {
   }
 
   .medical-info-category-nav strong {
-    font-size: 14px;
+    font-size: 16px;
   }
 
   .medical-info-services {
-    padding: 28px 0 66px;
+    padding: 40px 20px 80px;
   }
 
   .medical-info-service-card {
     display: flex;
     flex-direction: column;
-    gap: 18px;
+    gap: 15px;
     align-items: stretch;
-    padding: 32px 0;
+    padding: 0 10px 50px;
   }
 
   .medical-info-service-card__kicker {
-    font-size: 13px;
+    font-size: 14px;
   }
 
   .medical-info-service-card__title {
@@ -3430,8 +3425,8 @@ h1 {
   }
 
   .medical-info-service-card__body p:last-child {
-    font-size: 13px;
-    line-height: 1.95;
+    font-size: 16px;
+    line-height: 1.5;
   }
 
   .medical-info-service-card img {
