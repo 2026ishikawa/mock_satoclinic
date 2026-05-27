@@ -382,8 +382,9 @@ ul {
 }
 
 .reservation-btn:hover {
-  background-color: var(--font-sub-color);
+  background-color: var(--bright-orange);
 }
+
 
 /* Hero Section */
 .hero {
@@ -619,7 +620,7 @@ ul {
 }
 
 .reservation-tel-btn:hover {
-  background-color: var(--btn-tel-bg-hover);
+  background-color: var(--btn-tl-bg-hover);
 }
 
 .reservation-web-btn {
@@ -1603,7 +1604,6 @@ ul {
   display: flex;
   align-items: center;
   justify-content: center;
-  color: var(--phText);
   font-size: 14px;
   font-weight: 500;
   position: relative;
@@ -2655,130 +2655,11 @@ h1 {
     }
 
     .sc-news-container {
-      width: min(calc(100% - 80px), var(--sc-news-container-pc));
+      width: min(calc(100% - 80px));
       margin-inline: auto;
       margin: 0 auto 0 0;
     }
 
-    .sc-news-header {
-      position: relative;
-      z-index: 10;
-      height: 96px;
-      background: var(--sc-news-white);
-    }
-
-    .sc-news-header__inner {
-      width: min(calc(100% - 80px), 1360px);
-      height: 100%;
-      margin-inline: auto;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 32px;
-    }
-
-    .sc-news-logo {
-      display: inline-flex;
-      align-items: center;
-      gap: 12px;
-      color: var(--sc-news-green);
-      font-weight: 800;
-      line-height: 1.05;
-      flex: 0 0 auto;
-    }
-
-    .sc-news-logo__mark {
-      width: 54px;
-      height: 54px;
-      flex: 0 0 auto;
-    }
-
-    .sc-news-logo__ja {
-      display: block;
-      font-size: 30px;
-      letter-spacing: 0.08em;
-    }
-
-    .sc-news-logo__en {
-      display: block;
-      margin-top: 6px;
-      font-size: 17px;
-      letter-spacing: 0.08em;
-    }
-
-    .sc-news-header-nav {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-end;
-      gap: 10px;
-      font-weight: 700;
-      font-size: 15px;
-    }
-
-    .sc-news-header-nav__top,
-    .sc-news-header-nav__bottom {
-      display: flex;
-      align-items: center;
-      gap: 22px;
-      white-space: nowrap;
-    }
-
-    .sc-news-header-nav__top {
-      color: #3d3d3d;
-      font-size: 13px;
-    }
-
-    .sc-news-header-nav__icon {
-      color: var(--sc-news-green);
-      margin-right: 4px;
-      font-size: 12px;
-    }
-
-    .sc-news-header-nav__tel {
-      font-size: 20px;
-      letter-spacing: 0.04em;
-    }
-
-    .sc-news-header-nav__cta {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      width: 164px;
-      height: 52px;
-      border-radius: 999px;
-      color: var(--sc-news-white);
-      background: var(--sc-news-orange);
-      font-size: 15px;
-    }
-
-    .sc-news-menu-button {
-      display: none;
-      width: 58px;
-      border: 0;
-      background: transparent;
-      padding: 0;
-      color: var(--sc-news-text);
-      cursor: pointer;
-    }
-
-    .sc-news-menu-button__lines {
-      display: grid;
-      gap: 8px;
-      margin-bottom: 5px;
-    }
-
-    .sc-news-menu-button__lines span {
-      display: block;
-      height: 2px;
-      background: #4c4c4c;
-    }
-
-    .sc-news-menu-button__text {
-      display: block;
-      font-size: 12px;
-      font-weight: 700;
-      line-height: 1;
-    }
 
     .sc-news-hero {
       padding: 120px 0 100px;
@@ -2795,6 +2676,8 @@ h1 {
       display: flex;
       flex-direction: column;
       padding: 0 0 0 50px;
+      width: fit-content;
+      align-items: center;
     }
 
     .sc-news-page-title__en {
@@ -2804,6 +2687,8 @@ h1 {
       font-size: 16px;
       font-weight: 400;
       letter-spacing: 0.02em;
+      width: fit-content;
+      text-align: center;
     }
 
     .sc-news-page-title__ja {
@@ -2811,6 +2696,8 @@ h1 {
       font-size: 36px;
       letter-spacing: 0.04em;
       color: var(--font-main-color);
+      width: fit-content;
+      text-align: center;
     }
 
     .sc-news-breadcrumb {
@@ -2868,7 +2755,7 @@ h1 {
     }
 
     .sc-news-card__meta {
-      gap: 8px; /* date と tag の間 */
+      gap: 8px;
     }
 
     .sc-news-card:first-child {
@@ -2887,10 +2774,10 @@ h1 {
       justify-content: center;
       min-width: 78px;
       height: 25px;
-      border: 1px solid #8ca8a3;
+      border: 1px solid var(--font-sub-color);
       border-radius: 999px;
       color: var(--font-main-color);
-      background: #f3faf8;
+      background: var(--color-pale-aqua);
       font-size: 14px;
       line-height: 1;
       padding: 5px 20px;
@@ -2979,33 +2866,13 @@ h1 {
 
     @media (min-width: 768px) and (max-width: 1023px) {
       .sc-news-container {
-        width: min(calc(100% - 80px), var(--sc-news-container-tab));
+        width: min(calc(100% - 80px));
       }
 
       .sc-news-header__inner {
-        width: min(calc(100% - 70px), var(--sc-news-container-tab));
+        width: min(calc(100% - 70px));
       }
 
-      .sc-news-logo__mark {
-        width: 56px;
-        height: 56px;
-      }
-
-      .sc-news-logo__ja {
-        font-size: 31px;
-      }
-
-      .sc-news-logo__en {
-        font-size: 17px;
-      }
-
-      .sc-news-header-nav {
-        display: none;
-      }
-
-      .sc-news-menu-button {
-        display: block;
-      }
 
       .sc-news-page-title__en {
         font-size: 16px;
@@ -3081,46 +2948,6 @@ h1 {
 
       .sc-news-header {
         height: 60px;
-      }
-
-      .sc-news-logo {
-        gap: 6px;
-      }
-
-      .sc-news-logo__mark {
-        width: 31px;
-        height: 31px;
-      }
-
-      .sc-news-logo__ja {
-        font-size: 15px;
-      }
-
-      .sc-news-logo__en {
-        margin-top: 3px;
-        font-size: 8px;
-      }
-
-      .sc-news-header-nav {
-        display: none;
-      }
-
-      .sc-news-menu-button {
-        display: block;
-        width: 30px;
-      }
-
-      .sc-news-menu-button__lines {
-        gap: 5px;
-        margin-bottom: 4px;
-      }
-
-      .sc-news-menu-button__lines span {
-        height: 1px;
-      }
-
-      .sc-news-menu-button__text {
-        font-size: 9px;
       }
 
       .sc-news-hero {
@@ -3221,8 +3048,6 @@ h1 {
   z-index: 1000;
   transform: translateY(-160%);
   padding: 10px 14px;
-  color: var(--medical-info-white);
-  background: var(--medical-info-green-dark);
   border-radius: 999px;
   font-weight: 700;
 }
@@ -3240,14 +3065,14 @@ h1 {
 }
 
 .medical-info-container {
-  width: min(calc(100% - 96px), var(--medical-info-content-width));
+  width: min(calc(100% - 96px));
   margin-inline: auto;
   max-width: 1240px;
   margin: 0 auto;
 }
 
 .medical-info-contain {
-    padding: 0 0 0 50px;
+  padding: 0 0 0 50px;
   max-width: 270px;
   display: flex;
   flex-direction: column;
@@ -3338,7 +3163,6 @@ h1 {
 
 .medical-info-category-nav small {
   display: block;
-  color: var(--medical-info-gray);
   font-size: 10px;
   line-height: 1.5;
 }
