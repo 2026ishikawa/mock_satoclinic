@@ -13,8 +13,8 @@
 | カテゴリ | 技術 |
 | :--- | :--- |
 | フロントエンド | HTML, CSS, JavaScript |
-| バックエンド | Java, Spring boot |
-| データベース | H2 |
+| バックエンド | Java, Spring boot + MyBatis |
+| データベース | 開発初期はH2、本番想定はMySQL |
 
 
 ## 1. 佐藤医院のWebサイトリニューアルの背景と目的
