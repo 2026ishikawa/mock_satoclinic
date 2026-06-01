@@ -2066,7 +2066,7 @@ ul {
 }
 
 .footer-container {
-  max-width: 1240px;
+  max-width: 1440px;
   margin: 0 auto;
   padding: 30px 100px 10px;
   position: relative;
@@ -2268,10 +2268,10 @@ ul {
   width: min(1120px, calc(100% - 80px));
   padding: 0 0 0 50px;
   margin: 0;
-  max-width: 270px;
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: fit-content;
 }
 
 .faq-hero-wrapper {
@@ -3494,14 +3494,14 @@ h1 {
 .sc-resv-page-kicker {
   margin: 0 0 4px;
   color: var(--font-sub-color);
-  font-size: 14px;
+  font-size: 16px;
   font-family: "Fredoka", sans-serif;
 }
 
 .sc-resv-page h1 {
   margin: 0;
   color: var(--font-main-color);
-  font-size: 24px;
+  font-size: 36px;
 }
 
 .sc-resv-page-lead {

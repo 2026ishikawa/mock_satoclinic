@@ -20,6 +20,7 @@ public class ReservationForm {
 
     @NotBlank(message = "フリガナは必須です。")
     @Size(max = 50, message = "フリガナは50文字以内で入力してください。")
+    @Pattern(regexp = "^[ァ-ヶー　 ]+$", message = "フリガナは全角カタカナで入力してください。")
     private String patientKana;
 
     @NotNull(message = "生年月日は必須です。")
