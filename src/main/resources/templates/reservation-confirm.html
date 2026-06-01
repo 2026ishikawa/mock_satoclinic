@@ -22,7 +22,21 @@
         <tr><th style="text-align:left;padding:10px;border-bottom:1px solid #ddd;">症状</th><td style="padding:10px;border-bottom:1px solid #ddd;" th:text="${reservationForm.symptom}"></td></tr>
       </table>
 
-      <div style="margin-top:24px;">
+      <div style="margin-top:24px;display:flex;gap:12px;align-items:center;">
+        <form th:action="@{/reservations}" th:object="${reservationForm}" method="post">
+          <input type="hidden" th:field="*{patientName}" />
+          <input type="hidden" th:field="*{patientKana}" />
+          <input type="hidden" th:field="*{birthDate}" />
+          <input type="hidden" th:field="*{phoneNumber}" />
+          <input type="hidden" th:field="*{email}" />
+          <input type="hidden" th:field="*{visitType}" />
+          <input type="hidden" th:field="*{reservationDate}" />
+          <input type="hidden" th:field="*{reservationTime}" />
+          <input type="hidden" th:field="*{symptom}" />
+          <input type="hidden" th:field="*{agreedToPrivacyPolicy}" />
+          <button type="submit" style="padding:10px 16px;border:1px solid #0b7fab;border-radius:8px;background:#0b7fab;color:#fff;cursor:pointer;">登録する</button>
+        </form>
+
         <form th:action="@{/reservations/new}" th:object="${reservationForm}" method="post">
           <input type="hidden" th:field="*{patientName}" />
           <input type="hidden" th:field="*{patientKana}" />
@@ -34,7 +48,7 @@
           <input type="hidden" th:field="*{reservationTime}" />
           <input type="hidden" th:field="*{symptom}" />
           <input type="hidden" th:field="*{agreedToPrivacyPolicy}" />
-          <button type="submit" style="padding:10px 16px;border:1px solid #ccc;border-radius:8px;background:#fff;cursor:pointer;">入力画面に戻る</button>
+          <button type="submit" style="padding:10px 16px;border:1px solid #ccc;border-radius:8px;background:#fff;cursor:pointer;">修正する</button>
         </form>
       </div>
     </main>
