@@ -2,6 +2,8 @@ package com.example.satoclinic.web.form;
 
 import java.time.LocalDate;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import jakarta.validation.constraints.AssertTrue;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
@@ -22,6 +24,7 @@ public class ReservationForm {
 
     @NotNull(message = "生年月日は必須です。")
     @Past(message = "生年月日は過去日を入力してください。")
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private LocalDate birthDate;
 
     @NotBlank(message = "電話番号は必須です。")
@@ -36,6 +39,7 @@ public class ReservationForm {
     private String visitType;
 
     @NotNull(message = "予約日は必須です。")
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private LocalDate reservationDate;
 
     @NotBlank(message = "予約時間は必須です。")

@@ -29,6 +29,15 @@ public class ReservationPageController {
         return "reservation-new";
     }
 
+    @PostMapping("/reservations/new")
+    public String backToInput(
+            @ModelAttribute("reservationForm") ReservationForm form,
+            Model model) {
+        model.addAttribute("today", LocalDate.now());
+        model.addAttribute("timeOptions", defaultTimeOptions());
+        return "reservation-new";
+    }
+
     @PostMapping("/reservations/confirm")
     public String confirm(
             @Valid @ModelAttribute("reservationForm") ReservationForm form,
