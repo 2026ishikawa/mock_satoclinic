@@ -125,13 +125,13 @@
             <div style="display:grid;grid-template-columns:220px 1fr;gap:14px 20px;">
               <label for="patientName">氏名<span style="color:#c0392b;">*</span></label>
               <div>
-                <input id="patientName" th:field="*{patientName}" type="text" style="width:100%;padding:10px;border:1px solid #cfd8e3;border-radius:8px;" />
+                <input id="patientName" th:field="*{patientName}" type="text" placeholder="例：山田 太郎" style="width:100%;padding:10px;border:1px solid #cfd8e3;border-radius:8px;" />
                 <div th:errors="*{patientName}" style="color:#c0392b;font-size:13px;"></div>
               </div>
 
               <label for="patientKana">フリガナ<span style="color:#c0392b;">*</span></label>
               <div>
-                <input id="patientKana" th:field="*{patientKana}" type="text" style="width:100%;padding:10px;border:1px solid #cfd8e3;border-radius:8px;" />
+                <input id="patientKana" th:field="*{patientKana}" type="text" placeholder="例：ヤマダ タロウ" style="width:100%;padding:10px;border:1px solid #cfd8e3;border-radius:8px;" />
                 <div th:errors="*{patientKana}" style="color:#c0392b;font-size:13px;"></div>
               </div>
 
@@ -149,7 +149,7 @@
 
               <label for="email">メールアドレス</label>
               <div>
-                <input id="email" th:field="*{email}" type="email" style="width:100%;padding:10px;border:1px solid #cfd8e3;border-radius:8px;" />
+                <input id="email" th:field="*{email}" type="email" placeholder="例：taro@example.com" style="width:100%;padding:10px;border:1px solid #cfd8e3;border-radius:8px;" />
                 <div th:errors="*{email}" style="color:#c0392b;font-size:13px;"></div>
               </div>
 
@@ -177,7 +177,7 @@
 
               <label for="symptom">症状</label>
               <div>
-                <textarea id="symptom" th:field="*{symptom}" style="width:100%;min-height:120px;padding:10px;border:1px solid #cfd8e3;border-radius:8px;"></textarea>
+                <textarea id="symptom" th:field="*{symptom}" placeholder="例：3日前から発熱と喉の痛みがあります。" style="width:100%;min-height:120px;padding:10px;border:1px solid #cfd8e3;border-radius:8px;"></textarea>
                 <div th:errors="*{symptom}" style="color:#c0392b;font-size:13px;"></div>
               </div>
 
