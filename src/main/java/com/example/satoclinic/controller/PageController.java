@@ -1,4 +1,4 @@
-﻿package com.example.satoclinic.controller;
+package com.example.satoclinic.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,5 +24,10 @@ public class PageController {
     @GetMapping({"/news", "/news.html"})
     public String news() {
         return "news";
+    }
+
+    @GetMapping("/reservations/new")
+    public String reservationNew() {
+        return "reservation-new";
     }
 }
