@@ -1,4 +1,4 @@
-package com.example.satoclinic.web.form;
+﻿package com.example.satoclinic.web.form;
 
 import java.time.LocalDate;
 
@@ -6,9 +6,10 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import jakarta.validation.constraints.AssertTrue;
 import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Past;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 
@@ -23,8 +24,22 @@ public class ReservationForm {
     @Pattern(regexp = "^[ァ-ヶー　 ]+$", message = "フリガナは全角カタカナで入力してください。")
     private String patientKana;
 
-    @NotNull(message = "生年月日は必須です。")
-    @Past(message = "生年月日は過去日を入力してください。")
+    @NotNull(message = "生年月日（年）は必須です。")
+    @Min(value = 1900, message = "生年月日（年）が不正です。")
+    @Max(value = 2100, message = "生年月日（年）が不正です。")
+    private Integer birthYear;
+
+    @NotNull(message = "生年月日（月）は必須です。")
+    @Min(value = 1, message = "生年月日（月）が不正です。")
+    @Max(value = 12, message = "生年月日（月）が不正です。")
+    private Integer birthMonth;
+
+    @NotNull(message = "生年月日（日）は必須です。")
+    @Min(value = 1, message = "生年月日（日）が不正です。")
+    @Max(value = 31, message = "生年月日（日）が不正です。")
+    private Integer birthDay;
+
+    // Derived field created from year/month/day in controller.
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private LocalDate birthDate;
 
@@ -52,83 +67,42 @@ public class ReservationForm {
     @AssertTrue(message = "個人情報同意が必要です。")
     private boolean agreedToPrivacyPolicy;
 
-    public String getPatientName() {
-        return patientName;
-    }
+    public String getPatientName() { return patientName; }
+    public void setPatientName(String patientName) { this.patientName = patientName; }
 
-    public void setPatientName(String patientName) {
-        this.patientName = patientName;
-    }
+    public String getPatientKana() { return patientKana; }
+    public void setPatientKana(String patientKana) { this.patientKana = patientKana; }
 
-    public String getPatientKana() {
-        return patientKana;
-    }
+    public Integer getBirthYear() { return birthYear; }
+    public void setBirthYear(Integer birthYear) { this.birthYear = birthYear; }
 
-    public void setPatientKana(String patientKana) {
-        this.patientKana = patientKana;
-    }
+    public Integer getBirthMonth() { return birthMonth; }
+    public void setBirthMonth(Integer birthMonth) { this.birthMonth = birthMonth; }
 
-    public LocalDate getBirthDate() {
-        return birthDate;
-    }
+    public Integer getBirthDay() { return birthDay; }
+    public void setBirthDay(Integer birthDay) { this.birthDay = birthDay; }
 
-    public void setBirthDate(LocalDate birthDate) {
-        this.birthDate = birthDate;
-    }
+    public LocalDate getBirthDate() { return birthDate; }
+    public void setBirthDate(LocalDate birthDate) { this.birthDate = birthDate; }
 
-    public String getPhoneNumber() {
-        return phoneNumber;
-    }
+    public String getPhoneNumber() { return phoneNumber; }
+    public void setPhoneNumber(String phoneNumber) { this.phoneNumber = phoneNumber; }
 
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
-    }
+    public String getEmail() { return email; }
+    public void setEmail(String email) { this.email = email; }
 
-    public String getEmail() {
-        return email;
-    }
+    public String getVisitType() { return visitType; }
+    public void setVisitType(String visitType) { this.visitType = visitType; }
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
+    public LocalDate getReservationDate() { return reservationDate; }
+    public void setReservationDate(LocalDate reservationDate) { this.reservationDate = reservationDate; }
 
-    public String getVisitType() {
-        return visitType;
-    }
+    public String getReservationTime() { return reservationTime; }
+    public void setReservationTime(String reservationTime) { this.reservationTime = reservationTime; }
 
-    public void setVisitType(String visitType) {
-        this.visitType = visitType;
-    }
+    public String getSymptom() { return symptom; }
+    public void setSymptom(String symptom) { this.symptom = symptom; }
 
-    public LocalDate getReservationDate() {
-        return reservationDate;
-    }
-
-    public void setReservationDate(LocalDate reservationDate) {
-        this.reservationDate = reservationDate;
-    }
-
-    public String getReservationTime() {
-        return reservationTime;
-    }
-
-    public void setReservationTime(String reservationTime) {
-        this.reservationTime = reservationTime;
-    }
-
-    public String getSymptom() {
-        return symptom;
-    }
-
-    public void setSymptom(String symptom) {
-        this.symptom = symptom;
-    }
-
-    public boolean isAgreedToPrivacyPolicy() {
-        return agreedToPrivacyPolicy;
-    }
-
-    public void setAgreedToPrivacyPolicy(boolean agreedToPrivacyPolicy) {
-        this.agreedToPrivacyPolicy = agreedToPrivacyPolicy;
-    }
+    public boolean isAgreedToPrivacyPolicy() { return agreedToPrivacyPolicy; }
+    public void setAgreedToPrivacyPolicy(boolean agreedToPrivacyPolicy) { this.agreedToPrivacyPolicy = agreedToPrivacyPolicy; }
 }

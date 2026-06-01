@@ -3560,6 +3560,17 @@ h1 {
   min-height: 120px;
 }
 
+.sc-resv-form-birth-selects {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.sc-resv-form-birth-selects .sc-resv-form-control {
+  width: auto;
+  min-width: 100px;
+}
+
 .sc-resv-form-field-error {
   color: #c0392b;
   font-size: 13px;

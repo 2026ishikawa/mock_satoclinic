@@ -137,8 +137,26 @@
 
               <label for="birthDate">生年月日<span class="sc-resv-form-required">*</span></label>
               <div>
-                <input id="birthDate" th:field="*{birthDate}" type="date" class="sc-resv-form-control" />
-                <div th:errors="*{birthDate}" class="sc-resv-form-field-error"></div>
+                <div class="sc-resv-form-birth-selects">
+                  <select th:field="*{birthYear}" class="sc-resv-form-control">
+                    <option value="">西暦</option>
+                    <option th:each="year : ${birthYearOptions}" th:value="${year}" th:text="${year}"></option>
+                  </select>
+                  <span>年</span>
+                  <select th:field="*{birthMonth}" class="sc-resv-form-control">
+                    <option value="">月</option>
+                    <option th:each="month : ${birthMonthOptions}" th:value="${month}" th:text="${month}"></option>
+                  </select>
+                  <span>月</span>
+                  <select th:field="*{birthDay}" class="sc-resv-form-control">
+                    <option value="">日</option>
+                    <option th:each="day : ${birthDayOptions}" th:value="${day}" th:text="${day}"></option>
+                  </select>
+                  <span>日</span>
+                </div>
+                <div th:errors="*{birthYear}" class="sc-resv-form-field-error"></div>
+                <div th:errors="*{birthMonth}" class="sc-resv-form-field-error"></div>
+                <div th:errors="*{birthDay}" class="sc-resv-form-field-error"></div>
               </div>
 
               <label for="phoneNumber">電話番号<span class="sc-resv-form-required">*</span></label>

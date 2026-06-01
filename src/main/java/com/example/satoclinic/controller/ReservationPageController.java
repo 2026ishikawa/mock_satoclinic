@@ -1,9 +1,11 @@
 ﻿package com.example.satoclinic.controller;
 
+import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.stream.IntStream;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -32,8 +34,7 @@ public class ReservationPageController {
 
     @GetMapping("/reservations/new")
     public String newPage(Model model) {
-        model.addAttribute("today", LocalDate.now());
-        model.addAttribute("timeOptions", defaultTimeOptions());
+        addFormOptions(model);
         return "reservation-new";
     }
 
@@ -41,8 +42,7 @@ public class ReservationPageController {
     public String backToInput(
             @ModelAttribute("reservationForm") ReservationForm form,
             Model model) {
-        model.addAttribute("today", LocalDate.now());
-        model.addAttribute("timeOptions", defaultTimeOptions());
+        addFormOptions(model);
         return "reservation-new";
     }
 
@@ -51,8 +51,9 @@ public class ReservationPageController {
             @Valid @ModelAttribute("reservationForm") ReservationForm form,
             BindingResult bindingResult,
             Model model) {
-        model.addAttribute("today", LocalDate.now());
-        model.addAttribute("timeOptions", defaultTimeOptions());
+        addFormOptions(model);
+
+        composeBirthDate(form, bindingResult);
 
         if (form.getReservationDate() != null && form.getReservationDate().isBefore(LocalDate.now())) {
             bindingResult.rejectValue("reservationDate", "reservationDate.past", "過去日は予約できません。");
@@ -98,5 +99,29 @@ public class ReservationPageController {
         String key = date + "|" + time;
         int reservedCount = RESERVED_COUNT_BY_SLOT.getOrDefault(key, 0);
         return reservedCount < SLOT_CAPACITY;
+    }
+
+    private void addFormOptions(Model model) {
+        model.addAttribute("today", LocalDate.now());
+        model.addAttribute("timeOptions", defaultTimeOptions());
+        model.addAttribute("birthYearOptions", IntStream.rangeClosed(1900, LocalDate.now().getYear()).boxed().toList());
+        model.addAttribute("birthMonthOptions", IntStream.rangeClosed(1, 12).boxed().toList());
+        model.addAttribute("birthDayOptions", IntStream.rangeClosed(1, 31).boxed().toList());
+    }
+
+    private void composeBirthDate(ReservationForm form, BindingResult bindingResult) {
+        if (form.getBirthYear() == null || form.getBirthMonth() == null || form.getBirthDay() == null) {
+            return;
+        }
+        try {
+            LocalDate birthDate = LocalDate.of(form.getBirthYear(), form.getBirthMonth(), form.getBirthDay());
+            if (!birthDate.isBefore(LocalDate.now())) {
+                bindingResult.rejectValue("birthYear", "birthDate.future", "生年月日は過去日を入力してください。");
+                return;
+            }
+            form.setBirthDate(birthDate);
+        } catch (DateTimeException e) {
+            bindingResult.rejectValue("birthYear", "birthDate.invalid", "生年月日が正しくありません。");
+        }
     }
 }

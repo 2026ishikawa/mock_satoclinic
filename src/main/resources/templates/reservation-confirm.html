@@ -26,6 +26,9 @@
         <form th:action="@{/reservations}" th:object="${reservationForm}" method="post">
           <input type="hidden" th:field="*{patientName}" />
           <input type="hidden" th:field="*{patientKana}" />
+          <input type="hidden" th:field="*{birthYear}" />
+          <input type="hidden" th:field="*{birthMonth}" />
+          <input type="hidden" th:field="*{birthDay}" />
           <input type="hidden" th:field="*{birthDate}" />
           <input type="hidden" th:field="*{phoneNumber}" />
           <input type="hidden" th:field="*{email}" />
@@ -40,6 +43,9 @@
         <form th:action="@{/reservations/new}" th:object="${reservationForm}" method="post">
           <input type="hidden" th:field="*{patientName}" />
           <input type="hidden" th:field="*{patientKana}" />
+          <input type="hidden" th:field="*{birthYear}" />
+          <input type="hidden" th:field="*{birthMonth}" />
+          <input type="hidden" th:field="*{birthDay}" />
           <input type="hidden" th:field="*{birthDate}" />
           <input type="hidden" th:field="*{phoneNumber}" />
           <input type="hidden" th:field="*{email}" />
