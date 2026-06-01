@@ -1,14 +1,16 @@
-package com.example.satoclinic.controller;
+﻿package com.example.satoclinic.controller;
 
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import com.example.satoclinic.web.form.ReservationForm;
@@ -20,6 +22,8 @@ public class ReservationPageController {
     private static final int SLOT_CAPACITY = 3;
     // Temporary mock: reserved count by "yyyy-MM-dd|HH:mm". Replace with DB query later.
     private static final Map<String, Integer> RESERVED_COUNT_BY_SLOT = Map.of();
+    // Temporary in-memory store for completion view. Replace with DB lookup later.
+    private static final Map<String, ReservationForm> RESERVATION_SNAPSHOT_BY_CODE = new ConcurrentHashMap<>();
 
     @ModelAttribute("reservationForm")
     public ReservationForm reservationForm() {
@@ -68,12 +72,21 @@ public class ReservationPageController {
     }
 
     @PostMapping("/reservations")
-    public String register(
-            @ModelAttribute("reservationForm") ReservationForm form,
-            Model model) {
+    public String register(@ModelAttribute("reservationForm") ReservationForm form) {
         // Registration persistence will be implemented in the next step.
-        model.addAttribute("reservationCode", "R" + LocalDate.now().toString().replace("-", "") + "0001");
-        model.addAttribute("reservationForm", form);
+        String reservationCode = "R" + LocalDate.now().toString().replace("-", "") + "0001";
+        RESERVATION_SNAPSHOT_BY_CODE.put(reservationCode, form);
+        return "redirect:/reservations/complete/" + reservationCode;
+    }
+
+    @GetMapping("/reservations/complete/{reservationCode}")
+    public String complete(
+            @PathVariable("reservationCode") String reservationCode,
+            Model model) {
+        ReservationForm form = RESERVATION_SNAPSHOT_BY_CODE.get(reservationCode);
+        model.addAttribute("reservationCode", reservationCode);
+        model.addAttribute("reservationDate", form != null ? form.getReservationDate() : null);
+        model.addAttribute("reservationTime", form != null ? form.getReservationTime() : null);
         return "reservation-complete";
     }
 

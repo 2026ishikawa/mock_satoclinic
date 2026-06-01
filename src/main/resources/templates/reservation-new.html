@@ -94,102 +94,102 @@
       </div>
     </div>
 
-    <main class="faq-page">
-      <div class="faq-hero-wrapper">
-        <section class="page-hero">
-          <div class="container for-faq">
-            <p class="en-title">Reservation</p>
+    <main class="sc-resv-page faq-page">
+      <div class="sc-resv-page-hero-wrap faq-hero-wrapper">
+        <section class="sc-resv-page-hero page-hero">
+          <div class="container sc-resv-page-hero-container for-faq">
+            <p class="sc-resv-page-kicker en-title">Reservation</p>
             <h1>Web予約</h1>
           </div>
         </section>
       </div>
 
-      <section class="lead-section">
+      <section class="sc-resv-page-lead lead-section">
         <div class="container">
-          <nav class="breadcrumb">
+          <nav class="sc-resv-page-breadcrumb breadcrumb">
             <a href="/">ホーム</a>
             <span>＞</span>
             <span>Web予約</span>
           </nav>
 
-          <p class="lead-text">診療予約に必要な情報をご入力ください。</p>
+          <p class="sc-resv-page-lead-text lead-text">診療予約に必要な情報をご入力ください。</p>
         </div>
       </section>
 
-      <section class="lead-section">
-        <div class="container" style="max-width: 920px;">
-          <form th:action="@{/reservations/confirm}" th:object="${reservationForm}" method="post">
-            <div th:if="${#fields.hasErrors('*')}" style="margin-bottom: 16px; color: #c0392b; font-weight: 700;">
+      <section class="sc-resv-page-form-section">
+        <div class="container sc-resv-form-container">
+          <form class="sc-resv-form" th:action="@{/reservations/confirm}" th:object="${reservationForm}" method="post">
+            <div th:if="${#fields.hasErrors('*')}" class="sc-resv-form-error-summary">
               入力内容をご確認ください。
             </div>
-            <div style="display:grid;grid-template-columns:220px 1fr;gap:14px 20px;">
-              <label for="patientName">氏名<span style="color:#c0392b;">*</span></label>
+            <div class="sc-resv-form-grid">
+              <label for="patientName">氏名<span class="sc-resv-form-required">*</span></label>
               <div>
-                <input id="patientName" th:field="*{patientName}" type="text" placeholder="例：山田 太郎" style="width:100%;padding:10px;border:1px solid #cfd8e3;border-radius:8px;" />
-                <div th:errors="*{patientName}" style="color:#c0392b;font-size:13px;"></div>
+                <input id="patientName" th:field="*{patientName}" type="text" placeholder="例：山田 太郎" class="sc-resv-form-control" />
+                <div th:errors="*{patientName}" class="sc-resv-form-field-error"></div>
               </div>
 
-              <label for="patientKana">フリガナ<span style="color:#c0392b;">*</span></label>
+              <label for="patientKana">フリガナ<span class="sc-resv-form-required">*</span></label>
               <div>
-                <input id="patientKana" th:field="*{patientKana}" type="text" placeholder="例：ヤマダ タロウ" style="width:100%;padding:10px;border:1px solid #cfd8e3;border-radius:8px;" />
-                <div th:errors="*{patientKana}" style="color:#c0392b;font-size:13px;"></div>
+                <input id="patientKana" th:field="*{patientKana}" type="text" placeholder="例：ヤマダ タロウ" class="sc-resv-form-control" />
+                <div th:errors="*{patientKana}" class="sc-resv-form-field-error"></div>
               </div>
 
-              <label for="birthDate">生年月日<span style="color:#c0392b;">*</span></label>
+              <label for="birthDate">生年月日<span class="sc-resv-form-required">*</span></label>
               <div>
-                <input id="birthDate" th:field="*{birthDate}" type="date" style="width:100%;padding:10px;border:1px solid #cfd8e3;border-radius:8px;" />
-                <div th:errors="*{birthDate}" style="color:#c0392b;font-size:13px;"></div>
+                <input id="birthDate" th:field="*{birthDate}" type="date" class="sc-resv-form-control" />
+                <div th:errors="*{birthDate}" class="sc-resv-form-field-error"></div>
               </div>
 
-              <label for="phoneNumber">電話番号<span style="color:#c0392b;">*</span></label>
+              <label for="phoneNumber">電話番号<span class="sc-resv-form-required">*</span></label>
               <div>
-                <input id="phoneNumber" th:field="*{phoneNumber}" type="tel" placeholder="090-1234-5678" style="width:100%;padding:10px;border:1px solid #cfd8e3;border-radius:8px;" />
-                <div th:errors="*{phoneNumber}" style="color:#c0392b;font-size:13px;"></div>
+                <input id="phoneNumber" th:field="*{phoneNumber}" type="tel" placeholder="090-1234-5678" class="sc-resv-form-control" />
+                <div th:errors="*{phoneNumber}" class="sc-resv-form-field-error"></div>
               </div>
 
               <label for="email">メールアドレス</label>
               <div>
-                <input id="email" th:field="*{email}" type="email" placeholder="例：taro@example.com" style="width:100%;padding:10px;border:1px solid #cfd8e3;border-radius:8px;" />
-                <div th:errors="*{email}" style="color:#c0392b;font-size:13px;"></div>
+                <input id="email" th:field="*{email}" type="email" placeholder="例：taro@example.com" class="sc-resv-form-control" />
+                <div th:errors="*{email}" class="sc-resv-form-field-error"></div>
               </div>
 
-              <label>初診/再診<span style="color:#c0392b;">*</span></label>
+              <label>初診/再診<span class="sc-resv-form-required">*</span></label>
               <div>
-                <label style="margin-right:18px;"><input th:field="*{visitType}" type="radio" value="FIRST" /> 初診</label>
+                <label class="sc-resv-form-radio-item sc-resv-form-radio-item--spaced"><input th:field="*{visitType}" type="radio" value="FIRST" /> 初診</label>
                 <label><input th:field="*{visitType}" type="radio" value="RETURN" /> 再診</label>
-                <div th:errors="*{visitType}" style="color:#c0392b;font-size:13px;"></div>
+                <div th:errors="*{visitType}" class="sc-resv-form-field-error"></div>
               </div>
 
-              <label for="reservationDate">診療希望日<span style="color:#c0392b;">*</span></label>
+              <label for="reservationDate">診療希望日<span class="sc-resv-form-required">*</span></label>
               <div>
-                <input id="reservationDate" th:field="*{reservationDate}" th:attr="min=${today}" type="date" style="width:100%;padding:10px;border:1px solid #cfd8e3;border-radius:8px;" />
-                <div th:errors="*{reservationDate}" style="color:#c0392b;font-size:13px;"></div>
+                <input id="reservationDate" th:field="*{reservationDate}" th:attr="min=${today}" type="date" class="sc-resv-form-control" />
+                <div th:errors="*{reservationDate}" class="sc-resv-form-field-error"></div>
               </div>
 
-              <label for="reservationTime">希望時間<span style="color:#c0392b;">*</span></label>
+              <label for="reservationTime">希望時間<span class="sc-resv-form-required">*</span></label>
               <div>
-                <select id="reservationTime" th:field="*{reservationTime}" style="width:100%;padding:10px;border:1px solid #cfd8e3;border-radius:8px;">
+                <select id="reservationTime" th:field="*{reservationTime}" class="sc-resv-form-control">
                   <option value="">選択してください</option>
                   <option th:each="time : ${timeOptions}" th:value="${time}" th:text="${time}"></option>
                 </select>
-                <div th:errors="*{reservationTime}" style="color:#c0392b;font-size:13px;"></div>
+                <div th:errors="*{reservationTime}" class="sc-resv-form-field-error"></div>
               </div>
 
               <label for="symptom">症状</label>
               <div>
-                <textarea id="symptom" th:field="*{symptom}" placeholder="例：3日前から発熱と喉の痛みがあります。" style="width:100%;min-height:120px;padding:10px;border:1px solid #cfd8e3;border-radius:8px;"></textarea>
-                <div th:errors="*{symptom}" style="color:#c0392b;font-size:13px;"></div>
+                <textarea id="symptom" th:field="*{symptom}" placeholder="例：3日前から発熱と喉の痛みがあります。" class="sc-resv-form-control sc-resv-form-textarea"></textarea>
+                <div th:errors="*{symptom}" class="sc-resv-form-field-error"></div>
               </div>
 
-              <label>個人情報同意<span style="color:#c0392b;">*</span></label>
+              <label>個人情報同意<span class="sc-resv-form-required">*</span></label>
               <div>
                 <label><input th:field="*{agreedToPrivacyPolicy}" type="checkbox" /> 個人情報の取り扱いに同意します。</label>
-                <div th:errors="*{agreedToPrivacyPolicy}" style="color:#c0392b;font-size:13px;"></div>
+                <div th:errors="*{agreedToPrivacyPolicy}" class="sc-resv-form-field-error"></div>
               </div>
             </div>
 
-            <div style="text-align:center;margin-top:24px;">
-              <button type="submit" style="background:#0b7fab;color:#fff;border:none;border-radius:999px;padding:12px 40px;font-weight:700;cursor:pointer;">入力内容を確認する</button>
+            <div class="sc-resv-form-actions">
+              <button type="submit" class="sc-resv-form-submit">入力内容を確認する</button>
             </div>
           </form>
         </div>
