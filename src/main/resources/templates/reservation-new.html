@@ -1,5 +1,5 @@
 ﻿<!doctype html>
-<html lang="ja">
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -112,10 +112,86 @@
             <span>Web予約</span>
           </nav>
 
-          <p class="lead-text">
-            予約入力画面（実装中）です。<br>
-            次のステップで入力フォームを追加します。
-          </p>
+          <p class="lead-text">診療予約に必要な情報をご入力ください。</p>
+        </div>
+      </section>
+
+      <section class="lead-section">
+        <div class="container" style="max-width: 920px;">
+          <form th:action="@{/reservations/confirm}" th:object="${reservationForm}" method="post">
+            <div th:if="${#fields.hasErrors('*')}" style="margin-bottom: 16px; color: #c0392b; font-weight: 700;">
+              入力内容をご確認ください。
+            </div>
+            <div style="display:grid;grid-template-columns:220px 1fr;gap:14px 20px;">
+              <label for="patientName">氏名<span style="color:#c0392b;">*</span></label>
+              <div>
+                <input id="patientName" th:field="*{patientName}" type="text" style="width:100%;padding:10px;border:1px solid #cfd8e3;border-radius:8px;" />
+                <div th:errors="*{patientName}" style="color:#c0392b;font-size:13px;"></div>
+              </div>
+
+              <label for="patientKana">フリガナ<span style="color:#c0392b;">*</span></label>
+              <div>
+                <input id="patientKana" th:field="*{patientKana}" type="text" style="width:100%;padding:10px;border:1px solid #cfd8e3;border-radius:8px;" />
+                <div th:errors="*{patientKana}" style="color:#c0392b;font-size:13px;"></div>
+              </div>
+
+              <label for="birthDate">生年月日<span style="color:#c0392b;">*</span></label>
+              <div>
+                <input id="birthDate" th:field="*{birthDate}" type="date" style="width:100%;padding:10px;border:1px solid #cfd8e3;border-radius:8px;" />
+                <div th:errors="*{birthDate}" style="color:#c0392b;font-size:13px;"></div>
+              </div>
+
+              <label for="phoneNumber">電話番号<span style="color:#c0392b;">*</span></label>
+              <div>
+                <input id="phoneNumber" th:field="*{phoneNumber}" type="tel" placeholder="090-1234-5678" style="width:100%;padding:10px;border:1px solid #cfd8e3;border-radius:8px;" />
+                <div th:errors="*{phoneNumber}" style="color:#c0392b;font-size:13px;"></div>
+              </div>
+
+              <label for="email">メールアドレス</label>
+              <div>
+                <input id="email" th:field="*{email}" type="email" style="width:100%;padding:10px;border:1px solid #cfd8e3;border-radius:8px;" />
+                <div th:errors="*{email}" style="color:#c0392b;font-size:13px;"></div>
+              </div>
+
+              <label>初診/再診<span style="color:#c0392b;">*</span></label>
+              <div>
+                <label style="margin-right:18px;"><input th:field="*{visitType}" type="radio" value="FIRST" /> 初診</label>
+                <label><input th:field="*{visitType}" type="radio" value="RETURN" /> 再診</label>
+                <div th:errors="*{visitType}" style="color:#c0392b;font-size:13px;"></div>
+              </div>
+
+              <label for="reservationDate">診療希望日<span style="color:#c0392b;">*</span></label>
+              <div>
+                <input id="reservationDate" th:field="*{reservationDate}" th:attr="min=${today}" type="date" style="width:100%;padding:10px;border:1px solid #cfd8e3;border-radius:8px;" />
+                <div th:errors="*{reservationDate}" style="color:#c0392b;font-size:13px;"></div>
+              </div>
+
+              <label for="reservationTime">希望時間<span style="color:#c0392b;">*</span></label>
+              <div>
+                <select id="reservationTime" th:field="*{reservationTime}" style="width:100%;padding:10px;border:1px solid #cfd8e3;border-radius:8px;">
+                  <option value="">選択してください</option>
+                  <option th:each="time : ${timeOptions}" th:value="${time}" th:text="${time}"></option>
+                </select>
+                <div th:errors="*{reservationTime}" style="color:#c0392b;font-size:13px;"></div>
+              </div>
+
+              <label for="symptom">症状</label>
+              <div>
+                <textarea id="symptom" th:field="*{symptom}" style="width:100%;min-height:120px;padding:10px;border:1px solid #cfd8e3;border-radius:8px;"></textarea>
+                <div th:errors="*{symptom}" style="color:#c0392b;font-size:13px;"></div>
+              </div>
+
+              <label>個人情報同意<span style="color:#c0392b;">*</span></label>
+              <div>
+                <label><input th:field="*{agreedToPrivacyPolicy}" type="checkbox" /> 個人情報の取り扱いに同意します。</label>
+                <div th:errors="*{agreedToPrivacyPolicy}" style="color:#c0392b;font-size:13px;"></div>
+              </div>
+            </div>
+
+            <div style="text-align:center;margin-top:24px;">
+              <button type="submit" style="background:#0b7fab;color:#fff;border:none;border-radius:999px;padding:12px 40px;font-weight:700;cursor:pointer;">入力内容を確認する</button>
+            </div>
+          </form>
         </div>
       </section>
     </main>

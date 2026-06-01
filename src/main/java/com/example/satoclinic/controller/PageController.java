@@ -26,8 +26,4 @@ public class PageController {
         return "news";
     }
 
-    @GetMapping("/reservations/new")
-    public String reservationNew() {
-        return "reservation-new";
-    }
 }
