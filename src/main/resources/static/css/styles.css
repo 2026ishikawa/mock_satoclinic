@@ -3524,7 +3524,8 @@ h1 {
 
 .sc-resv-page-form-section {
   padding-bottom: 40px;
-  background-color: var(--color-white);
+  background-color: var(--color-pale-aqua);
+  border-bottom: 1px solid var(--border-dashed);
 }
 
 /* Reservation form (scoped, non-conflicting names) */
@@ -3593,4 +3594,58 @@ h1 {
   padding: 12px 40px;
   font-weight: 700;
   cursor: pointer;
+}
+/* Reservation progress bar */
+.sc-resv-progress {
+  padding: 50px 0;
+  background-color: var(--color-pale-aqua);
+}
+
+.sc-resv-progress-list {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.sc-resv-progress-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #8a8f98;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.sc-resv-progress-step {
+  width: 28px;
+  height: 28px;
+  border-radius: 999px;
+  border: 1px solid #c6ccd4;
+  background: #ffffff;
+  color: #7b8592;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  line-height: 1;
+}
+
+.sc-resv-progress-item.is-active {
+  color: #1f3a8a;
+}
+
+.sc-resv-progress-item.is-active .sc-resv-progress-step {
+  border-color: #1f3a8a;
+  background: #1f3a8a;
+  color: #ffffff;
+}
+
+.sc-resv-progress-sep {
+  width: 26px;
+  height: 1px;
+  background: #d1d7e0;
 }

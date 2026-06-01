@@ -6,7 +6,25 @@
     <title>予約確認 | 佐藤医院</title>
     <link rel="stylesheet" href="/css/styles.css" />
   </head>
-  <body>
+<body>
+  <nav class="sc-resv-progress" aria-label="予約手続きの進行状況">
+    <ol class="sc-resv-progress-list">
+      <li class="sc-resv-progress-item">
+        <span class="sc-resv-progress-step">1</span>
+        <span>入力</span>
+      </li>
+      <li class="sc-resv-progress-sep" aria-hidden="true"></li>
+      <li class="sc-resv-progress-item is-active">
+        <span class="sc-resv-progress-step">2</span>
+        <span>確認</span>
+      </li>
+      <li class="sc-resv-progress-sep" aria-hidden="true"></li>
+      <li class="sc-resv-progress-item">
+        <span class="sc-resv-progress-step">3</span>
+        <span>完了</span>
+      </li>
+    </ol>
+  </nav>
     <main style="max-width:900px;margin:48px auto;padding:24px;">
       <h1>予約確認</h1>
       <p>入力内容をご確認ください。</p>
@@ -57,6 +75,6 @@
           <button type="submit" style="padding:10px 16px;border:1px solid #ccc;border-radius:8px;background:#fff;cursor:pointer;">修正する</button>
         </form>
       </div>
-    </main>
+</main>
   </body>
 </html>

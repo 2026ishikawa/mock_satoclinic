@@ -13,7 +13,7 @@
       rel="stylesheet"
     />
   </head>
-  <body>
+<body>
     <header class="header">
       <div class="header-container">
         <a href="/">
@@ -116,7 +116,25 @@
         </div>
       </section>
 
-      <section class="sc-resv-page-form-section">
+  <nav class="sc-resv-progress" aria-label="予約手続きの進行状況">
+    <ol class="sc-resv-progress-list">
+      <li class="sc-resv-progress-item is-active">
+        <span class="sc-resv-progress-step">1</span>
+        <span>入力</span>
+      </li>
+      <li class="sc-resv-progress-sep" aria-hidden="true"></li>
+      <li class="sc-resv-progress-item">
+        <span class="sc-resv-progress-step">2</span>
+        <span>確認</span>
+      </li>
+      <li class="sc-resv-progress-sep" aria-hidden="true"></li>
+      <li class="sc-resv-progress-item">
+        <span class="sc-resv-progress-step">3</span>
+        <span>完了</span>
+      </li>
+    </ol>
+  </nav>
+  <section class="sc-resv-page-form-section">
         <div class="container sc-resv-form-container">
           <form class="sc-resv-form" th:action="@{/reservations/confirm}" th:object="${reservationForm}" method="post">
             <div th:if="${#fields.hasErrors('*')}" class="sc-resv-form-error-summary">
@@ -212,7 +230,7 @@
           </form>
         </div>
       </section>
-    </main>
+</main>
 
     <footer class="footer">
       <div class="footer-container">
