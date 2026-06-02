@@ -362,3 +362,13 @@ WHERE id = 1;
 | `doctors` | 医師情報を管理する |
 | `reservation_notifications` | メール通知履歴を管理する |
 | `closed_days` | 休診日を管理する |
+---
+
+## 11. H2 Console Connection
+
+H2コンソール接続時の設定値は以下の通りです。
+
+- Browser URL: `http://localhost:8080/h2-console`
+- JDBC URL: `jdbc:h2:mem:satoclinic`
+- User Name: `sa`
+- Password: 空欄
