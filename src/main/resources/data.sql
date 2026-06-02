@@ -1,24 +1,25 @@
 INSERT INTO reservation_slots
   (slot_date, start_time, end_time, capacity, is_active)
-VALUES
-  ('2026-06-01', '09:00:00', '09:30:00', 3, TRUE),
-  ('2026-06-01', '09:30:00', '10:00:00', 3, TRUE),
-  ('2026-06-01', '10:00:00', '10:30:00', 3, TRUE),
-  ('2026-06-01', '10:30:00', '11:00:00', 3, TRUE),
-  ('2026-06-01', '11:00:00', '11:30:00', 3, TRUE),
-  ('2026-06-01', '11:30:00', '12:00:00', 3, TRUE),
-  ('2026-06-02', '09:00:00', '09:30:00', 3, TRUE),
-  ('2026-06-02', '09:30:00', '10:00:00', 3, TRUE),
-  ('2026-06-02', '10:00:00', '10:30:00', 3, TRUE),
-  ('2026-06-02', '10:30:00', '11:00:00', 3, TRUE),
-  ('2026-06-02', '11:00:00', '11:30:00', 3, TRUE),
-  ('2026-06-02', '11:30:00', '12:00:00', 3, TRUE),
-  ('2026-06-03', '09:00:00', '09:30:00', 3, TRUE),
-  ('2026-06-03', '09:30:00', '10:00:00', 3, TRUE),
-  ('2026-06-03', '10:00:00', '10:30:00', 3, TRUE),
-  ('2026-06-03', '10:30:00', '11:00:00', 3, TRUE),
-  ('2026-06-03', '11:00:00', '11:30:00', 3, TRUE),
-  ('2026-06-03', '11:30:00', '12:00:00', 3, TRUE);
+SELECT
+  DATEADD('DAY', day_offset.x, DATE '2026-06-01'),
+  time_slots.start_time,
+  time_slots.end_time,
+  3,
+  TRUE
+FROM SYSTEM_RANGE(0, 578) AS day_offset
+CROSS JOIN (
+  SELECT TIME '09:00:00' AS start_time, TIME '09:30:00' AS end_time
+  UNION ALL
+  SELECT TIME '09:30:00', TIME '10:00:00'
+  UNION ALL
+  SELECT TIME '10:00:00', TIME '10:30:00'
+  UNION ALL
+  SELECT TIME '10:30:00', TIME '11:00:00'
+  UNION ALL
+  SELECT TIME '11:00:00', TIME '11:30:00'
+  UNION ALL
+  SELECT TIME '11:30:00', TIME '12:00:00'
+) AS time_slots;
 
 INSERT INTO reservations
   (
