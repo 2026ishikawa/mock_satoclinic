@@ -6,7 +6,7 @@
     <title>予約完了 | 佐藤医院</title>
     <link rel="stylesheet" href="/css/styles.css" />
   </head>
-<body>
+<body class="sc-reservation-complete-page">
   <nav class="sc-resv-progress" aria-label="予約手続きの進行状況">
     <ol class="sc-resv-progress-list">
       <li class="sc-resv-progress-item">
@@ -25,30 +25,30 @@
       </li>
     </ol>
   </nav>
-    <main style="max-width:900px;margin:30px auto;padding:24px;">
-      <section style="text-align:center;">
-        <h1 style="margin:0 0 16px;color:#0f2f9f;font-size:36px;font-weight:700;">ご予約ありがとうございます</h1>
-        <p style="margin:0 0 24px;font-size:17px;">
+    <main class="sc-reservation-complete-content">
+      <section class="sc-reservation-complete-header">
+        <h1 class="sc-reservation-complete-title">ご予約ありがとうございます</h1>
+        <p class="sc-reservation-complete-lead">
           受付完了のお知らせを送信いたしましたので、必ずご確認ください
         </p>
 
-        <div style="max-width:560px;margin:0 auto 18px;background:#e0e0e0;border-radius:2px;padding:28px 20px;">
-          <p style="margin:0 0 12px;font-size:28px;font-weight:700;">予約番号</p>
-          <p style="margin:0 0 16px;font-size:36px;font-weight:700;color:#d80000;" th:text="${reservationCode}"></p>
-          <p style="margin:0;font-size:18px;">お問い合わせに必要な番号です。大切に保管ください。</p>
+        <div class="sc-reservation-complete-code-box">
+          <p class="sc-reservation-complete-code-label">予約番号</p>
+          <p class="sc-reservation-complete-code-value" th:text="${reservationCode}"></p>
+          <p class="sc-reservation-complete-code-note">お問い合わせに必要な番号です。大切に保管ください。</p>
         </div>
       </section>
 
-      <p style="margin:6px 0 18px;text-align:center;">
-        <span style="font-weight:700;font-size:20px;">予約日時:</span>
-        <span style="font-size:22px;font-weight:700;" th:text="${reservationDate}"></span>
-        <span style="font-size:22px;font-weight:700;margin-left:12px;" th:text="${reservationTime}"></span>
+      <p class="sc-reservation-complete-datetime">
+        <span class="sc-reservation-complete-datetime-label">予約日時:</span>
+        <span class="sc-reservation-complete-datetime-value" th:text="${reservationDate}"></span>
+        <span class="sc-reservation-complete-datetime-value sc-reservation-complete-datetime-time" th:text="${reservationTime}"></span>
       </p>
 
-      <p style="margin-top:24px;text-align:center;">
+      <p class="sc-reservation-complete-back">
         <a
           href="/"
-          style="display:inline-block;padding:10px 16px;border:1px solid #b8c4d3;border-radius:8px;background:#fff;color:#1f3b57;text-decoration:none;font-weight:700;"
+          class="sc-reservation-complete-back-link"
         >
           ← トップページへ戻る
         </a>

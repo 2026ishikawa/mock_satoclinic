@@ -6,7 +6,7 @@
     <title>予約確認 | 佐藤医院</title>
     <link rel="stylesheet" href="/css/styles.css" />
   </head>
-<body>
+<body class="sc-reservation-confirm-page">
   <nav class="sc-resv-progress" aria-label="予約手続きの進行状況">
     <ol class="sc-resv-progress-list">
       <li class="sc-resv-progress-item">
@@ -25,22 +25,24 @@
       </li>
     </ol>
   </nav>
-    <main style="max-width:900px;margin:48px auto;padding:24px;">
-      <h1>予約確認</h1>
-      <p>入力内容をご確認ください。</p>
-      <table style="width:100%;border-collapse:collapse;">
-        <tr><th style="text-align:left;padding:10px;border-bottom:1px solid #ddd;">氏名</th><td style="padding:10px;border-bottom:1px solid #ddd;" th:text="${reservationForm.patientName}"></td></tr>
-        <tr><th style="text-align:left;padding:10px;border-bottom:1px solid #ddd;">フリガナ</th><td style="padding:10px;border-bottom:1px solid #ddd;" th:text="${reservationForm.patientKana}"></td></tr>
-        <tr><th style="text-align:left;padding:10px;border-bottom:1px solid #ddd;">生年月日</th><td style="padding:10px;border-bottom:1px solid #ddd;" th:text="${reservationForm.birthDate}"></td></tr>
-        <tr><th style="text-align:left;padding:10px;border-bottom:1px solid #ddd;">電話番号</th><td style="padding:10px;border-bottom:1px solid #ddd;" th:text="${reservationForm.phoneNumber}"></td></tr>
-        <tr><th style="text-align:left;padding:10px;border-bottom:1px solid #ddd;">メールアドレス</th><td style="padding:10px;border-bottom:1px solid #ddd;" th:text="${reservationForm.email}"></td></tr>
-        <tr><th style="text-align:left;padding:10px;border-bottom:1px solid #ddd;">初診/再診</th><td style="padding:10px;border-bottom:1px solid #ddd;" th:text="${reservationForm.visitType == 'FIRST' ? '初診' : '再診'}"></td></tr>
-        <tr><th style="text-align:left;padding:10px;border-bottom:1px solid #ddd;">診療希望日</th><td style="padding:10px;border-bottom:1px solid #ddd;" th:text="${reservationForm.reservationDate}"></td></tr>
-        <tr><th style="text-align:left;padding:10px;border-bottom:1px solid #ddd;">希望時間</th><td style="padding:10px;border-bottom:1px solid #ddd;" th:text="${reservationForm.reservationTime}"></td></tr>
-        <tr><th style="text-align:left;padding:10px;border-bottom:1px solid #ddd;">症状</th><td style="padding:10px;border-bottom:1px solid #ddd;" th:text="${reservationForm.symptom}"></td></tr>
+    <main class="sc-reservation-confirm-content">
+      <div class="sc-reservation-confirm-header">
+        <h1>予約確認</h1>
+        <p>入力内容をご確認ください。</p>
+      </div>
+      <table class="sc-reservation-confirm-table">
+        <tr><th>氏名</th><td th:text="${reservationForm.patientName}"></td></tr>
+        <tr><th>フリガナ</th><td th:text="${reservationForm.patientKana}"></td></tr>
+        <tr><th>生年月日</th><td th:text="${reservationForm.birthDate}"></td></tr>
+        <tr><th>電話番号</th><td th:text="${reservationForm.phoneNumber}"></td></tr>
+        <tr><th>メールアドレス</th><td th:text="${reservationForm.email}"></td></tr>
+        <tr><th>初診/再診</th><td th:text="${reservationForm.visitType == 'FIRST' ? '初診' : '再診'}"></td></tr>
+        <tr><th>診療希望日</th><td th:text="${reservationForm.reservationDate}"></td></tr>
+        <tr><th>希望時間</th><td th:text="${reservationForm.reservationTime}"></td></tr>
+        <tr><th>症状</th><td th:text="${reservationForm.symptom}"></td></tr>
       </table>
 
-      <div style="margin-top:24px;display:flex;gap:12px;align-items:center;">
+      <div class="sc-reservation-confirm-actions">
         <form th:action="@{/reservations}" th:object="${reservationForm}" method="post">
           <input type="hidden" th:field="*{patientName}" />
           <input type="hidden" th:field="*{patientKana}" />
@@ -55,7 +57,7 @@
           <input type="hidden" th:field="*{reservationTime}" />
           <input type="hidden" th:field="*{symptom}" />
           <input type="hidden" th:field="*{agreedToPrivacyPolicy}" />
-          <button type="submit" style="padding:10px 16px;border:1px solid #0b7fab;border-radius:8px;background:#0b7fab;color:#fff;cursor:pointer;">登録する</button>
+          <button type="submit" class="sc-reservation-confirm-button sc-reservation-confirm-button-primary">登録する</button>
         </form>
 
         <form th:action="@{/reservations/new}" th:object="${reservationForm}" method="post">
@@ -72,7 +74,7 @@
           <input type="hidden" th:field="*{reservationTime}" />
           <input type="hidden" th:field="*{symptom}" />
           <input type="hidden" th:field="*{agreedToPrivacyPolicy}" />
-          <button type="submit" style="padding:10px 16px;border:1px solid #ccc;border-radius:8px;background:#fff;cursor:pointer;">修正する</button>
+          <button type="submit" class="sc-reservation-confirm-button sc-reservation-confirm-button-secondary">修正する</button>
         </form>
       </div>
 </main>
