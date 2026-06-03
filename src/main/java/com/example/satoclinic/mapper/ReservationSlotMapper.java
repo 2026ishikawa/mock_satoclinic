@@ -58,6 +58,26 @@ public interface ReservationSlotMapper {
             @Param("startTime") LocalTime startTime);
 
     @Select("""
+            SELECT
+              id,
+              slot_date,
+              start_time,
+              end_time,
+              capacity,
+              is_active,
+              created_at,
+              updated_at
+            FROM reservation_slots
+            WHERE slot_date = #{date}
+              AND start_time = #{startTime}
+              AND is_active = TRUE
+            FOR UPDATE
+            """)
+    ReservationSlot lockActiveSlotByDateAndStartTime(
+            @Param("date") LocalDate date,
+            @Param("startTime") LocalTime startTime);
+
+    @Select("""
             SELECT DISTINCT start_time
             FROM reservation_slots
             WHERE is_active = TRUE

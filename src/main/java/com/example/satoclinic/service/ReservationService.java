@@ -31,7 +31,7 @@ public class ReservationService {
     public String register(ReservationForm form) {
         LocalTime startTime = LocalTime.parse(form.getReservationTime());
         validateBusinessRules(form.getReservationDate(), startTime);
-        ReservationSlot reservationSlot = reservationSlotMapper.findActiveSlotByDateAndStartTime(
+        ReservationSlot reservationSlot = reservationSlotMapper.lockActiveSlotByDateAndStartTime(
                 form.getReservationDate(), startTime);
 
         if (reservationSlot == null) {
