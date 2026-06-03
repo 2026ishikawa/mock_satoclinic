@@ -3916,6 +3916,31 @@ body.sc-admin-reservations-page {
   align-items: center;
 }
 
+.sc-admin-reservations-status-badge {
+  display: inline-block;
+  min-width: 88px;
+  padding: 6px 10px;
+  border-radius: 999px;
+  text-align: center;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.sc-admin-reservations-status-badge.is-reserved {
+  background: #e8f3ff;
+  color: #1f5fa8;
+}
+
+.sc-admin-reservations-status-badge.is-visited {
+  background: #e7f6ec;
+  color: #1f7a3f;
+}
+
+.sc-admin-reservations-status-badge.is-cancelled {
+  background: #fdecec;
+  color: #b23b3b;
+}
+
 .sc-admin-reservations-link {
   display: inline-block;
   padding: 10px 16px;
@@ -3926,6 +3951,26 @@ body.sc-admin-reservations-page {
   padding: 10px 16px;
   border-radius: 8px;
   background: #c0392b;
+}
+
+.sc-admin-reservations-visit {
+  padding: 10px 16px;
+  border-radius: 8px;
+  background: var(--color-deep-green);
+  color: #fff;
+  font-weight: 700;
+  cursor: pointer;
+  border: none;
+}
+
+.sc-admin-reservations-restore {
+  padding: 10px 16px;
+  border-radius: 8px;
+  background: #5b6c7a;
+  color: #fff;
+  font-weight: 700;
+  cursor: pointer;
+  border: none;
 }
 
 .sc-admin-reservations-message {

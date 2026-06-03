@@ -55,4 +55,22 @@ public class AdminReservationController {
                 cancelled ? "予約をキャンセルしました。" : "この予約はキャンセルできません。");
         return "redirect:/admin/reservations/" + id;
     }
+
+    @PostMapping("/{id}/visit")
+    public String markVisited(@PathVariable("id") Long id, RedirectAttributes redirectAttributes) {
+        boolean visited = adminReservationService.markVisited(id);
+        redirectAttributes.addFlashAttribute(
+                "message",
+                visited ? "予約ステータスを来院済みに更新しました。" : "この予約は来院済みに更新できません。");
+        return "redirect:/admin/reservations/" + id;
+    }
+
+    @PostMapping("/{id}/restore")
+    public String restoreReserved(@PathVariable("id") Long id, RedirectAttributes redirectAttributes) {
+        boolean restored = adminReservationService.restoreReserved(id);
+        redirectAttributes.addFlashAttribute(
+                "message",
+                restored ? "予約ステータスを予約済みに戻しました。" : "この予約は予約済みに戻せません。");
+        return "redirect:/admin/reservations/" + id;
+    }
 }

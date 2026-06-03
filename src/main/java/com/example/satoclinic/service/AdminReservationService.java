@@ -31,4 +31,14 @@ public class AdminReservationService {
     public boolean cancel(Long id) {
         return reservationMapper.cancelById(id) > 0;
     }
+
+    @Transactional
+    public boolean markVisited(Long id) {
+        return reservationMapper.markVisitedById(id) > 0;
+    }
+
+    @Transactional
+    public boolean restoreReserved(Long id) {
+        return reservationMapper.restoreReservedById(id) > 0;
+    }
 }

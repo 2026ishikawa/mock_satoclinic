@@ -163,4 +163,22 @@ public interface ReservationMapper {
               AND status = 'RESERVED'
             """)
     int cancelById(@Param("id") Long id);
+
+    @Update("""
+            UPDATE reservations
+            SET status = 'VISITED',
+                updated_at = CURRENT_TIMESTAMP
+            WHERE id = #{id}
+              AND status = 'RESERVED'
+            """)
+    int markVisitedById(@Param("id") Long id);
+
+    @Update("""
+            UPDATE reservations
+            SET status = 'RESERVED',
+                updated_at = CURRENT_TIMESTAMP
+            WHERE id = #{id}
+              AND status = 'VISITED'
+            """)
+    int restoreReservedById(@Param("id") Long id);
 }

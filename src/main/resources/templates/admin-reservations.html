@@ -50,7 +50,13 @@
             <td th:text="${reservation.reservationDate}"></td>
             <td th:text="${reservation.reservationTime}"></td>
             <td th:text="${reservation.visitType == 'FIRST' ? '初診' : '再診'}"></td>
-            <td th:text="${reservation.status}"></td>
+            <td>
+              <span
+                class="sc-admin-reservations-status-badge"
+                th:classappend="${reservation.status == 'RESERVED' ? ' is-reserved' : (reservation.status == 'VISITED' ? ' is-visited' : ' is-cancelled')}"
+                th:text="${reservation.status}"
+              ></span>
+            </td>
             <td><a th:href="@{/admin/reservations/{id}(id=${reservation.id})}">詳細</a></td>
           </tr>
         </tbody>
