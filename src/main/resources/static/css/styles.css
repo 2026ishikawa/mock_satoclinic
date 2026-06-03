@@ -3793,3 +3793,107 @@ body.sc-reservation-complete-page {
   text-decoration: none;
   font-weight: 700;
 }
+
+/* Admin reservations */
+body.sc-admin-reservations-page {
+  background-color: var(--color-pale-aqua);
+}
+
+.sc-admin-reservations-content {
+  max-width: 1100px;
+  margin: 40px auto 80px;
+  padding: 24px;
+}
+
+.sc-admin-reservations-header {
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+.sc-admin-reservations-header h1 {
+  margin-bottom: 8px;
+  color: var(--color-deep-green);
+}
+
+.sc-admin-reservations-filter {
+  display: flex;
+  gap: 16px;
+  align-items: end;
+  flex-wrap: wrap;
+  background: #fff;
+  border-radius: 12px;
+  padding: 16px;
+  margin-bottom: 24px;
+}
+
+.sc-admin-reservations-filter label {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-weight: 700;
+}
+
+.sc-admin-reservations-filter input,
+.sc-admin-reservations-filter select,
+.sc-admin-reservations-filter button {
+  padding: 10px 12px;
+  border: 1px solid #cfd8e3;
+  border-radius: 8px;
+}
+
+.sc-admin-reservations-filter button,
+.sc-admin-reservations-cancel,
+.sc-admin-reservations-link {
+  background: #0b7fab;
+  color: #fff;
+  text-decoration: none;
+  font-weight: 700;
+  cursor: pointer;
+  border: none;
+}
+
+.sc-admin-reservations-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #fff;
+  overflow: hidden;
+  border-radius: 12px;
+}
+
+.sc-admin-reservations-table th,
+.sc-admin-reservations-table td {
+  padding: 12px 14px;
+  border-bottom: 1px solid #e5eaef;
+  text-align: left;
+}
+
+.sc-admin-reservations-actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 20px;
+  align-items: center;
+}
+
+.sc-admin-reservations-link {
+  display: inline-block;
+  padding: 10px 16px;
+  border-radius: 8px;
+}
+
+.sc-admin-reservations-cancel {
+  padding: 10px 16px;
+  border-radius: 8px;
+  background: #c0392b;
+}
+
+.sc-admin-reservations-message {
+  color: #0d753b;
+  font-weight: 700;
+}
+
+.sc-admin-reservations-empty {
+  background: #fff;
+  border-radius: 12px;
+  padding: 24px;
+  text-align: center;
+}

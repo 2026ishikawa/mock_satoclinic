@@ -1,10 +1,7 @@
-﻿package com.example.satoclinic.controller;
+package com.example.satoclinic.controller;
 
 import java.time.DateTimeException;
 import java.time.LocalDate;
-import java.util.List;
-import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
 import java.util.stream.IntStream;
 
 import org.springframework.stereotype.Controller;
@@ -15,17 +12,25 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import com.example.satoclinic.model.reservation.ReservationDetail;
+import com.example.satoclinic.service.ReservationService;
+import com.example.satoclinic.service.ReservationSlotService;
 import com.example.satoclinic.web.form.ReservationForm;
 
 import jakarta.validation.Valid;
 
 @Controller
 public class ReservationPageController {
-    private static final int SLOT_CAPACITY = 3;
-    // Temporary mock: reserved count by "yyyy-MM-dd|HH:mm". Replace with DB query later.
-    private static final Map<String, Integer> RESERVED_COUNT_BY_SLOT = Map.of();
-    // Temporary in-memory store for completion view. Replace with DB lookup later.
-    private static final Map<String, ReservationForm> RESERVATION_SNAPSHOT_BY_CODE = new ConcurrentHashMap<>();
+
+    private final ReservationSlotService reservationSlotService;
+    private final ReservationService reservationService;
+
+    public ReservationPageController(
+            ReservationSlotService reservationSlotService,
+            ReservationService reservationService) {
+        this.reservationSlotService = reservationSlotService;
+        this.reservationService = reservationService;
+    }
 
     @ModelAttribute("reservationForm")
     public ReservationForm reservationForm() {
@@ -61,8 +66,8 @@ public class ReservationPageController {
         if (form.getReservationDate() != null
                 && form.getReservationTime() != null
                 && !form.getReservationTime().isBlank()
-                && !isSlotAvailable(form.getReservationDate(), form.getReservationTime())) {
-            bindingResult.rejectValue("reservationTime", "reservationTime.full", "この時間帯は予約枠が上限です。");
+                && !reservationSlotService.isSlotAvailable(form.getReservationDate(), form.getReservationTime())) {
+            bindingResult.rejectValue("reservationTime", "reservationTime.full", "この時間帯は予約できません。");
         }
 
         if (bindingResult.hasErrors()) {
@@ -73,37 +78,31 @@ public class ReservationPageController {
     }
 
     @PostMapping("/reservations")
-    public String register(@ModelAttribute("reservationForm") ReservationForm form) {
-        // Registration persistence will be implemented in the next step.
-        String reservationCode = "R" + LocalDate.now().toString().replace("-", "") + "0001";
-        RESERVATION_SNAPSHOT_BY_CODE.put(reservationCode, form);
-        return "redirect:/reservations/complete/" + reservationCode;
+    public String register(@ModelAttribute("reservationForm") ReservationForm form, Model model) {
+        try {
+            String reservationCode = reservationService.register(form);
+            return "redirect:/reservations/complete/" + reservationCode;
+        } catch (IllegalStateException e) {
+            model.addAttribute("registrationError", e.getMessage());
+            model.addAttribute("reservationForm", form);
+            return "reservation-confirm";
+        }
     }
 
     @GetMapping("/reservations/complete/{reservationCode}")
     public String complete(
             @PathVariable("reservationCode") String reservationCode,
             Model model) {
-        ReservationForm form = RESERVATION_SNAPSHOT_BY_CODE.get(reservationCode);
+        ReservationDetail detail = reservationService.findDetailByReservationCode(reservationCode);
         model.addAttribute("reservationCode", reservationCode);
-        model.addAttribute("reservationDate", form != null ? form.getReservationDate() : null);
-        model.addAttribute("reservationTime", form != null ? form.getReservationTime() : null);
+        model.addAttribute("reservationDate", detail != null ? detail.getReservationDate() : null);
+        model.addAttribute("reservationTime", detail != null ? detail.getReservationTime() : null);
         return "reservation-complete";
-    }
-
-    private List<String> defaultTimeOptions() {
-        return List.of("09:00", "09:30", "10:00", "10:30", "11:00", "11:30");
-    }
-
-    private boolean isSlotAvailable(LocalDate date, String time) {
-        String key = date + "|" + time;
-        int reservedCount = RESERVED_COUNT_BY_SLOT.getOrDefault(key, 0);
-        return reservedCount < SLOT_CAPACITY;
     }
 
     private void addFormOptions(Model model) {
         model.addAttribute("today", LocalDate.now());
-        model.addAttribute("timeOptions", defaultTimeOptions());
+        model.addAttribute("timeOptions", reservationSlotService.findTimeOptions());
         model.addAttribute("birthYearOptions", IntStream.rangeClosed(1900, LocalDate.now().getYear()).boxed().toList());
         model.addAttribute("birthMonthOptions", IntStream.rangeClosed(1, 12).boxed().toList());
         model.addAttribute("birthDayOptions", IntStream.rangeClosed(1, 31).boxed().toList());

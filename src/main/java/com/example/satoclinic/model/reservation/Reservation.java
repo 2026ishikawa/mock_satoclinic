@@ -1,89 +1,24 @@
-package com.example.satoclinic.domain.reservation;
+package com.example.satoclinic.model.reservation;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.PrePersist;
-import jakarta.persistence.PreUpdate;
-import jakarta.persistence.Table;
-import jakarta.persistence.UniqueConstraint;
-
-@Entity
-@Table(
-    name = "reservations",
-    uniqueConstraints = {
-        @UniqueConstraint(name = "uk_reservations_reservation_code", columnNames = "reservation_code")
-    }
-)
 public class Reservation {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    @Column(name = "reservation_code", nullable = false, length = 20)
     private String reservationCode;
-
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "reservation_slot_id", nullable = false)
-    private ReservationSlot reservationSlot;
-
-    @Column(name = "patient_name", nullable = false, length = 50)
+    private Long reservationSlotId;
     private String patientName;
-
-    @Column(name = "patient_kana", nullable = false, length = 50)
     private String patientKana;
-
-    @Column(name = "birth_date", nullable = false)
     private LocalDate birthDate;
-
-    @Column(name = "phone_number", nullable = false, length = 20)
     private String phoneNumber;
-
-    @Column(length = 255)
     private String email;
-
-    @Enumerated(EnumType.STRING)
-    @Column(name = "visit_type", nullable = false, length = 20)
-    private VisitType visitType;
-
-    @Column(length = 500)
+    private String visitType;
     private String symptom;
-
-    @Enumerated(EnumType.STRING)
-    @Column(nullable = false, length = 20)
-    private ReservationStatus status = ReservationStatus.RESERVED;
-
-    @Column(name = "agreed_to_privacy_policy", nullable = false)
+    private String status;
     private boolean agreedToPrivacyPolicy;
-
-    @Column(name = "created_at", nullable = false)
     private LocalDateTime createdAt;
-
-    @Column(name = "updated_at", nullable = false)
     private LocalDateTime updatedAt;
-
-    @PrePersist
-    void onCreate() {
-        LocalDateTime now = LocalDateTime.now();
-        createdAt = now;
-        updatedAt = now;
-    }
-
-    @PreUpdate
-    void onUpdate() {
-        updatedAt = LocalDateTime.now();
-    }
 
     public Long getId() {
         return id;
@@ -101,12 +36,12 @@ public class Reservation {
         this.reservationCode = reservationCode;
     }
 
-    public ReservationSlot getReservationSlot() {
-        return reservationSlot;
+    public Long getReservationSlotId() {
+        return reservationSlotId;
     }
 
-    public void setReservationSlot(ReservationSlot reservationSlot) {
-        this.reservationSlot = reservationSlot;
+    public void setReservationSlotId(Long reservationSlotId) {
+        this.reservationSlotId = reservationSlotId;
     }
 
     public String getPatientName() {
@@ -149,11 +84,11 @@ public class Reservation {
         this.email = email;
     }
 
-    public VisitType getVisitType() {
+    public String getVisitType() {
         return visitType;
     }
 
-    public void setVisitType(VisitType visitType) {
+    public void setVisitType(String visitType) {
         this.visitType = visitType;
     }
 
@@ -165,11 +100,11 @@ public class Reservation {
         this.symptom = symptom;
     }
 
-    public ReservationStatus getStatus() {
+    public String getStatus() {
         return status;
     }
 
-    public void setStatus(ReservationStatus status) {
+    public void setStatus(String status) {
         this.status = status;
     }
 

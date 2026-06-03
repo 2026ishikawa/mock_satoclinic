@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>予約一覧 | 管理画面</title>
+    <link rel="stylesheet" href="/css/styles.css" />
+  </head>
+  <body class="sc-admin-reservations-page">
+    <main class="sc-admin-reservations-content">
+      <div class="sc-admin-reservations-header">
+        <h1>予約一覧</h1>
+        <p>日付とステータスで絞り込みできます。</p>
+      </div>
+
+      <form class="sc-admin-reservations-filter" th:action="@{/admin/reservations}" method="get">
+        <label>
+          予約日
+          <input type="date" name="date" th:value="${selectedDate}" />
+        </label>
+        <label>
+          ステータス
+          <select name="status">
+            <option value="">すべて</option>
+            <option th:each="status : ${statusOptions}" th:value="${status}" th:text="${status}" th:selected="${status == selectedStatus}"></option>
+          </select>
+        </label>
+        <button type="submit">検索</button>
+      </form>
+
+      <table class="sc-admin-reservations-table">
+        <thead>
+          <tr>
+            <th>予約番号</th>
+            <th>氏名</th>
+            <th>予約日</th>
+            <th>時間</th>
+            <th>初診/再診</th>
+            <th>ステータス</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr th:if="${#lists.isEmpty(reservations)}">
+            <td colspan="7">該当する予約はありません。</td>
+          </tr>
+          <tr th:each="reservation : ${reservations}">
+            <td th:text="${reservation.reservationCode}"></td>
+            <td th:text="${reservation.patientName}"></td>
+            <td th:text="${reservation.reservationDate}"></td>
+            <td th:text="${reservation.reservationTime}"></td>
+            <td th:text="${reservation.visitType == 'FIRST' ? '初診' : '再診'}"></td>
+            <td th:text="${reservation.status}"></td>
+            <td><a th:href="@{/admin/reservations/{id}(id=${reservation.id})}">詳細</a></td>
+          </tr>
+        </tbody>
+      </table>
+    </main>
+  </body>
+</html>

@@ -30,6 +30,7 @@
         <h1>予約確認</h1>
         <p>入力内容をご確認ください。</p>
       </div>
+      <p th:if="${registrationError}" th:text="${registrationError}" class="sc-resv-form-error-summary"></p>
       <table class="sc-reservation-confirm-table">
         <tr><th>氏名</th><td th:text="${reservationForm.patientName}"></td></tr>
         <tr><th>フリガナ</th><td th:text="${reservationForm.patientKana}"></td></tr>

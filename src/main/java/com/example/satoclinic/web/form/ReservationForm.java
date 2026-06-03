@@ -1,4 +1,4 @@
-﻿package com.example.satoclinic.web.form;
+package com.example.satoclinic.web.form;
 
 import java.time.LocalDate;
 
@@ -39,7 +39,6 @@ public class ReservationForm {
     @Max(value = 31, message = "生年月日（日）が不正です。")
     private Integer birthDay;
 
-    // Derived field created from year/month/day in controller.
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private LocalDate birthDate;
 
@@ -67,42 +66,107 @@ public class ReservationForm {
     @AssertTrue(message = "個人情報同意が必要です。")
     private boolean agreedToPrivacyPolicy;
 
-    public String getPatientName() { return patientName; }
-    public void setPatientName(String patientName) { this.patientName = patientName; }
+    public String getPatientName() {
+        return patientName;
+    }
 
-    public String getPatientKana() { return patientKana; }
-    public void setPatientKana(String patientKana) { this.patientKana = patientKana; }
+    public void setPatientName(String patientName) {
+        this.patientName = patientName;
+    }
 
-    public Integer getBirthYear() { return birthYear; }
-    public void setBirthYear(Integer birthYear) { this.birthYear = birthYear; }
+    public String getPatientKana() {
+        return patientKana;
+    }
 
-    public Integer getBirthMonth() { return birthMonth; }
-    public void setBirthMonth(Integer birthMonth) { this.birthMonth = birthMonth; }
+    public void setPatientKana(String patientKana) {
+        this.patientKana = patientKana;
+    }
 
-    public Integer getBirthDay() { return birthDay; }
-    public void setBirthDay(Integer birthDay) { this.birthDay = birthDay; }
+    public Integer getBirthYear() {
+        return birthYear;
+    }
 
-    public LocalDate getBirthDate() { return birthDate; }
-    public void setBirthDate(LocalDate birthDate) { this.birthDate = birthDate; }
+    public void setBirthYear(Integer birthYear) {
+        this.birthYear = birthYear;
+    }
 
-    public String getPhoneNumber() { return phoneNumber; }
-    public void setPhoneNumber(String phoneNumber) { this.phoneNumber = phoneNumber; }
+    public Integer getBirthMonth() {
+        return birthMonth;
+    }
 
-    public String getEmail() { return email; }
-    public void setEmail(String email) { this.email = email; }
+    public void setBirthMonth(Integer birthMonth) {
+        this.birthMonth = birthMonth;
+    }
 
-    public String getVisitType() { return visitType; }
-    public void setVisitType(String visitType) { this.visitType = visitType; }
+    public Integer getBirthDay() {
+        return birthDay;
+    }
 
-    public LocalDate getReservationDate() { return reservationDate; }
-    public void setReservationDate(LocalDate reservationDate) { this.reservationDate = reservationDate; }
+    public void setBirthDay(Integer birthDay) {
+        this.birthDay = birthDay;
+    }
 
-    public String getReservationTime() { return reservationTime; }
-    public void setReservationTime(String reservationTime) { this.reservationTime = reservationTime; }
+    public LocalDate getBirthDate() {
+        return birthDate;
+    }
 
-    public String getSymptom() { return symptom; }
-    public void setSymptom(String symptom) { this.symptom = symptom; }
+    public void setBirthDate(LocalDate birthDate) {
+        this.birthDate = birthDate;
+    }
 
-    public boolean isAgreedToPrivacyPolicy() { return agreedToPrivacyPolicy; }
-    public void setAgreedToPrivacyPolicy(boolean agreedToPrivacyPolicy) { this.agreedToPrivacyPolicy = agreedToPrivacyPolicy; }
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getVisitType() {
+        return visitType;
+    }
+
+    public void setVisitType(String visitType) {
+        this.visitType = visitType;
+    }
+
+    public LocalDate getReservationDate() {
+        return reservationDate;
+    }
+
+    public void setReservationDate(LocalDate reservationDate) {
+        this.reservationDate = reservationDate;
+    }
+
+    public String getReservationTime() {
+        return reservationTime;
+    }
+
+    public void setReservationTime(String reservationTime) {
+        this.reservationTime = reservationTime;
+    }
+
+    public String getSymptom() {
+        return symptom;
+    }
+
+    public void setSymptom(String symptom) {
+        this.symptom = symptom;
+    }
+
+    public boolean isAgreedToPrivacyPolicy() {
+        return agreedToPrivacyPolicy;
+    }
+
+    public void setAgreedToPrivacyPolicy(boolean agreedToPrivacyPolicy) {
+        this.agreedToPrivacyPolicy = agreedToPrivacyPolicy;
+    }
 }
