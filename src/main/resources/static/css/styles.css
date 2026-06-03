@@ -3583,6 +3583,42 @@ h1 {
   font-size: 13px;
 }
 
+.sc-resv-form-alert {
+  display: none;
+  margin-top: 10px;
+  padding: 14px 16px;
+  border-radius: 10px;
+  border: 1px solid #f1c27d;
+  background:
+    linear-gradient(135deg, #fff6e8 0%, #fffdf8 100%);
+  color: #7a4b00;
+  box-shadow: 0 8px 18px rgba(243, 156, 18, 0.08);
+}
+
+.sc-resv-form-alert.is-visible {
+  display: block;
+}
+
+.sc-resv-form-alert-title {
+  display: block;
+  margin-bottom: 4px;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.sc-resv-form-alert-text {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.sc-resv-form-control.is-disabled {
+  opacity: 0.55;
+  background-color: #eef2f5;
+  border-color: #cfd8e3;
+  cursor: not-allowed;
+}
+
 .sc-resv-form-radio-item--spaced {
   margin-right: 18px;
 }

@@ -200,7 +200,15 @@
               <div>
                 <input id="reservationDate" th:field="*{reservationDate}" th:attr="min=${today}" type="date" class="sc-resv-form-control" />
                 <div th:errors="*{reservationDate}" class="sc-resv-form-field-error"></div>
-                <p id="reservationDateMessage" class="sc-resv-form-help" th:if="${reservationRestrictionMessage}" th:text="${reservationRestrictionMessage}"></p>
+                <div
+                  id="reservationDateAlert"
+                  class="sc-resv-form-alert"
+                  th:classappend="${reservationRestrictionMessage} ? ' is-visible' : ''"
+                  th:if="${reservationRestrictionMessage}"
+                >
+                  <strong class="sc-resv-form-alert-title">ご確認ください</strong>
+                  <p id="reservationDateMessage" class="sc-resv-form-alert-text" th:text="${reservationRestrictionMessage}"></p>
+                </div>
               </div>
 
               <label for="reservationTime">希望時間<span class="sc-resv-form-required">*</span></label>
@@ -210,7 +218,10 @@
                   <option th:each="time : ${timeOptions}" th:value="${time}" th:text="${time}"></option>
                 </select>
                 <div th:errors="*{reservationTime}" class="sc-resv-form-field-error"></div>
-                <p id="reservationTimeMessage" class="sc-resv-form-help"></p>
+                <div id="reservationTimeAlert" class="sc-resv-form-alert">
+                  <strong class="sc-resv-form-alert-title">予約時間の選択について</strong>
+                  <p id="reservationTimeMessage" class="sc-resv-form-alert-text"></p>
+                </div>
               </div>
 
               <label for="symptom">症状</label>

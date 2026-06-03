@@ -98,7 +98,9 @@ document.addEventListener("DOMContentLoaded", () => {
 document.addEventListener("DOMContentLoaded", () => {
   const reservationDateInput = document.getElementById("reservationDate");
   const reservationTimeSelect = document.getElementById("reservationTime");
+  const reservationDateAlert = document.getElementById("reservationDateAlert");
   const reservationDateMessage = document.getElementById("reservationDateMessage");
+  const reservationTimeAlert = document.getElementById("reservationTimeAlert");
   const reservationTimeMessage = document.getElementById("reservationTimeMessage");
 
   if (!reservationDateInput || !reservationTimeSelect) {
@@ -107,11 +109,19 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const initialSelectedTime = reservationTimeSelect.dataset.selectedTime || reservationTimeSelect.value;
 
-  const setMessage = (element, message) => {
+  const setMessage = (element, message, alertElement) => {
     if (!element) {
       return;
     }
     element.textContent = message || "";
+    if (alertElement) {
+      alertElement.classList.toggle("is-visible", Boolean(message));
+    }
+  };
+
+  const setTimeSelectDisabled = (disabled) => {
+    reservationTimeSelect.disabled = disabled;
+    reservationTimeSelect.classList.toggle("is-disabled", disabled);
   };
 
   const buildOption = (value, label, selected = false) => {
@@ -122,14 +132,21 @@ document.addEventListener("DOMContentLoaded", () => {
     return option;
   };
 
+  const resetTimeOptions = (label) => {
+    reservationTimeSelect.innerHTML = "";
+    reservationTimeSelect.appendChild(buildOption("", label, true));
+  };
+
   const updateTimeOptions = async (selectedTime = "") => {
     const selectedDate = reservationDateInput.value;
-    reservationTimeSelect.innerHTML = "";
-    reservationTimeSelect.appendChild(buildOption("", "選択してください", !selectedTime));
-    setMessage(reservationTimeMessage, "");
+    resetTimeOptions("選択してください");
+    setMessage(reservationTimeMessage, "", reservationTimeAlert);
+    setTimeSelectDisabled(false);
 
     if (!selectedDate) {
-      setMessage(reservationDateMessage, "");
+      setMessage(reservationDateMessage, "", reservationDateAlert);
+      resetTimeOptions("日付を選択してください");
+      setTimeSelectDisabled(true);
       return;
     }
 
@@ -148,20 +165,28 @@ document.addEventListener("DOMContentLoaded", () => {
       const selectedDay = new Date(`${selectedDate}T00:00:00`);
       const day = selectedDay.getDay();
       if (day === 4) {
-        setMessage(reservationDateMessage, "木曜日は休診のため予約できません。");
+        setMessage(reservationDateMessage, "木曜日は休診日です。別の日付を選択してください。", reservationDateAlert);
+        resetTimeOptions("選択できません");
+        setTimeSelectDisabled(true);
       } else if (day === 0) {
-        setMessage(reservationDateMessage, "日曜日は休診のため予約できません。");
+        setMessage(reservationDateMessage, "日曜日は休診日です。別の日付を選択してください。", reservationDateAlert);
+        resetTimeOptions("選択できません");
+        setTimeSelectDisabled(true);
       } else if (day === 6) {
-        setMessage(reservationDateMessage, "土曜日は午前のみ予約できます。");
+        setMessage(reservationDateMessage, "土曜日は午前のみ診療しています。午後の予約は選べません。", reservationDateAlert);
       } else {
-        setMessage(reservationDateMessage, "");
+        setMessage(reservationDateMessage, "", reservationDateAlert);
       }
 
       if (availableSlots.length === 0) {
-        setMessage(reservationTimeMessage, "選択した日は予約可能な時間帯がありません。");
+        setMessage(reservationTimeMessage, "選択した日は予約可能な時間帯がありません。別の日付を選択してください。", reservationTimeAlert);
+        resetTimeOptions("選択できません");
+        setTimeSelectDisabled(true);
       }
     } catch (error) {
-      setMessage(reservationTimeMessage, "予約時間の取得に失敗しました。時間をおいて再度お試しください。");
+      setMessage(reservationTimeMessage, "予約時間の取得に失敗しました。時間をおいて再度お試しください。", reservationTimeAlert);
+      resetTimeOptions("選択できません");
+      setTimeSelectDisabled(true);
     }
   };
 
