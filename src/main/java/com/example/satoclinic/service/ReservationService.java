@@ -30,11 +30,12 @@ public class ReservationService {
     @Transactional
     public String register(ReservationForm form) {
         LocalTime startTime = LocalTime.parse(form.getReservationTime());
+        validateBusinessRules(form.getReservationDate(), startTime);
         ReservationSlot reservationSlot = reservationSlotMapper.findActiveSlotByDateAndStartTime(
                 form.getReservationDate(), startTime);
 
         if (reservationSlot == null) {
-            throw new IllegalStateException("選択した予約枠は利用できません。");
+            throw new IllegalStateException("選択した時間帯は予約できません。");
         }
 
         int reservedCount = reservationMapper.countReservedBySlotId(reservationSlot.getId());
@@ -82,6 +83,23 @@ public class ReservationService {
     private String generateReservationCode(LocalDate reservationDate) {
         int nextSequence = reservationMapper.findMaxSequenceBySlotDate(reservationDate) + 1;
         return "R" + reservationDate.format(RESERVATION_CODE_DATE) + String.format("%04d", nextSequence);
+    }
+
+    private void validateBusinessRules(LocalDate reservationDate, LocalTime startTime) {
+        if (reservationDate == null || startTime == null) {
+            return;
+        }
+        switch (reservationDate.getDayOfWeek()) {
+            case THURSDAY -> throw new IllegalStateException("木曜日は休診のため予約できません。");
+            case SUNDAY -> throw new IllegalStateException("日曜日は休診のため予約できません。");
+            case SATURDAY -> {
+                if (!startTime.isBefore(LocalTime.of(14, 0))) {
+                    throw new IllegalStateException("土曜日は午後の予約を受け付けていません。");
+                }
+            }
+            default -> {
+            }
+        }
     }
 
     private String normalizeName(String value) {

@@ -39,7 +39,7 @@ public class ReservationPageController {
 
     @GetMapping("/reservations/new")
     public String newPage(Model model) {
-        addFormOptions(model);
+        addFormOptions(model, null);
         return "reservation-new";
     }
 
@@ -47,7 +47,7 @@ public class ReservationPageController {
     public String backToInput(
             @ModelAttribute("reservationForm") ReservationForm form,
             Model model) {
-        addFormOptions(model);
+        addFormOptions(model, form.getReservationDate());
         return "reservation-new";
     }
 
@@ -56,12 +56,18 @@ public class ReservationPageController {
             @Valid @ModelAttribute("reservationForm") ReservationForm form,
             BindingResult bindingResult,
             Model model) {
-        addFormOptions(model);
+        addFormOptions(model, form.getReservationDate());
 
         composeBirthDate(form, bindingResult);
 
         if (form.getReservationDate() != null && form.getReservationDate().isBefore(LocalDate.now())) {
             bindingResult.rejectValue("reservationDate", "reservationDate.past", "過去日は予約できません。");
+        }
+        if (form.getReservationDate() != null) {
+            String restrictionMessage = reservationSlotService.getReservationRestrictionMessage(form.getReservationDate());
+            if (restrictionMessage != null && form.getReservationDate().getDayOfWeek().getValue() != 6) {
+                bindingResult.rejectValue("reservationDate", "reservationDate.closed", restrictionMessage);
+            }
         }
         if (form.getReservationDate() != null
                 && form.getReservationTime() != null
@@ -85,6 +91,7 @@ public class ReservationPageController {
         } catch (IllegalStateException e) {
             model.addAttribute("registrationError", e.getMessage());
             model.addAttribute("reservationForm", form);
+            addFormOptions(model, form.getReservationDate());
             return "reservation-confirm";
         }
     }
@@ -100,9 +107,10 @@ public class ReservationPageController {
         return "reservation-complete";
     }
 
-    private void addFormOptions(Model model) {
+    private void addFormOptions(Model model, LocalDate selectedDate) {
         model.addAttribute("today", LocalDate.now());
-        model.addAttribute("timeOptions", reservationSlotService.findTimeOptions());
+        model.addAttribute("timeOptions", reservationSlotService.findAvailableTimeOptions(selectedDate));
+        model.addAttribute("reservationRestrictionMessage", reservationSlotService.getReservationRestrictionMessage(selectedDate));
         model.addAttribute("birthYearOptions", IntStream.rangeClosed(1900, LocalDate.now().getYear()).boxed().toList());
         model.addAttribute("birthMonthOptions", IntStream.rangeClosed(1, 12).boxed().toList());
         model.addAttribute("birthDayOptions", IntStream.rangeClosed(1, 31).boxed().toList());

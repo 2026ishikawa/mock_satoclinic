@@ -2,6 +2,7 @@ package com.example.satoclinic.service;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.DayOfWeek;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
@@ -25,9 +26,35 @@ public class ReservationSlotService {
         return reservationSlotMapper.findAvailabilityByDate(date);
     }
 
+    public List<String> findAvailableTimeOptions(LocalDate date) {
+        if (date == null) {
+            return List.of();
+        }
+        return findAvailabilityByDate(date).stream()
+                .filter(ReservationSlotAvailability::isAvailable)
+                .map(slot -> formatTime(slot.getStartTime()))
+                .toList();
+    }
+
     public boolean isSlotAvailable(LocalDate date, String time) {
         return findAvailabilityByDate(date).stream()
                 .anyMatch(slot -> slot.isAvailable() && formatTime(slot.getStartTime()).equals(time));
+    }
+
+    public String getReservationRestrictionMessage(LocalDate date) {
+        if (date == null) {
+            return null;
+        }
+        if (date.getDayOfWeek() == DayOfWeek.THURSDAY) {
+            return "木曜日は休診のため予約できません。";
+        }
+        if (date.getDayOfWeek() == DayOfWeek.SUNDAY) {
+            return "日曜日は休診のため予約できません。";
+        }
+        if (date.getDayOfWeek() == DayOfWeek.SATURDAY) {
+            return "土曜日は午前のみ予約できます。";
+        }
+        return null;
     }
 
     public List<String> findTimeOptions() {

@@ -200,15 +200,17 @@
               <div>
                 <input id="reservationDate" th:field="*{reservationDate}" th:attr="min=${today}" type="date" class="sc-resv-form-control" />
                 <div th:errors="*{reservationDate}" class="sc-resv-form-field-error"></div>
+                <p id="reservationDateMessage" class="sc-resv-form-help" th:if="${reservationRestrictionMessage}" th:text="${reservationRestrictionMessage}"></p>
               </div>
 
               <label for="reservationTime">希望時間<span class="sc-resv-form-required">*</span></label>
               <div>
-                <select id="reservationTime" th:field="*{reservationTime}" class="sc-resv-form-control">
+                <select id="reservationTime" th:field="*{reservationTime}" class="sc-resv-form-control" data-selected-time="[[${reservationForm.reservationTime}]]">
                   <option value="">選択してください</option>
                   <option th:each="time : ${timeOptions}" th:value="${time}" th:text="${time}"></option>
                 </select>
                 <div th:errors="*{reservationTime}" class="sc-resv-form-field-error"></div>
+                <p id="reservationTimeMessage" class="sc-resv-form-help"></p>
               </div>
 
               <label for="symptom">症状</label>

@@ -94,3 +94,80 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 });
+
+document.addEventListener("DOMContentLoaded", () => {
+  const reservationDateInput = document.getElementById("reservationDate");
+  const reservationTimeSelect = document.getElementById("reservationTime");
+  const reservationDateMessage = document.getElementById("reservationDateMessage");
+  const reservationTimeMessage = document.getElementById("reservationTimeMessage");
+
+  if (!reservationDateInput || !reservationTimeSelect) {
+    return;
+  }
+
+  const initialSelectedTime = reservationTimeSelect.dataset.selectedTime || reservationTimeSelect.value;
+
+  const setMessage = (element, message) => {
+    if (!element) {
+      return;
+    }
+    element.textContent = message || "";
+  };
+
+  const buildOption = (value, label, selected = false) => {
+    const option = document.createElement("option");
+    option.value = value;
+    option.textContent = label;
+    option.selected = selected;
+    return option;
+  };
+
+  const updateTimeOptions = async (selectedTime = "") => {
+    const selectedDate = reservationDateInput.value;
+    reservationTimeSelect.innerHTML = "";
+    reservationTimeSelect.appendChild(buildOption("", "選択してください", !selectedTime));
+    setMessage(reservationTimeMessage, "");
+
+    if (!selectedDate) {
+      setMessage(reservationDateMessage, "");
+      return;
+    }
+
+    try {
+      const response = await fetch(`/api/reservation-slots?date=${selectedDate}`);
+      if (!response.ok) {
+        throw new Error("failed to load slots");
+      }
+      const data = await response.json();
+      const availableSlots = data.slots.filter((slot) => slot.available);
+
+      availableSlots.forEach((slot) => {
+        reservationTimeSelect.appendChild(buildOption(slot.time, `${slot.time}（残り${slot.remaining}枠）`, slot.time === selectedTime));
+      });
+
+      const selectedDay = new Date(`${selectedDate}T00:00:00`);
+      const day = selectedDay.getDay();
+      if (day === 4) {
+        setMessage(reservationDateMessage, "木曜日は休診のため予約できません。");
+      } else if (day === 0) {
+        setMessage(reservationDateMessage, "日曜日は休診のため予約できません。");
+      } else if (day === 6) {
+        setMessage(reservationDateMessage, "土曜日は午前のみ予約できます。");
+      } else {
+        setMessage(reservationDateMessage, "");
+      }
+
+      if (availableSlots.length === 0) {
+        setMessage(reservationTimeMessage, "選択した日は予約可能な時間帯がありません。");
+      }
+    } catch (error) {
+      setMessage(reservationTimeMessage, "予約時間の取得に失敗しました。時間をおいて再度お試しください。");
+    }
+  };
+
+  reservationDateInput.addEventListener("change", () => {
+    updateTimeOptions("");
+  });
+
+  updateTimeOptions(initialSelectedTime);
+});

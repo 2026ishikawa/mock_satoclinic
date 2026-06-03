@@ -3577,6 +3577,12 @@ h1 {
   font-size: 13px;
 }
 
+.sc-resv-form-help {
+  margin-top: 8px;
+  color: #4e6b63;
+  font-size: 13px;
+}
+
 .sc-resv-form-radio-item--spaced {
   margin-right: 18px;
 }
