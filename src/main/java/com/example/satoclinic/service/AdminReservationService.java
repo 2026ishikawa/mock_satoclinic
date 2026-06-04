@@ -19,8 +19,18 @@ public class AdminReservationService {
         this.reservationMapper = reservationMapper;
     }
 
-    public List<AdminReservationSummary> findReservations(LocalDate date, String status) {
-        return reservationMapper.findAdminSummaries(date, status);
+    public List<AdminReservationSummary> findReservations(
+            LocalDate date,
+            String status,
+            String patientName,
+            String reservationCode,
+            String phoneNumber) {
+        return reservationMapper.findAdminSummaries(
+                date,
+                status,
+                normalize(patientName),
+                normalize(reservationCode),
+                normalizePhone(phoneNumber));
     }
 
     public ReservationDetail findDetail(Long id) {
@@ -40,5 +50,26 @@ public class AdminReservationService {
     @Transactional
     public boolean restoreReserved(Long id) {
         return reservationMapper.restoreReservedById(id) > 0;
+    }
+
+    private String normalize(String value) {
+        if (value == null) {
+            return null;
+        }
+        String normalized = value.trim();
+        return normalized.isEmpty() ? null : normalized;
+    }
+
+    private String normalizePhone(String value) {
+        String normalized = normalize(value);
+        if (normalized == null) {
+            return null;
+        }
+        return normalized
+                .replace("-", "")
+                .replace(" ", "")
+                .replace("　", "")
+                .replace("(", "")
+                .replace(")", "");
     }
 }

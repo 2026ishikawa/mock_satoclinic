@@ -31,11 +31,22 @@ public class AdminReservationController {
     public String list(
             @RequestParam(value = "date", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date,
             @RequestParam(value = "status", required = false) String status,
+            @RequestParam(value = "patientName", required = false) String patientName,
+            @RequestParam(value = "reservationCode", required = false) String reservationCode,
+            @RequestParam(value = "phoneNumber", required = false) String phoneNumber,
             Model model) {
-        List<AdminReservationSummary> reservations = adminReservationService.findReservations(date, status);
+        List<AdminReservationSummary> reservations = adminReservationService.findReservations(
+                date,
+                status,
+                patientName,
+                reservationCode,
+                phoneNumber);
         model.addAttribute("reservations", reservations);
         model.addAttribute("selectedDate", date);
         model.addAttribute("selectedStatus", status);
+        model.addAttribute("selectedPatientName", patientName);
+        model.addAttribute("selectedReservationCode", reservationCode);
+        model.addAttribute("selectedPhoneNumber", phoneNumber);
         model.addAttribute("statusOptions", List.of("RESERVED", "CANCELLED", "VISITED"));
         return "admin-reservations";
     }
@@ -50,27 +61,21 @@ public class AdminReservationController {
     @PostMapping("/{id}/cancel")
     public String cancel(@PathVariable("id") Long id, RedirectAttributes redirectAttributes) {
         boolean cancelled = adminReservationService.cancel(id);
-        redirectAttributes.addFlashAttribute(
-                "message",
-                cancelled ? "予約をキャンセルしました。" : "この予約はキャンセルできません。");
+        redirectAttributes.addFlashAttribute("message", cancelled ? "予約をキャンセルしました。" : "予約を更新できませんでした。");
         return "redirect:/admin/reservations/" + id;
     }
 
     @PostMapping("/{id}/visit")
     public String markVisited(@PathVariable("id") Long id, RedirectAttributes redirectAttributes) {
         boolean visited = adminReservationService.markVisited(id);
-        redirectAttributes.addFlashAttribute(
-                "message",
-                visited ? "予約ステータスを来院済みに更新しました。" : "この予約は来院済みに更新できません。");
+        redirectAttributes.addFlashAttribute("message", visited ? "来院済みに変更しました。" : "予約を更新できませんでした。");
         return "redirect:/admin/reservations/" + id;
     }
 
     @PostMapping("/{id}/restore")
     public String restoreReserved(@PathVariable("id") Long id, RedirectAttributes redirectAttributes) {
         boolean restored = adminReservationService.restoreReserved(id);
-        redirectAttributes.addFlashAttribute(
-                "message",
-                restored ? "予約ステータスを予約済みに戻しました。" : "この予約は予約済みに戻せません。");
+        redirectAttributes.addFlashAttribute("message", restored ? "予約済みに戻しました。" : "予約を更新できませんでした。");
         return "redirect:/admin/reservations/" + id;
     }
 }

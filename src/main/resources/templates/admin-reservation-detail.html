@@ -7,6 +7,13 @@
     <link rel="stylesheet" href="/css/styles.css" />
   </head>
   <body class="sc-admin-reservations-page">
+    <div th:if="${message}" class="sc-admin-reservations-toast-backdrop" id="adminReservationToast" onclick="closeAdminReservationToast()">
+      <div class="sc-admin-reservations-toast" onclick="event.stopPropagation()">
+        <button type="button" class="sc-admin-reservations-toast-close" aria-label="メッセージを閉じる" onclick="closeAdminReservationToast()">×</button>
+        <p class="sc-admin-reservations-toast-text" th:text="${message}"></p>
+      </div>
+    </div>
+
     <main class="sc-admin-reservations-content">
       <div class="sc-admin-reservations-header">
         <div class="sc-admin-reservations-header-row">
@@ -15,7 +22,6 @@
             <button type="submit" class="sc-admin-reservations-logout">ログアウト</button>
           </form>
         </div>
-        <p th:if="${message}" th:text="${message}" class="sc-admin-reservations-message"></p>
       </div>
 
       <div th:if="${reservation == null}" class="sc-admin-reservations-empty">
@@ -53,5 +59,15 @@
         </div>
       </div>
     </main>
+    <script th:if="${message}">
+      function closeAdminReservationToast() {
+        const toast = document.getElementById('adminReservationToast');
+        if (toast) {
+          toast.remove();
+        }
+      }
+
+      window.setTimeout(closeAdminReservationToast, 3000);
+    </script>
   </body>
 </html>

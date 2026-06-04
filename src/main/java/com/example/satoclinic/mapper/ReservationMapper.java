@@ -36,13 +36,25 @@ public interface ReservationMapper {
               <if test="status != null and status != ''">
                 AND r.status = #{status}
               </if>
+              <if test="patientName != null and patientName != ''">
+                AND r.patient_name LIKE CONCAT('%', #{patientName}, '%')
+              </if>
+              <if test="reservationCode != null and reservationCode != ''">
+                AND r.reservation_code LIKE CONCAT('%', #{reservationCode}, '%')
+              </if>
+              <if test="phoneNumber != null and phoneNumber != ''">
+                AND REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(r.phone_number, '-', ''), ' ', ''), '　', ''), '(', ''), ')', '') LIKE CONCAT('%', #{phoneNumber}, '%')
+              </if>
             </where>
-            ORDER BY rs.slot_date, rs.start_time, r.id
+            ORDER BY rs.slot_date ASC, rs.start_time ASC, r.created_at ASC, r.id ASC
             </script>
             """)
     java.util.List<AdminReservationSummary> findAdminSummaries(
             @Param("date") LocalDate date,
-            @Param("status") String status);
+            @Param("status") String status,
+            @Param("patientName") String patientName,
+            @Param("reservationCode") String reservationCode,
+            @Param("phoneNumber") String phoneNumber);
 
     @Select("""
             SELECT COALESCE(MAX(CAST(SUBSTRING(r.reservation_code, 10, 4) AS INTEGER)), 0)

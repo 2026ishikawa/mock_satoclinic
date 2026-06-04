@@ -3884,6 +3884,19 @@ body.sc-admin-reservations-page {
   font-weight: 700;
 }
 
+.sc-admin-reservations-filter-actions {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.sc-admin-reservations-filter-actions button,
+.sc-admin-reservations-reset {
+  min-width: 96px;
+  font-size: 14px;
+  text-align: center;
+}
+
 .sc-admin-reservations-filter input,
 .sc-admin-reservations-filter select,
 .sc-admin-reservations-filter button {
@@ -3962,6 +3975,23 @@ body.sc-admin-reservations-page {
   border-radius: 8px;
 }
 
+.sc-admin-reservations-reset {
+  display: inline-block;
+  padding: 10px 16px;
+  border-radius: 8px;
+  border: 1px solid #d8e0e8;
+  background: #fcfdff;
+  color: #5b6c7a;
+  text-decoration: none;
+  font-weight: 700;
+  line-height: 1.2;
+  box-sizing: border-box;
+}
+
+.sc-admin-reservations-reset:hover {
+  background: #eef3f7;
+}
+
 .sc-admin-reservations-cancel {
   padding: 10px 16px;
   border-radius: 8px;
@@ -3991,6 +4021,48 @@ body.sc-admin-reservations-page {
 .sc-admin-reservations-message {
   color: #0d753b;
   font-weight: 700;
+}
+
+.sc-admin-reservations-toast-backdrop {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(15, 34, 52, 0.18);
+  z-index: 1000;
+  pointer-events: auto;
+}
+
+.sc-admin-reservations-toast {
+  position: relative;
+  min-width: 280px;
+  max-width: 420px;
+  padding: 18px 24px;
+  border-radius: 14px;
+  background: #ffffff;
+  color: #0b7fab;
+  text-align: center;
+  font-size: 18px;
+  font-weight: 700;
+  box-shadow: 0 14px 36px rgba(15, 45, 62, 0.18);
+  pointer-events: auto;
+}
+
+.sc-admin-reservations-toast-text {
+  margin: 0;
+}
+
+.sc-admin-reservations-toast-close {
+  position: absolute;
+  top: 10px;
+  right: 12px;
+  border: none;
+  background: transparent;
+  color: #0b7fab;
+  font-size: 28px;
+  line-height: 1;
+  cursor: pointer;
 }
 
 .sc-admin-reservations-empty {
