@@ -287,6 +287,21 @@ ul {
   overflow-y: auto;
 }
 
+.mobile-menu-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 34, 52, 0.32);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+  z-index: 999;
+}
+
+.mobile-menu-overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+
 .mobile-menu.active {
   right: 0;
 }
