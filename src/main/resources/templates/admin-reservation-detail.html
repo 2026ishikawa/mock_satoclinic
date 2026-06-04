@@ -3,13 +3,18 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>予約詳細 | 管理画面</title>
+    <title>予約詳細 | 佐藤クリニック</title>
     <link rel="stylesheet" href="/css/styles.css" />
   </head>
   <body class="sc-admin-reservations-page">
     <main class="sc-admin-reservations-content">
       <div class="sc-admin-reservations-header">
-        <h1>予約詳細</h1>
+        <div class="sc-admin-reservations-header-row">
+          <h1>予約詳細</h1>
+          <form th:action="@{/admin/logout}" method="post">
+            <button type="submit" class="sc-admin-reservations-logout">ログアウト</button>
+          </form>
+        </div>
         <p th:if="${message}" th:text="${message}" class="sc-admin-reservations-message"></p>
       </div>
 
@@ -21,7 +26,7 @@
         <table class="sc-admin-reservations-table">
           <tbody>
             <tr><th>予約番号</th><td th:text="${reservation.reservationCode}"></td></tr>
-            <tr><th>氏名</th><td th:text="${reservation.patientName}"></td></tr>
+            <tr><th>患者名</th><td th:text="${reservation.patientName}"></td></tr>
             <tr><th>フリガナ</th><td th:text="${reservation.patientKana}"></td></tr>
             <tr><th>生年月日</th><td th:text="${reservation.birthDate}"></td></tr>
             <tr><th>電話番号</th><td th:text="${reservation.phoneNumber}"></td></tr>

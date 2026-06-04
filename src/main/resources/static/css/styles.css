@@ -3847,13 +3847,23 @@ body.sc-admin-reservations-page {
 }
 
 .sc-admin-reservations-header {
-  text-align: center;
   margin-bottom: 24px;
+}
+
+.sc-admin-reservations-header-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
 }
 
 .sc-admin-reservations-header h1 {
   margin-bottom: 8px;
-  color: var(--color-deep-green);
+  color: #0b7fab;
+}
+
+.sc-admin-reservations-header p {
+  margin: 0;
 }
 
 .sc-admin-reservations-filter {
@@ -3884,7 +3894,8 @@ body.sc-admin-reservations-page {
 
 .sc-admin-reservations-filter button,
 .sc-admin-reservations-cancel,
-.sc-admin-reservations-link {
+.sc-admin-reservations-link,
+.sc-admin-reservations-logout {
   background: #0b7fab;
   color: #fff;
   text-decoration: none;
@@ -3946,6 +3957,11 @@ body.sc-admin-reservations-page {
   border-radius: 8px;
 }
 
+.sc-admin-reservations-logout {
+  padding: 10px 16px;
+  border-radius: 8px;
+}
+
 .sc-admin-reservations-cancel {
   padding: 10px 16px;
   border-radius: 8px;
@@ -3982,4 +3998,103 @@ body.sc-admin-reservations-page {
   border-radius: 12px;
   padding: 24px;
   text-align: center;
+}
+
+/* Admin login */
+body.sc-admin-login-page {
+  min-height: 100vh;
+  margin: 0;
+  background: var(--color-pale-aqua);
+  display: grid;
+  place-items: center;
+  padding: 24px;
+}
+
+.sc-admin-login-content {
+  width: 100%;
+  max-width: 480px;
+}
+
+.sc-admin-login-card {
+  background: #fff;
+  border-radius: 16px;
+  padding: 30px 25px;
+  box-shadow: 0 8px 24px rgba(15, 45, 62, 0.08);
+}
+
+.sc-admin-login-title {
+  margin: 0 0 8px;
+  color: #0b7fab;
+  text-align: center;
+}
+
+.sc-admin-login-lead {
+  margin: 0 0 24px;
+  text-align: center;
+  color: #44576a;
+}
+
+.sc-admin-login-credentials {
+  margin: 0 0 20px;
+  padding: 14px 16px;
+  border-radius: 10px;
+  background: #f3f8fb;
+  color: #23405b;
+}
+
+.sc-admin-login-credentials-title {
+  margin: 0 0 8px;
+  font-weight: 700;
+}
+
+.sc-admin-login-credentials p {
+  margin: 4px 0;
+}
+
+.sc-admin-login-form {
+  display: grid;
+  gap: 16px;
+}
+
+.sc-admin-login-label {
+  display: grid;
+  gap: 6px;
+  font-weight: 700;
+}
+
+.sc-admin-login-label input {
+  padding: 12px 14px;
+  border: 1px solid #cfd8e3;
+  border-radius: 10px;
+}
+
+.sc-admin-login-button {
+  align-self: center;
+  justify-self: center;
+  width: auto;
+  min-width: 180px;
+  padding: 15px 20px;
+  border: none;
+  border-radius: 10px;
+  background: #0b7fab;
+  color: #fff;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.sc-admin-login-alert {
+  margin: 0 0 16px;
+  padding: 12px 14px;
+  border-radius: 10px;
+  font-weight: 700;
+}
+
+.sc-admin-login-alert.is-error {
+  background: #fdecec;
+  color: #b23b3b;
+}
+
+.sc-admin-login-alert.is-success {
+  background: #e7f6ec;
+  color: #1f7a3f;
 }

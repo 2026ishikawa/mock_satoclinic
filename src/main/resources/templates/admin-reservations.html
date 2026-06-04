@@ -3,14 +3,21 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>予約一覧 | 管理画面</title>
+    <title>予約一覧 | 佐藤クリニック</title>
     <link rel="stylesheet" href="/css/styles.css" />
   </head>
   <body class="sc-admin-reservations-page">
     <main class="sc-admin-reservations-content">
       <div class="sc-admin-reservations-header">
-        <h1>予約一覧</h1>
-        <p>日付とステータスで絞り込みできます。</p>
+        <div class="sc-admin-reservations-header-row">
+          <div>
+            <h1>予約一覧</h1>
+            <p>予約日とステータスで絞り込みできます。</p>
+          </div>
+          <form th:action="@{/admin/logout}" method="post">
+            <button type="submit" class="sc-admin-reservations-logout">ログアウト</button>
+          </form>
+        </div>
       </div>
 
       <form class="sc-admin-reservations-filter" th:action="@{/admin/reservations}" method="get">
@@ -32,7 +39,7 @@
         <thead>
           <tr>
             <th>予約番号</th>
-            <th>氏名</th>
+            <th>患者名</th>
             <th>予約日</th>
             <th>時間</th>
             <th>初診/再診</th>
