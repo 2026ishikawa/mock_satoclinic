@@ -32,6 +32,7 @@
           class="sc-admin-reservations-modal-form"
           onsubmit="return confirm('この内容でキャンセルしますか？');"
         >
+          <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
           <label class="sc-admin-reservations-inline-label">
             キャンセル理由
             <select name="cancelReason" class="sc-admin-reservations-inline-select" required>
@@ -52,6 +53,7 @@
         <div class="sc-admin-reservations-header-row">
           <h1>予約詳細</h1>
           <form th:action="@{/admin/logout}" method="post">
+            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
             <button type="submit" class="sc-admin-reservations-logout">ログアウト</button>
           </form>
         </div>
@@ -85,12 +87,14 @@
         <div class="sc-admin-reservations-actions">
           <a href="/admin/reservations" class="sc-admin-reservations-link">一覧へ戻る</a>
           <form th:if="${reservation.status == 'RESERVED'}" th:action="@{/admin/reservations/{id}/visit(id=${reservation.id})}" method="post" onsubmit="return confirm('本当に来院済みに変更しますか？');">
+            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
             <button type="submit" class="sc-admin-reservations-visit">来院済みにする</button>
           </form>
           <button th:if="${reservation.status == 'RESERVED'}" type="button" class="sc-admin-reservations-cancel" onclick="openCancelReasonModal()">
             キャンセルする
           </button>
           <form th:if="${reservation.status == 'VISITED' or reservation.status == 'CANCELLED'}" th:action="@{/admin/reservations/{id}/restore(id=${reservation.id})}" method="post">
+            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
             <button type="submit" class="sc-admin-reservations-restore">予約済みに戻す</button>
           </form>
         </div>

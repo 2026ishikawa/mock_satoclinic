@@ -15,6 +15,7 @@
             <p>予約日・時間順で表示します。同じ時間帯は作成順です。</p>
           </div>
           <form th:action="@{/admin/logout}" method="post">
+            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
             <button type="submit" class="sc-admin-reservations-logout">ログアウト</button>
           </form>
         </div>

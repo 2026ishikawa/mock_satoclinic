@@ -45,6 +45,7 @@
 
       <div class="sc-reservation-confirm-actions">
         <form th:action="@{/reservations}" th:object="${reservationForm}" method="post">
+          <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
           <input type="hidden" th:field="*{patientName}" />
           <input type="hidden" th:field="*{patientKana}" />
           <input type="hidden" th:field="*{birthYear}" />
@@ -62,6 +63,7 @@
         </form>
 
         <form th:action="@{/reservations/new}" th:object="${reservationForm}" method="post">
+          <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
           <input type="hidden" th:field="*{patientName}" />
           <input type="hidden" th:field="*{patientKana}" />
           <input type="hidden" th:field="*{birthYear}" />
