@@ -53,7 +53,7 @@
           <form th:if="${reservation.status == 'RESERVED'}" th:action="@{/admin/reservations/{id}/cancel(id=${reservation.id})}" method="post" onsubmit="return confirm('本当にキャンセルしますか？');">
             <button type="submit" class="sc-admin-reservations-cancel">キャンセルする</button>
           </form>
-          <form th:if="${reservation.status == 'VISITED'}" th:action="@{/admin/reservations/{id}/restore(id=${reservation.id})}" method="post">
+          <form th:if="${reservation.status == 'VISITED' or reservation.status == 'CANCELLED'}" th:action="@{/admin/reservations/{id}/restore(id=${reservation.id})}" method="post">
             <button type="submit" class="sc-admin-reservations-restore">予約済みに戻す</button>
           </form>
         </div>

@@ -190,7 +190,7 @@ public interface ReservationMapper {
             SET status = 'RESERVED',
                 updated_at = CURRENT_TIMESTAMP
             WHERE id = #{id}
-              AND status = 'VISITED'
+              AND status IN ('VISITED', 'CANCELLED')
             """)
     int restoreReservedById(@Param("id") Long id);
 }

@@ -3995,7 +3995,15 @@ body.sc-admin-reservations-page {
 .sc-admin-reservations-cancel {
   padding: 10px 16px;
   border-radius: 8px;
-  background: #c0392b;
+  background: #d93025;
+  color: #fff;
+  font-weight: 700;
+  border: none;
+  box-shadow: 0 0 0 2px rgba(217, 48, 37, 0.12);
+}
+
+.sc-admin-reservations-cancel:hover {
+  background: #b42318;
 }
 
 .sc-admin-reservations-visit {
