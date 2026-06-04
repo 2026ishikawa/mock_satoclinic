@@ -135,6 +135,7 @@ public interface ReservationMapper {
               r.visit_type,
               r.symptom,
               r.status,
+              r.cancel_reason,
               r.agreed_to_privacy_policy,
               rs.slot_date AS reservation_date,
               rs.start_time AS reservation_time
@@ -157,6 +158,7 @@ public interface ReservationMapper {
               r.visit_type,
               r.symptom,
               r.status,
+              r.cancel_reason,
               r.agreed_to_privacy_policy,
               rs.slot_date AS reservation_date,
               rs.start_time AS reservation_time
@@ -170,11 +172,12 @@ public interface ReservationMapper {
     @Update("""
             UPDATE reservations
             SET status = 'CANCELLED',
+                cancel_reason = #{cancelReason},
                 updated_at = CURRENT_TIMESTAMP
             WHERE id = #{id}
               AND status = 'RESERVED'
             """)
-    int cancelById(@Param("id") Long id);
+    int cancelById(@Param("id") Long id, @Param("cancelReason") String cancelReason);
 
     @Update("""
             UPDATE reservations
@@ -188,6 +191,7 @@ public interface ReservationMapper {
     @Update("""
             UPDATE reservations
             SET status = 'RESERVED',
+                cancel_reason = NULL,
                 updated_at = CURRENT_TIMESTAMP
             WHERE id = #{id}
               AND status IN ('VISITED', 'CANCELLED')

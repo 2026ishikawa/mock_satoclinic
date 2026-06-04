@@ -3937,6 +3937,28 @@ body.sc-admin-reservations-page {
   gap: 12px;
   margin-top: 20px;
   align-items: center;
+  flex-wrap: wrap;
+}
+
+.sc-admin-reservations-inline-form {
+  display: flex;
+  gap: 10px;
+  align-items: end;
+  flex-wrap: wrap;
+}
+
+.sc-admin-reservations-inline-label {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-weight: 700;
+}
+
+.sc-admin-reservations-inline-select {
+  min-width: 180px;
+  padding: 10px 12px;
+  border: 1px solid #cfd8e3;
+  border-radius: 8px;
 }
 
 .sc-admin-reservations-status-badge {
@@ -4071,6 +4093,68 @@ body.sc-admin-reservations-page {
   font-size: 28px;
   line-height: 1;
   cursor: pointer;
+}
+
+.sc-admin-reservations-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(15, 34, 52, 0.28);
+  z-index: 999;
+}
+
+.sc-admin-reservations-modal-backdrop.is-hidden {
+  display: none;
+}
+
+.sc-admin-reservations-modal {
+  width: min(92vw, 480px);
+  background: #fff;
+  border-radius: 16px;
+  padding: 24px;
+  box-shadow: 0 14px 36px rgba(15, 45, 62, 0.2);
+}
+
+.sc-admin-reservations-modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 10px;
+}
+
+.sc-admin-reservations-modal-title {
+  margin: 0;
+  color: #0b7fab;
+  font-size: 24px;
+}
+
+.sc-admin-reservations-modal-close {
+  border: none;
+  background: transparent;
+  color: #0b7fab;
+  font-size: 28px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.sc-admin-reservations-modal-lead {
+  margin: 0 0 18px;
+  color: #44576a;
+}
+
+.sc-admin-reservations-modal-form {
+  display: grid;
+  gap: 18px;
+}
+
+.sc-admin-reservations-modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  flex-wrap: wrap;
 }
 
 .sc-admin-reservations-empty {

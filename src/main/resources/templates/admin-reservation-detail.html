@@ -14,6 +14,39 @@
       </div>
     </div>
 
+    <div
+      th:if="${reservation != null and reservation.status == 'RESERVED'}"
+      class="sc-admin-reservations-modal-backdrop is-hidden"
+      id="cancelReasonModal"
+      onclick="closeCancelReasonModal()"
+    >
+      <div class="sc-admin-reservations-modal" onclick="event.stopPropagation()">
+        <div class="sc-admin-reservations-modal-header">
+          <h2 class="sc-admin-reservations-modal-title">キャンセル理由を選択</h2>
+          <button type="button" class="sc-admin-reservations-modal-close" aria-label="モーダルを閉じる" onclick="closeCancelReasonModal()">×</button>
+        </div>
+        <p class="sc-admin-reservations-modal-lead">理由を選択してから、キャンセルを確定してください。</p>
+        <form
+          th:action="@{/admin/reservations/{id}/cancel(id=${reservation.id})}"
+          method="post"
+          class="sc-admin-reservations-modal-form"
+          onsubmit="return confirm('この内容でキャンセルしますか？');"
+        >
+          <label class="sc-admin-reservations-inline-label">
+            キャンセル理由
+            <select name="cancelReason" class="sc-admin-reservations-inline-select" required>
+              <option value="">選択してください</option>
+              <option th:each="option : ${cancelReasonOptions.entrySet()}" th:value="${option.key}" th:text="${option.value}"></option>
+            </select>
+          </label>
+          <div class="sc-admin-reservations-modal-actions">
+            <button type="button" class="sc-admin-reservations-reset" onclick="closeCancelReasonModal()">閉じる</button>
+            <button type="submit" class="sc-admin-reservations-cancel">この内容でキャンセル</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
     <main class="sc-admin-reservations-content">
       <div class="sc-admin-reservations-header">
         <div class="sc-admin-reservations-header-row">
@@ -42,6 +75,10 @@
             <tr><th>予約時間</th><td th:text="${reservation.reservationTime}"></td></tr>
             <tr><th>症状</th><td th:text="${reservation.symptom}"></td></tr>
             <tr><th>ステータス</th><td th:text="${reservation.status}"></td></tr>
+            <tr th:if="${reservation.status == 'CANCELLED' and reservation.cancelReason != null}">
+              <th>キャンセル理由</th>
+              <td th:text="${cancelReasonOptions[reservation.cancelReason]}"></td>
+            </tr>
           </tbody>
         </table>
 
@@ -50,20 +87,34 @@
           <form th:if="${reservation.status == 'RESERVED'}" th:action="@{/admin/reservations/{id}/visit(id=${reservation.id})}" method="post" onsubmit="return confirm('本当に来院済みに変更しますか？');">
             <button type="submit" class="sc-admin-reservations-visit">来院済みにする</button>
           </form>
-          <form th:if="${reservation.status == 'RESERVED'}" th:action="@{/admin/reservations/{id}/cancel(id=${reservation.id})}" method="post" onsubmit="return confirm('本当にキャンセルしますか？');">
-            <button type="submit" class="sc-admin-reservations-cancel">キャンセルする</button>
-          </form>
+          <button th:if="${reservation.status == 'RESERVED'}" type="button" class="sc-admin-reservations-cancel" onclick="openCancelReasonModal()">
+            キャンセルする
+          </button>
           <form th:if="${reservation.status == 'VISITED' or reservation.status == 'CANCELLED'}" th:action="@{/admin/reservations/{id}/restore(id=${reservation.id})}" method="post">
             <button type="submit" class="sc-admin-reservations-restore">予約済みに戻す</button>
           </form>
         </div>
       </div>
     </main>
-    <script th:if="${message}">
+    <script>
       function closeAdminReservationToast() {
         const toast = document.getElementById('adminReservationToast');
         if (toast) {
           toast.remove();
+        }
+      }
+
+      function openCancelReasonModal() {
+        const modal = document.getElementById('cancelReasonModal');
+        if (modal) {
+          modal.classList.remove('is-hidden');
+        }
+      }
+
+      function closeCancelReasonModal() {
+        const modal = document.getElementById('cancelReasonModal');
+        if (modal) {
+          modal.classList.add('is-hidden');
         }
       }
 

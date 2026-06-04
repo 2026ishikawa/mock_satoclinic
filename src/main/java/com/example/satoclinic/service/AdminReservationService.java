@@ -38,8 +38,8 @@ public class AdminReservationService {
     }
 
     @Transactional
-    public boolean cancel(Long id) {
-        return reservationMapper.cancelById(id) > 0;
+    public boolean cancel(Long id, String cancelReason) {
+        return reservationMapper.cancelById(id, cancelReason) > 0;
     }
 
     @Transactional

@@ -15,6 +15,7 @@ public class ReservationDetail {
     private String visitType;
     private String symptom;
     private String status;
+    private String cancelReason;
     private boolean agreedToPrivacyPolicy;
     private LocalDate reservationDate;
     private LocalTime reservationTime;
@@ -97,6 +98,14 @@ public class ReservationDetail {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public String getCancelReason() {
+        return cancelReason;
+    }
+
+    public void setCancelReason(String cancelReason) {
+        this.cancelReason = cancelReason;
     }
 
     public boolean isAgreedToPrivacyPolicy() {

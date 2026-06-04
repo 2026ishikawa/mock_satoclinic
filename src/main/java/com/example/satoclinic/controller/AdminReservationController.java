@@ -1,7 +1,9 @@
 package com.example.satoclinic.controller;
 
 import java.time.LocalDate;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
@@ -20,6 +22,8 @@ import com.example.satoclinic.service.AdminReservationService;
 @Controller
 @RequestMapping("/admin/reservations")
 public class AdminReservationController {
+
+    private static final Map<String, String> CANCEL_REASON_OPTIONS = createCancelReasonOptions();
 
     private final AdminReservationService adminReservationService;
 
@@ -55,12 +59,16 @@ public class AdminReservationController {
     public String detail(@PathVariable("id") Long id, Model model) {
         ReservationDetail reservation = adminReservationService.findDetail(id);
         model.addAttribute("reservation", reservation);
+        model.addAttribute("cancelReasonOptions", CANCEL_REASON_OPTIONS);
         return "admin-reservation-detail";
     }
 
     @PostMapping("/{id}/cancel")
-    public String cancel(@PathVariable("id") Long id, RedirectAttributes redirectAttributes) {
-        boolean cancelled = adminReservationService.cancel(id);
+    public String cancel(
+            @PathVariable("id") Long id,
+            @RequestParam("cancelReason") String cancelReason,
+            RedirectAttributes redirectAttributes) {
+        boolean cancelled = adminReservationService.cancel(id, cancelReason);
         redirectAttributes.addFlashAttribute("message", cancelled ? "予約をキャンセルしました。" : "予約を更新できませんでした。");
         return "redirect:/admin/reservations/" + id;
     }
@@ -77,5 +85,14 @@ public class AdminReservationController {
         boolean restored = adminReservationService.restoreReserved(id);
         redirectAttributes.addFlashAttribute("message", restored ? "予約済みに戻しました。" : "予約を更新できませんでした。");
         return "redirect:/admin/reservations/" + id;
+    }
+
+    private static Map<String, String> createCancelReasonOptions() {
+        Map<String, String> options = new LinkedHashMap<>();
+        options.put("PATIENT_REQUEST", "患者都合");
+        options.put("CLINIC_REASON", "クリニック都合");
+        options.put("DUPLICATE", "重複予約");
+        options.put("OTHER", "その他");
+        return options;
     }
 }

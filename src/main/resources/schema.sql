@@ -24,6 +24,7 @@ CREATE TABLE reservations (
   visit_type VARCHAR(20) NOT NULL,
   symptom VARCHAR(500),
   status VARCHAR(20) NOT NULL DEFAULT 'RESERVED',
+  cancel_reason VARCHAR(30),
   agreed_to_privacy_policy BOOLEAN NOT NULL DEFAULT FALSE,
   created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -35,6 +36,8 @@ CREATE TABLE reservations (
     CHECK (visit_type IN ('FIRST', 'RETURN')),
   CONSTRAINT chk_reservations_status
     CHECK (status IN ('RESERVED', 'CANCELLED', 'VISITED')),
+  CONSTRAINT chk_reservations_cancel_reason
+    CHECK (cancel_reason IS NULL OR cancel_reason IN ('PATIENT_REQUEST', 'CLINIC_REASON', 'DUPLICATE', 'OTHER')),
   CONSTRAINT chk_reservations_privacy_policy
     CHECK (agreed_to_privacy_policy = TRUE)
 );
