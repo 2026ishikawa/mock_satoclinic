@@ -3525,7 +3525,6 @@ h1 {
 .sc-resv-page-form-section {
   padding-bottom: 40px;
   background-color: var(--color-pale-aqua);
-  border-bottom: 1px solid var(--border-dashed);
 }
 
 /* Reservation form (scoped, non-conflicting names) */
