@@ -56,6 +56,8 @@
           <tr>
             <th>予約番号</th>
             <th>患者名</th>
+            <th>電話番号</th>
+            <th>症状</th>
             <th>予約日</th>
             <th>時間</th>
             <th>初診/再診</th>
@@ -65,11 +67,13 @@
         </thead>
         <tbody>
           <tr th:if="${#lists.isEmpty(reservations)}">
-            <td colspan="7">該当する予約はありません。</td>
+            <td colspan="9">該当する予約はありません。</td>
           </tr>
           <tr th:each="reservation : ${reservations}">
             <td th:text="${reservation.reservationCode}"></td>
             <td th:text="${reservation.patientName}"></td>
+            <td th:text="${reservation.phoneNumber}"></td>
+            <td th:text="${reservation.symptomPreview}"></td>
             <td th:text="${reservation.reservationDate}"></td>
             <td th:text="${reservation.reservationTime}"></td>
             <td th:text="${reservation.visitType == 'FIRST' ? '初診' : '再診'}"></td>

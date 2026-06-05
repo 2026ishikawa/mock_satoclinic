@@ -22,6 +22,8 @@ public interface ReservationMapper {
               r.id,
               r.reservation_code,
               r.patient_name,
+              r.phone_number,
+              r.symptom,
               rs.slot_date AS reservation_date,
               rs.start_time AS reservation_time,
               r.visit_type,

@@ -5,9 +5,13 @@ import java.time.LocalTime;
 
 public class AdminReservationSummary {
 
+    private static final int SYMPTOM_PREVIEW_LENGTH = 30;
+
     private Long id;
     private String reservationCode;
     private String patientName;
+    private String phoneNumber;
+    private String symptom;
     private LocalDate reservationDate;
     private LocalTime reservationTime;
     private String visitType;
@@ -35,6 +39,32 @@ public class AdminReservationSummary {
 
     public void setPatientName(String patientName) {
         this.patientName = patientName;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public String getSymptom() {
+        return symptom;
+    }
+
+    public void setSymptom(String symptom) {
+        this.symptom = symptom;
+    }
+
+    public String getSymptomPreview() {
+        if (symptom == null || symptom.isBlank()) {
+            return "";
+        }
+        if (symptom.length() <= SYMPTOM_PREVIEW_LENGTH) {
+            return symptom;
+        }
+        return symptom.substring(0, SYMPTOM_PREVIEW_LENGTH) + "...";
     }
 
     public LocalDate getReservationDate() {
