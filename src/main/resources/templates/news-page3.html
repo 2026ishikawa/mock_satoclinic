@@ -45,66 +45,66 @@
             <div class="sc-news-list">
               <a class="sc-news-card" href="#">
                 <div class="sc-news-card__meta">
-                  <time class="sc-news-card__date" datetime="2026-01-28">2026.01.28</time>
+                  <time class="sc-news-card__date" datetime="2025-12-26">2025.12.26</time>
                   <span class="sc-news-card__tag">お知らせ</span>
                 </div>
                 <div class="sc-news-card__main">
-                  <span class="sc-news-card__title">インフルエンザ予防接種について</span>
+                  <span class="sc-news-card__title">年内最終診療日のお知らせ</span>
                   <span class="sc-news-card__arrow" aria-hidden="true">→</span>
                 </div>
               </a>
               <a class="sc-news-card" href="#">
                 <div class="sc-news-card__meta">
-                  <time class="sc-news-card__date" datetime="2026-01-28">2026.01.28</time>
-                  <span class="sc-news-card__tag">お知らせ</span>
+                  <time class="sc-news-card__date" datetime="2025-12-22">2025.12.22</time>
+                  <span class="sc-news-card__tag">休診</span>
                 </div>
                 <div class="sc-news-card__main">
-                  <span class="sc-news-card__title">年末年始の休診について</span>
+                  <span class="sc-news-card__title">1月祝日診療の休診案内</span>
                   <span class="sc-news-card__arrow" aria-hidden="true">→</span>
                 </div>
               </a>
               <a class="sc-news-card" href="#">
                 <div class="sc-news-card__meta">
-                  <time class="sc-news-card__date" datetime="2026-01-28">2026.01.28</time>
-                  <span class="sc-news-card__tag">お知らせ</span>
+                  <time class="sc-news-card__date" datetime="2025-12-18">2025.12.18</time>
+                  <span class="sc-news-card__tag">コラム</span>
                 </div>
                 <div class="sc-news-card__main">
-                  <span class="sc-news-card__title">健康診断のご案内</span>
+                  <span class="sc-news-card__title">冬の乾燥対策と体調管理</span>
                   <span class="sc-news-card__arrow" aria-hidden="true">→</span>
                 </div>
               </a>
               <a class="sc-news-card" href="#">
                 <div class="sc-news-card__meta">
-                  <time class="sc-news-card__date" datetime="2026-01-28">2026.01.28</time>
-                  <span class="sc-news-card__tag">お知らせ</span>
+                  <time class="sc-news-card__date" datetime="2025-12-12">2025.12.12</time>
+                  <span class="sc-news-card__tag">緊急</span>
                 </div>
                 <div class="sc-news-card__main">
-                  <span class="sc-news-card__title">新型コロナウイルス対策について</span>
+                  <span class="sc-news-card__title">感染症流行に伴う面会制限について</span>
                   <span class="sc-news-card__arrow" aria-hidden="true">→</span>
                 </div>
               </a>
               <a class="sc-news-card" href="#">
                 <div class="sc-news-card__meta">
-                  <time class="sc-news-card__date" datetime="2026-01-28">2026.01.28</time>
+                  <time class="sc-news-card__date" datetime="2025-12-05">2025.12.05</time>
                   <span class="sc-news-card__tag">お知らせ</span>
                 </div>
                 <div class="sc-news-card__main">
-                <span class="sc-news-card__title">オンライン診療の導入について</span>
+                <span class="sc-news-card__title">予防接種予約枠の追加について</span>
                 <span class="sc-news-card__arrow" aria-hidden="true">→</span>
                 </div>
               </a>
             </div>
 
             <nav class="sc-news-pagination" aria-label="ページネーション">
-              <a class="sc-news-pagination__nav is-disabled" href="#" aria-label="前のページ" aria-disabled="true">前へ</a>
+              <a class="sc-news-pagination__nav" href="/news-page2" th:href="@{/news-page2}" aria-label="前のページ">前へ</a>
 
               <div class="sc-news-pagination__pages">
-                <span class="sc-news-pagination__num is-active" aria-current="page">1</span>
+                <a class="sc-news-pagination__num" href="/news" th:href="@{/news}">1</a>
                 <a class="sc-news-pagination__num" href="/news-page2" th:href="@{/news-page2}">2</a>
-                <a class="sc-news-pagination__num" href="/news-page3" th:href="@{/news-page3}">3</a>
+                <span class="sc-news-pagination__num is-active" aria-current="page">3</span>
               </div>
 
-              <a class="sc-news-pagination__nav" href="/news-page2" th:href="@{/news-page2}" aria-label="次のページ">次へ</a>
+              <a class="sc-news-pagination__nav is-disabled" href="#" aria-label="次のページ" aria-disabled="true">次へ</a>
             </nav>
           </div>
 
@@ -205,7 +205,7 @@
       </div>
     </section>
 
-    <th:block th:replace="~{fragments/layout :: siteFooter(footerLogoHref=@{/news#top})}"></th:block>
+    <th:block th:replace="~{fragments/layout :: siteFooter(footerLogoHref=@{/news-page3#top})}"></th:block>
 
     <script src="/js/script.js" th:src="@{/js/script.js}"></script>
   </body>

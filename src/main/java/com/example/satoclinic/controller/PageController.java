@@ -28,6 +28,16 @@ public class PageController {
         return "news";
     }
 
+    @GetMapping({"/news-page2", "/news-page2.html"})
+    public String newsPage2() {
+        return "news-page2";
+    }
+
+    @GetMapping({"/news-page3", "/news-page3.html"})
+    public String newsPage3() {
+        return "news-page3";
+    }
+
     @GetMapping("/admin/login")
     public String adminLogin(
             @RequestParam(value = "error", required = false) String error,
