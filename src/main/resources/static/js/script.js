@@ -75,13 +75,46 @@ if (mobileMenuOverlay) {
 
 // Back to Top Button
 const backToTop = document.getElementById('backToTop');
+const footer = document.querySelector('.footer');
+
+function smoothScrollToTop(pixelsPerMs = 1.4) {
+    const startY = window.pageYOffset;
+    if (startY <= 0) {
+        return;
+    }
+    const startTime = performance.now();
+    const duration = Math.max(startY / pixelsPerMs, 600);
+    const root = document.documentElement;
+    const previousScrollBehavior = root.style.scrollBehavior;
+
+    root.style.scrollBehavior = 'auto';
+
+    function easeInOutCubic(progress) {
+        return progress < 0.5
+            ? 4 * progress * progress * progress
+            : 1 - Math.pow(-2 * progress + 2, 3) / 2;
+    }
+
+    function step(currentTime) {
+        const elapsed = currentTime - startTime;
+        const progress = Math.min(elapsed / duration, 1);
+        const easedProgress = easeInOutCubic(progress);
+
+        window.scrollTo(0, startY * (1 - easedProgress));
+
+        if (progress < 1) {
+            window.requestAnimationFrame(step);
+        } else {
+            root.style.scrollBehavior = previousScrollBehavior;
+        }
+    }
+
+    window.requestAnimationFrame(step);
+}
 
 if (backToTop) {
     backToTop.addEventListener('click', () => {
-        window.scrollTo({
-            top: 0,
-            behavior: 'smooth'
-        });
+        smoothScrollToTop();
     });
 }
 
@@ -119,10 +152,23 @@ window.addEventListener('scroll', () => {
     if (!backToTop) {
         return;
     }
-    if (window.pageYOffset > 300) {
-        backToTop.style.opacity = '1';
+
+    if (!footer) {
+        if (window.pageYOffset > 300) {
+            backToTop.classList.add('is-visible');
+        } else {
+            backToTop.classList.remove('is-visible');
+        }
+        return;
+    }
+
+    const footerTop = footer.getBoundingClientRect().top;
+    const triggerPoint = window.innerHeight * 0.9;
+
+    if (footerTop <= triggerPoint) {
+        backToTop.classList.add('is-visible');
     } else {
-        backToTop.style.opacity = '0.7';
+        backToTop.classList.remove('is-visible');
     }
 });
 

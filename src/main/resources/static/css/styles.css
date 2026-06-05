@@ -2136,11 +2136,37 @@ ul {
   align-items: center;
   gap: 5px;
   color: var(--font-main-color);
-  transition: opacity 0.3s;
+  opacity: 0;
+  transform: translateY(12px);
+  pointer-events: none;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.back-to-top.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
 }
 
 .back-to-top:hover {
-  opacity: 0.8;
+  opacity: 0.9;
+  transform: translateY(-4px);
+  color: #222;
+}
+
+.back-to-top:hover svg path {
+  fill: #222;
+}
+
+.back-to-top:focus-visible {
+  outline: 3px solid #0b7fab;
+  outline-offset: 4px;
+  transform: translateY(-4px);
+  color: #222;
+}
+
+.back-to-top:focus-visible svg path {
+  fill: #222;
 }
 
 .back-to-top span {
