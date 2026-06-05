@@ -4,6 +4,28 @@ const mobileMenu = document.getElementById('mobileMenu');
 const closeBtn = document.getElementById('closeBtn');
 const mobileMenuOverlay = document.getElementById('mobileMenuOverlay');
 const mobileNavLinks = document.querySelectorAll('.mobile-nav a');
+const header = document.querySelector('.header');
+
+function getHeaderOffset() {
+    if (!header) {
+        return 80;
+    }
+    return header.offsetHeight + 16;
+}
+
+function scrollToAnchorTarget(target) {
+    if (!target) {
+        return;
+    }
+
+    const elementPosition = target.getBoundingClientRect().top;
+    const offsetPosition = elementPosition + window.pageYOffset - getHeaderOffset();
+
+    window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth'
+    });
+}
 
 function openMobileMenu() {
     mobileMenu.classList.add('active');
@@ -54,38 +76,66 @@ if (mobileMenuOverlay) {
 // Back to Top Button
 const backToTop = document.getElementById('backToTop');
 
-backToTop.addEventListener('click', () => {
-    window.scrollTo({
-        top: 0,
-        behavior: 'smooth'
+if (backToTop) {
+    backToTop.addEventListener('click', () => {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
     });
-});
+}
 
-// Smooth scrolling for all anchor links
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+// Smooth scrolling for same-page anchor links
+document.querySelectorAll('a[href^="#"], a[href^="/#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
+        const href = this.getAttribute('href');
+        if (!href) {
+            return;
+        }
+
+        let hash = href;
+        if (href.startsWith('/#')) {
+            if (window.location.pathname !== '/' && window.location.pathname !== '/index.html') {
+                return;
+            }
+            hash = href.substring(1);
+        }
+
+        if (!hash.startsWith('#')) {
+            return;
+        }
+
+        const target = document.querySelector(hash);
 
         if (target) {
-            const headerOffset = 80;
-            const elementPosition = target.getBoundingClientRect().top;
-            const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
-
-            window.scrollTo({
-                top: offsetPosition,
-                behavior: 'smooth'
-            });
+            e.preventDefault();
+            scrollToAnchorTarget(target);
         }
     });
 });
 
 // Show/hide back to top button based on scroll position
 window.addEventListener('scroll', () => {
+    if (!backToTop) {
+        return;
+    }
     if (window.pageYOffset > 300) {
         backToTop.style.opacity = '1';
     } else {
         backToTop.style.opacity = '0.7';
+    }
+});
+
+window.addEventListener('load', () => {
+    if (!window.location.hash) {
+        return;
+    }
+
+    const target = document.querySelector(window.location.hash);
+    if (target) {
+        window.setTimeout(() => {
+            scrollToAnchorTarget(target);
+        }, 50);
     }
 });
 
