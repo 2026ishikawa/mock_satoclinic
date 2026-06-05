@@ -3151,6 +3151,7 @@ h1 {
 
       .sc-news-main-grid {
         display: block;
+        width: 100%;
       }
 
       .sc-news-card {
@@ -4428,7 +4429,7 @@ body.sc-admin-login-page {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 60px;
+  gap: 45px;
   margin-top: 40px;
 }
 

@@ -40,4 +40,13 @@ class SatoclinicApplicationTests {
                 .andExpect(content().string(not(containsString("院内設備点検に伴う一時停電のお知らせ"))))
                 .andExpect(content().string(containsString("/news?category=urgent&amp;year=2025")));
     }
+
+    @Test
+    void topPageUsesSharedNewsDataSource() throws Exception {
+        mockMvc.perform(get("/"))
+                .andExpect(status().isOk())
+                .andExpect(content().string(containsString("インフルエンザ予防接種について")))
+                .andExpect(content().string(containsString("オンライン診療の導入について")))
+                .andExpect(content().string(not(containsString("感染症流行に伴う面会制限について"))));
+    }
 }

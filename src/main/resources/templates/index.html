@@ -112,13 +112,13 @@
           <div class="news-contentmlp-right">
             <!-- News Items -->
             <div class="news-items-new">
-              <div class="news-item-new">
+              <a class="news-item-new" href="#" th:each="article : ${homeNewsItems}" th:href="${article.href}">
                 <div class="news-item-content">
                   <div class="news-item-meta">
-                    <span class="news-date-new">2026.01.28</span>
-                    <span class="news-tag-new">お知らせ</span>
+                    <span class="news-date-new" th:text="${#temporals.format(article.date, 'yyyy.MM.dd')}">2026.01.28</span>
+                    <span class="news-tag-new" th:text="${article.categoryLabel}">お知らせ</span>
                   </div>
-                  <p class="news-title-new">インフルエンザ予防接種について</p>
+                  <p class="news-title-new" th:text="${article.title}">インフルエンザ予防接種について</p>
                 </div>
                 <div class="news-arrow">
                   <svg width="50" height="20" viewBox="0 0 50 20" fill="none">
@@ -128,79 +128,7 @@
                     />
                   </svg>
                 </div>
-              </div>
-
-              <div class="news-item-new">
-                <div class="news-item-content">
-                  <div class="news-item-meta">
-                    <span class="news-date-new">2026.01.28</span>
-                    <span class="news-tag-new">お知らせ</span>
-                  </div>
-                  <p class="news-title-new">年末年始の休診について</p>
-                </div>
-                <div class="news-arrow">
-                  <svg width="50" height="20" viewBox="0 0 50 20" fill="none">
-                    <path
-                      d="M10 9C9.44772 9 9 9.44772 9 10C9 10.5523 9.44772 11 10 11V10V9ZM40.7071 10.7071C41.0976 10.3166 41.0976 9.68342 40.7071 9.29289L34.3431 2.92893C33.9526 2.53841 33.3195 2.53841 32.9289 2.92893C32.5384 3.31946 32.5384 3.95262 32.9289 4.34315L38.5858 10L32.9289 15.6569C32.5384 16.0474 32.5384 16.6805 32.9289 17.0711C33.3195 17.4616 33.9526 17.4616 34.3431 17.0711L40.7071 10.7071ZM10 10V11H40V10V9H10V10Z"
-                      fill="#444"
-                    />
-                  </svg>
-                </div>
-              </div>
-
-              <div class="news-item-new">
-                <div class="news-item-content">
-                  <div class="news-item-meta">
-                    <span class="news-date-new">2026.01.28</span>
-                    <span class="news-tag-new">お知らせ</span>
-                  </div>
-                  <p class="news-title-new">健康診断のご案内</p>
-                </div>
-                <div class="news-arrow">
-                  <svg width="50" height="20" viewBox="0 0 50 20" fill="none">
-                    <path
-                      d="M10 9C9.44772 9 9 9.44772 9 10C9 10.5523 9.44772 11 10 11V10V9ZM40.7071 10.7071C41.0976 10.3166 41.0976 9.68342 40.7071 9.29289L34.3431 2.92893C33.9526 2.53841 33.3195 2.53841 32.9289 2.92893C32.5384 3.31946 32.5384 3.95262 32.9289 4.34315L38.5858 10L32.9289 15.6569C32.5384 16.0474 32.5384 16.6805 32.9289 17.0711C33.3195 17.4616 33.9526 17.4616 34.3431 17.0711L40.7071 10.7071ZM10 10V11H40V10V9H10V10Z"
-                      fill="black"
-                    />
-                  </svg>
-                </div>
-              </div>
-
-              <div class="news-item-new">
-                <div class="news-item-content">
-                  <div class="news-item-meta">
-                    <span class="news-date-new">2026.01.28</span>
-                    <span class="news-tag-new">お知らせ</span>
-                  </div>
-                  <p class="news-title-new">新型コロナウイルス対策について</p>
-                </div>
-                <div class="news-arrow">
-                  <svg width="50" height="20" viewBox="0 0 50 20" fill="none">
-                    <path
-                      d="M10 9C9.44772 9 9 9.44772 9 10C9 10.5523 9.44772 11 10 11V10V9ZM40.7071 10.7071C41.0976 10.3166 41.0976 9.68342 40.7071 9.29289L34.3431 2.92893C33.9526 2.53841 33.3195 2.53841 32.9289 2.92893C32.5384 3.31946 32.5384 3.95262 32.9289 4.34315L38.5858 10L32.9289 15.6569C32.5384 16.0474 32.5384 16.6805 32.9289 17.0711C33.3195 17.4616 33.9526 17.4616 34.3431 17.0711L40.7071 10.7071ZM10 10V11H40V10V9H10V10Z"
-                      fill="black"
-                    />
-                  </svg>
-                </div>
-              </div>
-
-              <div class="news-item-new">
-                <div class="news-item-content">
-                  <div class="news-item-meta">
-                    <span class="news-date-new">2026.01.28</span>
-                    <span class="news-tag-new">お知らせ</span>
-                  </div>
-                  <p class="news-title-new">オンライン診療の導入について</p>
-                </div>
-                <div class="news-arrow">
-                  <svg width="50" height="20" viewBox="0 0 50 20" fill="none">
-                    <path
-                      d="M10 9C9.44772 9 9 9.44772 9 10C9 10.5523 9.44772 11 10 11V10V9ZM40.7071 10.7071C41.0976 10.3166 41.0976 9.68342 40.7071 9.29289L34.3431 2.92893C33.9526 2.53841 33.3195 2.53841 32.9289 2.92893C32.5384 3.31946 32.5384 3.95262 32.9289 4.34315L38.5858 10L32.9289 15.6569C32.5384 16.0474 32.5384 16.6805 32.9289 17.0711C33.3195 17.4616 33.9526 17.4616 34.3431 17.0711L40.7071 10.7071ZM10 10V11H40V10V9H10V10Z"
-                      fill="black"
-                    />
-                  </svg>
-                </div>
-              </div>
+              </a>
             </div>
 
             <!-- News List Button -->
