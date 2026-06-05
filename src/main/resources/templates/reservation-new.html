@@ -14,8 +14,8 @@
     />
   </head>
 <body>
-    <th:block th:replace="~{fragments/layout :: siteHeader(headerLogoHref=@{/})}"></th:block>
-    <th:block th:replace="~{fragments/layout :: mobileMenu(topMenuHref=@{/})}"></th:block>
+    <th:block th:replace="~{fragments/layout :: siteHeader(headerLogoHref=@{/}, currentPage='')}"></th:block>
+    <th:block th:replace="~{fragments/layout :: mobileMenu(topMenuHref=@{/}, currentPage='')}"></th:block>
 
     <main class="sc-resv-page faq-page">
       <div class="sc-resv-page-hero-wrap faq-hero-wrapper">

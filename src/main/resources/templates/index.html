@@ -15,8 +15,8 @@
     <link href="https://googleapis.com/css2?family=Fredoka:wght@300..700&display=swap" rel="stylesheet">
   </head>
   <body>
-    <th:block th:replace="~{fragments/layout :: siteHeader(headerLogoHref=@{/#top})}"></th:block>
-    <th:block th:replace="~{fragments/layout :: mobileMenu(topMenuHref=@{/#top})}"></th:block>
+    <th:block th:replace="~{fragments/layout :: siteHeader(headerLogoHref=@{/#top}, currentPage='')}"></th:block>
+    <th:block th:replace="~{fragments/layout :: mobileMenu(topMenuHref=@{/#top}, currentPage='')}"></th:block>
 
     <!-- Hero Section -->
     <section class="hero" id="top">

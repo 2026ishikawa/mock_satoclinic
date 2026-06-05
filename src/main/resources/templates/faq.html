@@ -15,8 +15,8 @@
     <link href="https://googleapis.com/css2?family=Fredoka:wght@300..700&display=swap" rel="stylesheet">
   </head>
   <body>
-    <th:block th:replace="~{fragments/layout :: siteHeader(headerLogoHref=@{/})}"></th:block>
-    <th:block th:replace="~{fragments/layout :: mobileMenu(topMenuHref=@{/})}"></th:block>
+    <th:block th:replace="~{fragments/layout :: siteHeader(headerLogoHref=@{/}, currentPage='faq')}"></th:block>
+    <th:block th:replace="~{fragments/layout :: mobileMenu(topMenuHref=@{/}, currentPage='faq')}"></th:block>
 
 
   <main class="faq-page">
