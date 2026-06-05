@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+  <body>
+    <header class="header" th:fragment="siteHeader(headerLogoHref)">
+      <div class="header-container">
+        <a href="/" th:href="${headerLogoHref}">
+          <img
+            src="/images/Logo.png"
+            th:src="@{/images/Logo.png}"
+            alt="logo"
+            width="200"
+            height="auto"
+            class="logo"
+          />
+        </a>
+        <div class="desktop-navi">
+          <div class="navi-area">
+            <div class="nav-top">
+              <a href="/#schedule" th:href="@{/#schedule}" class="nav-top-item">
+                <img
+                  src="/images/Header/icon_schedule.png"
+                  th:src="@{/images/Header/icon_schedule.png}"
+                  alt="診療時間のアイコン"
+                  width="22"
+                  height="22"
+                />
+                <span>診療時間</span>
+              </a>
+              <a href="/#access" th:href="@{/#access}" class="nav-top-item">
+                <div class="map-marker-icon"></div>
+                <span>アクセス</span>
+              </a>
+              <a href="/faq" th:href="@{/faq}" class="nav-top-item">
+                <img
+                  src="/images/Header/icon_faq.png"
+                  th:src="@{/images/Header/icon_faq.png}"
+                  alt="？"
+                  width="20"
+                  height="20"
+                />
+                <span>よくある質問</span>
+              </a>
+            </div>
+
+            <div class="nav-main">
+              <a href="/#about" th:href="@{/#about}">当院について</a>
+              <a href="/#director" th:href="@{/#director}">院長挨拶</a>
+              <a href="/medical-info" th:href="@{/medical-info}">診療案内</a>
+              <a href="/news" th:href="@{/news}">お知らせ</a>
+            </div>
+          </div>
+
+          <div class="header-actions">
+            <a href="tel:0123-456-789" class="header-tel-btn">
+              <img
+                src="/images/Header/icon_phone_wh.png"
+                th:src="@{/images/Header/icon_phone_wh.png}"
+                alt=""
+                width="18"
+                height="18"
+              />
+              <span>0123-456-789</span>
+            </a>
+            <a href="/reservations/new" th:href="@{/reservations/new}" class="header-reserve-btn">Web予約</a>
+          </div>
+        </div>
+
+        <button class="hamburger" id="hamburger" aria-label="メニュー">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </header>
+
+    <th:block th:fragment="mobileMenu(topMenuHref)">
+      <div class="mobile-menu" id="mobileMenu">
+        <div class="mobile-menu-header">
+          <div class="logo"></div>
+          <button class="close-btn" id="closeBtn" aria-label="閉じる">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+              <path
+                d="M18 6L6 18"
+                stroke="black"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+              <path
+                d="M6 6L18 18"
+                stroke="black"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+          </button>
+        </div>
+        <nav class="mobile-nav">
+          <ul>
+            <li><a href="/" th:href="${topMenuHref}">トップ</a></li>
+            <li><a href="/#about" th:href="@{/#about}">当院について</a></li>
+            <li><a href="/#director" th:href="@{/#director}">院長挨拶</a></li>
+            <li><a href="/medical-info" th:href="@{/medical-info}">診療案内</a></li>
+            <li><a href="/news" th:href="@{/news}">お知らせ</a></li>
+            <li><a href="/#access" th:href="@{/#access}">診療時間・アクセス</a></li>
+            <li><a href="/faq" th:href="@{/faq}">よくある質問</a></li>
+          </ul>
+        </nav>
+        <div class="mobile-menu-actions">
+          <a href="tel:0123-456-789" class="tel-btn">
+            <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
+              <path
+                d="M21.9993 16.4712V19.7831C22.0006 20.0906 21.9375 20.3949 21.814 20.6766C21.6906 20.9583 21.5096 21.2112 21.2826 21.419C21.0556 21.6269 20.7876 21.7851 20.4958 21.8836C20.2039 21.9821 19.8947 22.0187 19.5879 21.991C16.1841 21.6219 12.9145 20.4611 10.0418 18.6019C7.36914 16.9069 5.10319 14.6455 3.40487 11.9781C1.53545 9.09809 0.372066 5.81909 0.00897833 2.40675C-0.0186639 2.10146 0.0176892 1.79378 0.115723 1.50329C0.213756 1.2128 0.371322 0.94586 0.578389 0.719472C0.785455 0.493085 1.03749 0.312208 1.31843 0.188357C1.59938 0.0645062 1.90309 0.000395695 2.21023 0.000107032H5.52869C6.06551 -0.00516598 6.58594 0.184556 6.99297 0.533909C7.4 0.883262 7.66586 1.36841 7.74099 1.89892C7.88106 2.9588 8.14081 3.99946 8.5153 5.00106C8.66413 5.39619 8.69634 5.82562 8.60812 6.23847C8.51989 6.65131 8.31494 7.03026 8.01753 7.33042L6.61272 8.73245C8.18739 11.4963 10.4803 13.7847 13.2496 15.3562L14.6545 13.9542C14.9552 13.6574 15.3349 13.4528 15.7486 13.3648C16.1622 13.2767 16.5925 13.3089 16.9884 13.4574C17.992 13.8312 19.0348 14.0904 20.0967 14.2302C20.6341 14.3058 21.1248 14.576 21.4756 14.9892C21.8264 15.4024 22.0128 15.9298 21.9993 16.4712Z"
+                fill="white"
+              />
+            </svg>
+            <span>0123-456-789</span>
+          </a>
+          <a href="/reservations/new" th:href="@{/reservations/new}" class="reservation-btn">Webで予約する</a>
+        </div>
+      </div>
+      <div class="mobile-menu-overlay" id="mobileMenuOverlay" aria-hidden="true"></div>
+    </th:block>
+
+    <footer class="footer" th:fragment="siteFooter(footerLogoHref)">
+      <div class="footer-container">
+        <div class="footer-content">
+          <div class="footer-logo">
+            <a href="/" th:href="${footerLogoHref}">
+              <img
+                src="/images/Logo.png"
+                th:src="@{/images/Logo.png}"
+                alt="ロゴ"
+                width="220"
+                height="70"
+              />
+            </a>
+          </div>
+          <div class="footer-info">
+            <p class="postal-code">〒000-0000</p>
+            <p class="address">東京都台東区上野0 丁目 0 - 0</p>
+          </div>
+        </div>
+        <button class="back-to-top" id="backToTop" aria-label="ページ上部へ戻る">
+          <span>TOP</span>
+          <svg width="12" height="56" viewBox="0 0 12 56" fill="none">
+            <path
+              d="M1.4502 0.0255165C1.83339 -0.054681 2.24841 0.054198 2.5459 0.351688L11.6484 9.45423C12.1171 9.92287 12.1171 10.6828 11.6484 11.1515C11.1798 11.62 10.4198 11.6201 9.95117 11.1515L2.40039 3.59974V54.0011C2.40039 54.6638 1.86286 55.2012 1.2002 55.2013C0.537433 55.2013 -2.89702e-08 54.6639 0 54.0011V1.19934C0.000189083 0.536743 0.53755 0.000125872 1.2002 0.000125901C1.28591 0.000141025 1.36957 0.00842028 1.4502 0.0255165Z"
+              fill="#444"
+            />
+          </svg>
+        </button>
+        <div class="footer-bottom">
+          <p>&copy; 2026 佐藤医院 All rights reserved.</p>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
