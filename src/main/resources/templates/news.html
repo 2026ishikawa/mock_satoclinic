@@ -35,7 +35,11 @@
         <div class="sc-news-container sc-news-breadcrumb__inner">
           <a href="/" th:href="@{/}">ホーム</a>
           <span>&gt;</span>
-          <span>お知らせ</span>
+          <a href="/news" th:href="@{/news}">お知らせ</a>
+          <span th:if="${currentCategory != 'all'}">&gt;</span>
+          <span th:if="${currentCategory != 'all'}" th:text="${currentCategoryLabel}">お知らせ</span>
+          <span th:if="${currentArchiveYear != null}">&gt;</span>
+          <span th:if="${currentArchiveYear != null}" th:text="${currentArchiveLabel}">2026年</span>
         </div>
       </div>
 
@@ -43,68 +47,32 @@
         <div class="sc-news-container sc-news-main-grid">
           <div>
             <div class="sc-news-list">
-              <a class="sc-news-card" href="#">
+              <a class="sc-news-card" href="#" th:each="article : ${newsItems}" th:href="${article.href}">
                 <div class="sc-news-card__meta">
-                  <time class="sc-news-card__date" datetime="2026-01-28">2026.01.28</time>
-                  <span class="sc-news-card__tag">お知らせ</span>
+                  <time class="sc-news-card__date" th:attr="datetime=${article.date}" th:text="${#temporals.format(article.date, 'yyyy.MM.dd')}">2026.01.28</time>
+                  <span class="sc-news-card__tag" th:text="${article.categoryLabel}">お知らせ</span>
                 </div>
                 <div class="sc-news-card__main">
-                  <span class="sc-news-card__title">インフルエンザ予防接種について</span>
+                  <span class="sc-news-card__title" th:text="${article.title}">お知らせタイトル</span>
                   <span class="sc-news-card__arrow" aria-hidden="true">→</span>
-                </div>
-              </a>
-              <a class="sc-news-card" href="#">
-                <div class="sc-news-card__meta">
-                  <time class="sc-news-card__date" datetime="2026-01-28">2026.01.28</time>
-                  <span class="sc-news-card__tag">お知らせ</span>
-                </div>
-                <div class="sc-news-card__main">
-                  <span class="sc-news-card__title">年末年始の休診について</span>
-                  <span class="sc-news-card__arrow" aria-hidden="true">→</span>
-                </div>
-              </a>
-              <a class="sc-news-card" href="#">
-                <div class="sc-news-card__meta">
-                  <time class="sc-news-card__date" datetime="2026-01-28">2026.01.28</time>
-                  <span class="sc-news-card__tag">お知らせ</span>
-                </div>
-                <div class="sc-news-card__main">
-                  <span class="sc-news-card__title">健康診断のご案内</span>
-                  <span class="sc-news-card__arrow" aria-hidden="true">→</span>
-                </div>
-              </a>
-              <a class="sc-news-card" href="#">
-                <div class="sc-news-card__meta">
-                  <time class="sc-news-card__date" datetime="2026-01-28">2026.01.28</time>
-                  <span class="sc-news-card__tag">お知らせ</span>
-                </div>
-                <div class="sc-news-card__main">
-                  <span class="sc-news-card__title">新型コロナウイルス対策について</span>
-                  <span class="sc-news-card__arrow" aria-hidden="true">→</span>
-                </div>
-              </a>
-              <a class="sc-news-card" href="#">
-                <div class="sc-news-card__meta">
-                  <time class="sc-news-card__date" datetime="2026-01-28">2026.01.28</time>
-                  <span class="sc-news-card__tag">お知らせ</span>
-                </div>
-                <div class="sc-news-card__main">
-                <span class="sc-news-card__title">オンライン診療の導入について</span>
-                <span class="sc-news-card__arrow" aria-hidden="true">→</span>
                 </div>
               </a>
             </div>
+            <p th:if="${#lists.isEmpty(newsItems)}">条件に一致するお知らせはありません。</p>
 
             <nav class="sc-news-pagination" aria-label="ページネーション">
-              <a class="sc-news-pagination__nav is-disabled" href="#" aria-label="前のページ" aria-disabled="true">前へ</a>
+              <a class="sc-news-pagination__nav" th:if="${hasPreviousPage}" th:href="${previousPageHref}" href="#" aria-label="前のページ">前へ</a>
+              <span class="sc-news-pagination__nav is-disabled" th:unless="${hasPreviousPage}" aria-disabled="true">前へ</span>
 
               <div class="sc-news-pagination__pages">
-                <span class="sc-news-pagination__num is-active" aria-current="page">1</span>
-                <a class="sc-news-pagination__num" href="/news-page2" th:href="@{/news-page2}">2</a>
-                <a class="sc-news-pagination__num" href="/news-page3" th:href="@{/news-page3}">3</a>
+                <th:block th:each="pageLink : ${pageLinks}">
+                  <a class="sc-news-pagination__num" th:if="${!pageLink.active}" th:href="${pageLink.href}" href="#" th:text="${pageLink.page}">1</a>
+                  <span class="sc-news-pagination__num is-active" th:if="${pageLink.active}" aria-current="page" th:text="${pageLink.page}">1</span>
+                </th:block>
               </div>
 
-              <a class="sc-news-pagination__nav" href="/news-page2" th:href="@{/news-page2}" aria-label="次のページ">次へ</a>
+              <a class="sc-news-pagination__nav" th:if="${hasNextPage}" th:href="${nextPageHref}" href="#" aria-label="次のページ">次へ</a>
+              <span class="sc-news-pagination__nav is-disabled" th:unless="${hasNextPage}" aria-disabled="true">次へ</span>
             </nav>
           </div>
 
@@ -112,19 +80,24 @@
             <section class="sc-news-side-block">
               <h2 class="sc-news-side-block__title">カテゴリ</h2>
               <ul class="sc-news-side-list">
-                <li><a href="#">お知らせ</a></li>
-                <li><a href="#">緊急</a></li>
-                <li><a href="#">休診</a></li>
-                <li><a href="#">コラム</a></li>
+                <li th:each="category : ${categoryOptions}">
+                  <a href="#" th:href="${category.href}" th:classappend="${category.current} ? ' is-current' : ''">
+                    <span th:text="${category.label}">お知らせ</span>
+                    <span th:text="${'(' + category.count + ')'}">(0)</span>
+                  </a>
+                </li>
               </ul>
             </section>
 
             <section class="sc-news-side-block">
               <h2 class="sc-news-side-block__title">アーカイブ</h2>
               <ul class="sc-news-side-list">
-                <li><a href="#">2026年(5)</a></li>
-                <li><a href="#">2025年(0)</a></li>
-                <li><a href="#">2024年(0)</a></li>
+                <li th:each="archive : ${archiveOptions}">
+                  <a href="#" th:href="${archive.href}" th:classappend="${archive.current} ? ' is-current' : ''">
+                    <span th:text="${archive.label}">2026年</span>
+                    <span th:text="${'(' + archive.count + ')'}">(0)</span>
+                  </a>
+                </li>
               </ul>
             </section>
           </aside>

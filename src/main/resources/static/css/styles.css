@@ -3023,11 +3023,26 @@ h1 {
     }
 
     .sc-news-side-list a {
-      transition: .3s;
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      align-items: center;
+      width: 100%;
+      color: var(--font-main-color);
+      transition: color 0.3s, opacity 0.3s;
     }
 
     .sc-news-side-list a:hover {
       opacity: 0.8;
+    }
+
+    .sc-news-side-list a.is-current {
+      color: var(--color-deep-green);
+      font-weight: 700;
+    }
+
+    .sc-news-side-list a.is-current:hover {
+      opacity: 1;
     }
 
 
