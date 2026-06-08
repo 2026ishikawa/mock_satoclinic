@@ -2244,6 +2244,7 @@ ul {
 .nav-main a:hover,
 .mobile-nav a:hover {
   text-decoration: none;
+  color: var(--color-deep-green);
 }
 
 .nav-main a::after,
@@ -3797,6 +3798,12 @@ h1 {
   padding: 12px 40px;
   font-weight: 700;
   cursor: pointer;
+}
+
+.sc-resv-form-submit:disabled {
+  background: #9eb7c3;
+  cursor: not-allowed;
+  opacity: 0.7;
 }
 /* Reservation progress bar */
 .sc-resv-progress {

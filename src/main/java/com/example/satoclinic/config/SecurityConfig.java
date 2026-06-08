@@ -47,6 +47,10 @@ public class SecurityConfig {
                 .logout(logout -> logout
                         .logoutUrl("/admin/logout")
                         .logoutSuccessUrl("/admin/login?logout"))
+                .exceptionHandling(exceptions -> exceptions
+                        .accessDeniedPage("/admin/login?forbidden"))
+                .sessionManagement(session -> session
+                        .invalidSessionUrl("/admin/login?expired"))
                 .csrf(csrf -> csrf
                         .ignoringRequestMatchers("/h2-console/**"))
                 .headers(headers -> headers.frameOptions(frame -> frame.sameOrigin()))

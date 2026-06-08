@@ -156,13 +156,20 @@
 
               <label>個人情報同意<span class="sc-resv-form-required">*</span></label>
               <div>
-                <label><input th:field="*{agreedToPrivacyPolicy}" type="checkbox" /> 個人情報の取り扱いに同意します。</label>
+                <label><input id="agreedToPrivacyPolicy" th:field="*{agreedToPrivacyPolicy}" type="checkbox" /> 個人情報の取り扱いに同意します。</label>
                 <div th:errors="*{agreedToPrivacyPolicy}" class="sc-resv-form-field-error"></div>
               </div>
             </div>
 
             <div class="sc-resv-form-actions">
-              <button type="submit" class="sc-resv-form-submit">入力内容を確認する</button>
+              <button
+                id="reservationConfirmButton"
+                type="submit"
+                class="sc-resv-form-submit"
+                th:disabled="${!reservationForm.agreedToPrivacyPolicy}"
+              >
+                入力内容を確認する
+              </button>
             </div>
           </form>
         </div>
@@ -282,5 +289,22 @@
     <th:block th:replace="~{fragments/layout :: siteFooter(footerLogoHref=@{/})}"></th:block>
 
     <script src="/js/script.js" th:src="@{/js/script.js}"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const privacyCheckbox = document.getElementById("agreedToPrivacyPolicy");
+        const confirmButton = document.getElementById("reservationConfirmButton");
+
+        if (!privacyCheckbox || !confirmButton) {
+          return;
+        }
+
+        const syncConfirmButton = function () {
+          confirmButton.disabled = !privacyCheckbox.checked;
+        };
+
+        syncConfirmButton();
+        privacyCheckbox.addEventListener("change", syncConfirmButton);
+      });
+    </script>
   </body>
 </html>

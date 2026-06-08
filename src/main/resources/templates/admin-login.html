@@ -19,6 +19,8 @@
 
         <p th:if="${hasError}" class="sc-admin-login-alert is-error">ユーザー名またはパスワードが正しくありません。</p>
         <p th:if="${loggedOut}" class="sc-admin-login-alert is-success">ログアウトしました。</p>
+        <p th:if="${accessDenied}" class="sc-admin-login-alert is-error">操作の有効期限が切れたか、アクセス権がありません。もう一度ログインしてください。</p>
+        <p th:if="${sessionExpired}" class="sc-admin-login-alert is-error">セッションの有効期限が切れました。もう一度ログインしてください。</p>
 
         <form th:action="@{/admin/login}" method="post" class="sc-admin-login-form">
           <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />

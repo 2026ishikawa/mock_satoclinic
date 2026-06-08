@@ -79,9 +79,13 @@ public class PageController {
     public String adminLogin(
             @RequestParam(value = "error", required = false) String error,
             @RequestParam(value = "logout", required = false) String logout,
+            @RequestParam(value = "forbidden", required = false) String forbidden,
+            @RequestParam(value = "expired", required = false) String expired,
             Model model) {
         model.addAttribute("hasError", error != null);
         model.addAttribute("loggedOut", logout != null);
+        model.addAttribute("accessDenied", forbidden != null);
+        model.addAttribute("sessionExpired", expired != null);
         return "admin-login";
     }
 }
