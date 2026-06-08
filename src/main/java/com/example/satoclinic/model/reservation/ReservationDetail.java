@@ -8,6 +8,7 @@ public class ReservationDetail {
 
     private Long id;
     private String reservationCode;
+    private Long reservationSlotId;
     private String patientName;
     private String patientKana;
     private LocalDate birthDate;
@@ -38,6 +39,14 @@ public class ReservationDetail {
 
     public void setReservationCode(String reservationCode) {
         this.reservationCode = reservationCode;
+    }
+
+    public Long getReservationSlotId() {
+        return reservationSlotId;
+    }
+
+    public void setReservationSlotId(Long reservationSlotId) {
+        this.reservationSlotId = reservationSlotId;
     }
 
     public String getPatientName() {

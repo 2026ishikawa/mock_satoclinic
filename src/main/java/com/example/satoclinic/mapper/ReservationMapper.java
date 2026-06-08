@@ -49,7 +49,7 @@ public interface ReservationMapper {
                 AND r.reservation_code LIKE CONCAT('%', #{reservationCode}, '%')
               </if>
               <if test="phoneNumber != null and phoneNumber != ''">
-                AND REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(r.phone_number, '-', ''), ' ', ''), '縲', ''), '(', ''), ')', '') LIKE CONCAT('%', #{phoneNumber}, '%')
+                AND REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(r.phone_number, '-', ''), ' ', ''), '　', ''), '(', ''), ')', '') LIKE CONCAT('%', #{phoneNumber}, '%')
               </if>
             </where>
             ORDER BY rs.slot_date ASC, rs.start_time ASC, r.created_at ASC, r.id ASC
@@ -85,15 +85,47 @@ public interface ReservationMapper {
             SELECT COUNT(*)
             FROM reservations
             WHERE reservation_slot_id = #{reservationSlotId}
-              AND REPLACE(REPLACE(TRIM(patient_name), ' ', ''), '縲', '') = #{patientName}
-              AND REPLACE(REPLACE(TRIM(patient_kana), ' ', ''), '縲', '') = #{patientKana}
+              AND id <> #{reservationId}
+              AND status = 'RESERVED'
+              AND deleted_at IS NULL
+            """)
+    int countReservedBySlotIdExcludingReservation(
+            @Param("reservationSlotId") Long reservationSlotId,
+            @Param("reservationId") Long reservationId);
+
+    @Select("""
+            SELECT COUNT(*)
+            FROM reservations
+            WHERE reservation_slot_id = #{reservationSlotId}
+              AND REPLACE(REPLACE(TRIM(patient_name), ' ', ''), '　', '') = #{patientName}
+              AND REPLACE(REPLACE(TRIM(patient_kana), ' ', ''), '　', '') = #{patientKana}
               AND birth_date = #{birthDate}
-              AND REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(phone_number, '-', ''), ' ', ''), '縲', ''), '(', ''), ')', '') = #{phoneNumber}
+              AND REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(phone_number, '-', ''), ' ', ''), '　', ''), '(', ''), ')', '') = #{phoneNumber}
               AND status = 'RESERVED'
               AND deleted_at IS NULL
             """)
     int countDuplicateReservedReservation(
             @Param("reservationSlotId") Long reservationSlotId,
+            @Param("patientName") String patientName,
+            @Param("patientKana") String patientKana,
+            @Param("birthDate") LocalDate birthDate,
+            @Param("phoneNumber") String phoneNumber);
+
+    @Select("""
+            SELECT COUNT(*)
+            FROM reservations
+            WHERE reservation_slot_id = #{reservationSlotId}
+              AND id <> #{reservationId}
+              AND REPLACE(REPLACE(TRIM(patient_name), ' ', ''), '　', '') = #{patientName}
+              AND REPLACE(REPLACE(TRIM(patient_kana), ' ', ''), '　', '') = #{patientKana}
+              AND birth_date = #{birthDate}
+              AND REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(phone_number, '-', ''), ' ', ''), '　', ''), '(', ''), ')', '') = #{phoneNumber}
+              AND status = 'RESERVED'
+              AND deleted_at IS NULL
+            """)
+    int countDuplicateReservedReservationExcludingReservation(
+            @Param("reservationSlotId") Long reservationSlotId,
+            @Param("reservationId") Long reservationId,
             @Param("patientName") String patientName,
             @Param("patientKana") String patientKana,
             @Param("birthDate") LocalDate birthDate,
@@ -136,6 +168,7 @@ public interface ReservationMapper {
             SELECT
               r.id,
               r.reservation_code,
+              r.reservation_slot_id,
               r.patient_name,
               r.patient_kana,
               r.birth_date,
@@ -164,6 +197,7 @@ public interface ReservationMapper {
             SELECT
               r.id,
               r.reservation_code,
+              r.reservation_slot_id,
               r.patient_name,
               r.patient_kana,
               r.birth_date,
@@ -189,6 +223,31 @@ public interface ReservationMapper {
             </script>
             """)
     ReservationDetail findDetailById(@Param("id") Long id, @Param("includeDeleted") boolean includeDeleted);
+
+    @Select("""
+            SELECT
+              id,
+              reservation_code,
+              reservation_slot_id,
+              patient_name,
+              patient_kana,
+              birth_date,
+              phone_number,
+              email,
+              visit_type,
+              symptom,
+              status,
+              agreed_to_privacy_policy,
+              deleted_at,
+              deleted_by,
+              delete_reason,
+              created_at,
+              updated_at
+            FROM reservations
+            WHERE id = #{id}
+            FOR UPDATE
+            """)
+    Reservation lockById(@Param("id") Long id);
 
     @Update("""
             UPDATE reservations
@@ -221,6 +280,18 @@ public interface ReservationMapper {
               AND deleted_at IS NULL
             """)
     int restoreReservedById(@Param("id") Long id);
+
+    @Update("""
+            UPDATE reservations
+            SET reservation_slot_id = #{reservationSlotId},
+                updated_at = CURRENT_TIMESTAMP
+            WHERE id = #{id}
+              AND status = 'RESERVED'
+              AND deleted_at IS NULL
+            """)
+    int updateReservationSlotById(
+            @Param("id") Long id,
+            @Param("reservationSlotId") Long reservationSlotId);
 
     @Update("""
             UPDATE reservations

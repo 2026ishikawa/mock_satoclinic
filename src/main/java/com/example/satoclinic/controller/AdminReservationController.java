@@ -71,6 +71,21 @@ public class AdminReservationController {
         return "admin-reservation-detail";
     }
 
+    @PostMapping("/{id}/reschedule")
+    public String reschedule(
+            @PathVariable("id") Long id,
+            @RequestParam("reservationDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate reservationDate,
+            @RequestParam("reservationTime") String reservationTime,
+            RedirectAttributes redirectAttributes) {
+        try {
+            adminReservationService.reschedule(id, reservationDate, reservationTime);
+            redirectAttributes.addFlashAttribute("message", "予約日時を変更しました。");
+        } catch (IllegalStateException exception) {
+            redirectAttributes.addFlashAttribute("message", exception.getMessage());
+        }
+        return "redirect:/admin/reservations/" + id;
+    }
+
     @PostMapping("/{id}/cancel")
     public String cancel(
             @PathVariable("id") Long id,

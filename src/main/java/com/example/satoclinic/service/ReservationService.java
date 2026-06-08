@@ -21,16 +21,21 @@ public class ReservationService {
 
     private final ReservationMapper reservationMapper;
     private final ReservationSlotMapper reservationSlotMapper;
+    private final ReservationSlotService reservationSlotService;
 
-    public ReservationService(ReservationMapper reservationMapper, ReservationSlotMapper reservationSlotMapper) {
+    public ReservationService(
+            ReservationMapper reservationMapper,
+            ReservationSlotMapper reservationSlotMapper,
+            ReservationSlotService reservationSlotService) {
         this.reservationMapper = reservationMapper;
         this.reservationSlotMapper = reservationSlotMapper;
+        this.reservationSlotService = reservationSlotService;
     }
 
     @Transactional
     public String register(ReservationForm form) {
         LocalTime startTime = LocalTime.parse(form.getReservationTime());
-        validateBusinessRules(form.getReservationDate(), startTime);
+        reservationSlotService.validateReservationDateTime(form.getReservationDate(), startTime);
         ReservationSlot reservationSlot = reservationSlotMapper.lockActiveSlotByDateAndStartTime(
                 form.getReservationDate(), startTime);
 
@@ -40,7 +45,7 @@ public class ReservationService {
 
         int reservedCount = reservationMapper.countReservedBySlotId(reservationSlot.getId());
         if (reservedCount >= reservationSlot.getCapacity()) {
-            throw new IllegalStateException("この時間帯は満席になりました。別の時間を選択してください。");
+            throw new IllegalStateException("この時間帯は満員です。別の時間を選択してください。");
         }
 
         String normalizedPatientName = normalizeName(form.getPatientName());
@@ -54,7 +59,7 @@ public class ReservationService {
                 form.getBirthDate(),
                 normalizedPhoneNumber);
         if (duplicateCount > 0) {
-            throw new IllegalStateException("同じ時間帯に同一患者の予約が既に登録されています。");
+            throw new IllegalStateException("同じ時間帯に同一患者の予約がすでに入っています。");
         }
 
         String reservationCode = generateReservationCode(reservationSlot.getSlotDate());
@@ -83,23 +88,6 @@ public class ReservationService {
     private String generateReservationCode(LocalDate reservationDate) {
         int nextSequence = reservationMapper.findMaxSequenceBySlotDate(reservationDate) + 1;
         return "R" + reservationDate.format(RESERVATION_CODE_DATE) + String.format("%04d", nextSequence);
-    }
-
-    private void validateBusinessRules(LocalDate reservationDate, LocalTime startTime) {
-        if (reservationDate == null || startTime == null) {
-            return;
-        }
-        switch (reservationDate.getDayOfWeek()) {
-            case THURSDAY -> throw new IllegalStateException("木曜日は休診のため予約できません。");
-            case SUNDAY -> throw new IllegalStateException("日曜日は休診のため予約できません。");
-            case SATURDAY -> {
-                if (!startTime.isBefore(LocalTime.of(14, 0))) {
-                    throw new IllegalStateException("土曜日は午後の予約を受け付けていません。");
-                }
-            }
-            default -> {
-            }
-        }
     }
 
     private String normalizeName(String value) {

@@ -17,6 +17,51 @@
     <div
       th:if="${reservation != null and !reservation.deleted and reservation.status == 'RESERVED'}"
       class="sc-admin-reservations-modal-backdrop is-hidden"
+      id="rescheduleModal"
+      onclick="closeRescheduleModal()"
+    >
+      <div class="sc-admin-reservations-modal" onclick="event.stopPropagation()">
+        <div class="sc-admin-reservations-modal-header">
+          <h2 class="sc-admin-reservations-modal-title">予約日時を変更</h2>
+          <button type="button" class="sc-admin-reservations-modal-close" aria-label="モーダルを閉じる" onclick="closeRescheduleModal()">×</button>
+        </div>
+        <p class="sc-admin-reservations-modal-note" id="rescheduleRestrictionMessage"></p>
+        <form
+          th:action="@{/admin/reservations/{id}/reschedule(id=${reservation.id})}"
+          method="post"
+          class="sc-admin-reservations-modal-form"
+          id="rescheduleForm"
+          th:attr="data-current-date=${reservation.reservationDate},data-current-time=${#temporals.format(reservation.reservationTime, 'HH:mm')}"
+        >
+          <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+          <label class="sc-admin-reservations-inline-label">
+            予約日
+            <input
+              type="date"
+              id="rescheduleDate"
+              name="reservationDate"
+              th:value="${reservation.reservationDate}"
+              required
+            />
+          </label>
+          <label class="sc-admin-reservations-inline-label">
+            予約時間
+            <select id="rescheduleTime" name="reservationTime" class="sc-admin-reservations-inline-select" required>
+              <option th:value="${#temporals.format(reservation.reservationTime, 'HH:mm')}" th:text="${#temporals.format(reservation.reservationTime, 'HH:mm')} + '（現在）'"></option>
+            </select>
+          </label>
+          <p class="sc-admin-reservations-modal-help" id="rescheduleTimeHelp">日付を選ぶと空いている時間帯を読み込みます。</p>
+          <div class="sc-admin-reservations-modal-actions">
+            <button type="button" class="sc-admin-reservations-reset" onclick="closeRescheduleModal()">閉じる</button>
+            <button type="submit" class="sc-admin-reservations-reschedule" id="rescheduleSubmitButton">変更を確定する</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <div
+      th:if="${reservation != null and !reservation.deleted and reservation.status == 'RESERVED'}"
+      class="sc-admin-reservations-modal-backdrop is-hidden"
       id="cancelReasonModal"
       onclick="closeCancelReasonModal()"
     >
@@ -105,7 +150,7 @@
             <tr><th>メールアドレス</th><td th:text="${reservation.email}"></td></tr>
             <tr><th>初診/再診</th><td th:text="${reservation.visitType == 'FIRST' ? '初診' : '再診'}"></td></tr>
             <tr><th>予約日</th><td th:text="${reservation.reservationDate}"></td></tr>
-            <tr><th>予約時間</th><td th:text="${reservation.reservationTime}"></td></tr>
+            <tr><th>予約時間</th><td th:text="${#temporals.format(reservation.reservationTime, 'HH:mm')}"></td></tr>
             <tr><th>症状</th><td th:text="${reservation.symptom}"></td></tr>
             <tr>
               <th>状態</th>
@@ -136,44 +181,78 @@
           </tbody>
         </table>
 
-        <div class="sc-admin-reservations-actions">
-          <a
-            th:href="${includeDeleted} ? @{/admin/reservations(includeDeleted=${includeDeleted})} : @{/admin/reservations}"
-            class="sc-admin-reservations-link"
-          >
-            一覧へ戻る
-          </a>
+        <div class="sc-admin-reservations-action-layout">
+          <div class="sc-admin-reservations-action-panel">
+            <h2 class="sc-admin-reservations-action-title">通常操作</h2>
+            <div class="sc-admin-reservations-actions">
+              <button th:if="${!reservation.deleted and reservation.status == 'RESERVED'}" type="button" class="sc-admin-reservations-reschedule" onclick="openRescheduleModal()">
+                予約変更
+              </button>
 
-          <form th:if="${!reservation.deleted and reservation.status == 'RESERVED'}" th:action="@{/admin/reservations/{id}/visit(id=${reservation.id})}" method="post" onsubmit="return confirm('本当に来院済みに変更しますか？');">
-            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
-            <button type="submit" class="sc-admin-reservations-visit">来院済みにする</button>
-          </form>
+              <form th:if="${!reservation.deleted and reservation.status == 'RESERVED'}" th:action="@{/admin/reservations/{id}/visit(id=${reservation.id})}" method="post" onsubmit="return confirm('本当に来院済みに変更しますか？');">
+                <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+                <button type="submit" class="sc-admin-reservations-visit">来院済みにする</button>
+              </form>
 
-          <button th:if="${!reservation.deleted and reservation.status == 'RESERVED'}" type="button" class="sc-admin-reservations-cancel" onclick="openCancelReasonModal()">
-            キャンセルする
-          </button>
+              <button th:if="${!reservation.deleted and reservation.status == 'RESERVED'}" type="button" class="sc-admin-reservations-cancel" onclick="openCancelReasonModal()">
+                キャンセルする
+              </button>
 
-          <form th:if="${!reservation.deleted and (reservation.status == 'VISITED' or reservation.status == 'CANCELLED')}" th:action="@{/admin/reservations/{id}/restore(id=${reservation.id})}" method="post">
-            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
-            <button type="submit" class="sc-admin-reservations-restore">予約済みに戻す</button>
-          </form>
+              <form th:if="${!reservation.deleted and (reservation.status == 'VISITED' or reservation.status == 'CANCELLED')}" th:action="@{/admin/reservations/{id}/restore(id=${reservation.id})}" method="post">
+                <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+                <button type="submit" class="sc-admin-reservations-restore">予約済みに戻す</button>
+              </form>
+            </div>
+          </div>
 
-          <button th:if="${!reservation.deleted}" type="button" class="sc-admin-reservations-delete" onclick="openDeleteReasonModal()">
-            削除する
-          </button>
+          <div class="sc-admin-reservations-action-panel sc-admin-reservations-action-panel-danger">
+            <div class="sc-admin-reservations-action-heading">
+              <h2 class="sc-admin-reservations-action-title">削除操作</h2>
+              <p class="sc-admin-reservations-action-note">※慎重に操作</p>
+            </div>
+            <div class="sc-admin-reservations-actions">
+              <button th:if="${!reservation.deleted}" type="button" class="sc-admin-reservations-delete" onclick="openDeleteReasonModal()">
+                削除する
+              </button>
 
-          <form th:if="${reservation.deleted}" th:action="@{/admin/reservations/{id}/restore-deleted(id=${reservation.id})}" method="post">
-            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
-            <button type="submit" class="sc-admin-reservations-restore">削除を取り消す</button>
-          </form>
+              <form th:if="${reservation.deleted}" th:action="@{/admin/reservations/{id}/restore-deleted(id=${reservation.id})}" method="post">
+                <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+                <button type="submit" class="sc-admin-reservations-restore">削除を取り消す</button>
+              </form>
+            </div>
+          </div>
         </div>
+
+        <a
+          th:href="${includeDeleted} ? @{/admin/reservations(includeDeleted=${includeDeleted})} : @{/admin/reservations}"
+          class="sc-admin-reservations-link sc-admin-reservations-link-back"
+        >
+          一覧へ戻る
+        </a>
       </div>
     </main>
-    <script>
+    <script th:inline="javascript">
+      const reservationApiUrl = /*[[@{/api/reservation-slots}]]*/ "/api/reservation-slots";
+
       function closeAdminReservationToast() {
         const toast = document.getElementById("adminReservationToast");
         if (toast) {
           toast.remove();
+        }
+      }
+
+      function openRescheduleModal() {
+        const modal = document.getElementById("rescheduleModal");
+        if (modal) {
+          modal.classList.remove("is-hidden");
+          syncRescheduleOptions();
+        }
+      }
+
+      function closeRescheduleModal() {
+        const modal = document.getElementById("rescheduleModal");
+        if (modal) {
+          modal.classList.add("is-hidden");
         }
       }
 
@@ -204,6 +283,110 @@
           modal.classList.add("is-hidden");
         }
       }
+
+      function getRestrictionMessage(dateValue) {
+        if (!dateValue) {
+          return "";
+        }
+        const selectedDate = new Date(dateValue + "T00:00:00");
+        const dayOfWeek = selectedDate.getDay();
+        if (dayOfWeek === 4) {
+          return "木曜日は休診日のため予約できません。";
+        }
+        if (dayOfWeek === 0) {
+          return "日曜日は休診日のため予約できません。";
+        }
+        if (dayOfWeek === 6) {
+          return "土曜日は午前のみ予約できます。";
+        }
+        return "";
+      }
+
+      async function syncRescheduleOptions() {
+        const form = document.getElementById("rescheduleForm");
+        const dateInput = document.getElementById("rescheduleDate");
+        const timeSelect = document.getElementById("rescheduleTime");
+        const help = document.getElementById("rescheduleTimeHelp");
+        const restriction = document.getElementById("rescheduleRestrictionMessage");
+        const submitButton = document.getElementById("rescheduleSubmitButton");
+
+        if (!form || !dateInput || !timeSelect || !help || !restriction || !submitButton) {
+          return;
+        }
+
+        const currentDate = form.dataset.currentDate;
+        const currentTime = form.dataset.currentTime;
+        const restrictionMessage = getRestrictionMessage(dateInput.value);
+        restriction.textContent = restrictionMessage;
+        restriction.classList.toggle("is-visible", Boolean(restrictionMessage));
+
+        timeSelect.innerHTML = "";
+        submitButton.disabled = true;
+
+        if (!dateInput.value) {
+          const option = document.createElement("option");
+          option.value = "";
+          option.textContent = "予約日を選択してください";
+          timeSelect.appendChild(option);
+          help.textContent = "日付を選ぶと空いている時間帯を読み込みます。";
+          return;
+        }
+
+        try {
+          const response = await fetch(`${reservationApiUrl}?date=${dateInput.value}`);
+          if (!response.ok) {
+            throw new Error("failed");
+          }
+          const data = await response.json();
+          const availableSlots = data.slots.filter((slot) => slot.available);
+          const isCurrentDate = currentDate === dateInput.value;
+
+          availableSlots.forEach((slot) => {
+            const option = document.createElement("option");
+            option.value = slot.time;
+            option.textContent = `${slot.time}（残り${slot.remaining}）`;
+            timeSelect.appendChild(option);
+          });
+
+          if (isCurrentDate && !availableSlots.some((slot) => slot.time === currentTime)) {
+            const option = document.createElement("option");
+            option.value = currentTime;
+            option.textContent = `${currentTime}（現在）`;
+            timeSelect.appendChild(option);
+          }
+
+          if (timeSelect.options.length === 0) {
+            const option = document.createElement("option");
+            option.value = "";
+            option.textContent = "空いている予約枠がありません";
+            timeSelect.appendChild(option);
+            help.textContent = "別の日付を選択してください。";
+            return;
+          }
+
+          if (isCurrentDate) {
+            timeSelect.value = currentTime;
+          }
+
+          submitButton.disabled = Boolean(restrictionMessage);
+          help.textContent = restrictionMessage
+            ? "休診日または受付対象外のため変更できません。"
+            : "空いている時間帯のみ選択できます。";
+        } catch (error) {
+          const option = document.createElement("option");
+          option.value = "";
+          option.textContent = "時間帯を取得できませんでした";
+          timeSelect.appendChild(option);
+          help.textContent = "時間帯の取得に失敗しました。時間をおいて再度お試しください。";
+        }
+      }
+
+      document.addEventListener("DOMContentLoaded", function () {
+        const dateInput = document.getElementById("rescheduleDate");
+        if (dateInput) {
+          dateInput.addEventListener("change", syncRescheduleOptions);
+        }
+      });
 
       window.setTimeout(closeAdminReservationToast, 3000);
     </script>

@@ -1,8 +1,8 @@
 package com.example.satoclinic.service;
 
+import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.time.DayOfWeek;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
@@ -41,15 +41,32 @@ public class ReservationSlotService {
                 .anyMatch(slot -> slot.isAvailable() && formatTime(slot.getStartTime()).equals(time));
     }
 
+    public void validateReservationDateTime(LocalDate date, LocalTime startTime) {
+        if (date == null || startTime == null) {
+            return;
+        }
+        switch (date.getDayOfWeek()) {
+            case THURSDAY -> throw new IllegalStateException("木曜日は休診日のため予約できません。");
+            case SUNDAY -> throw new IllegalStateException("日曜日は休診日のため予約できません。");
+            case SATURDAY -> {
+                if (!startTime.isBefore(LocalTime.of(14, 0))) {
+                    throw new IllegalStateException("土曜日の午後は予約できません。");
+                }
+            }
+            default -> {
+            }
+        }
+    }
+
     public String getReservationRestrictionMessage(LocalDate date) {
         if (date == null) {
             return null;
         }
         if (date.getDayOfWeek() == DayOfWeek.THURSDAY) {
-            return "木曜日は休診のため予約できません。";
+            return "木曜日は休診日のため予約できません。";
         }
         if (date.getDayOfWeek() == DayOfWeek.SUNDAY) {
-            return "日曜日は休診のため予約できません。";
+            return "日曜日は休診日のため予約できません。";
         }
         if (date.getDayOfWeek() == DayOfWeek.SATURDAY) {
             return "土曜日は午前のみ予約できます。";
