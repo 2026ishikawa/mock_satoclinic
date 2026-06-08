@@ -24,17 +24,19 @@ public class AdminReservationService {
             String status,
             String patientName,
             String reservationCode,
-            String phoneNumber) {
+            String phoneNumber,
+            boolean includeDeleted) {
         return reservationMapper.findAdminSummaries(
                 date,
                 status,
                 normalize(patientName),
                 normalize(reservationCode),
-                normalizePhone(phoneNumber));
+                normalizePhone(phoneNumber),
+                includeDeleted);
     }
 
-    public ReservationDetail findDetail(Long id) {
-        return reservationMapper.findDetailById(id);
+    public ReservationDetail findDetail(Long id, boolean includeDeleted) {
+        return reservationMapper.findDetailById(id, includeDeleted);
     }
 
     @Transactional
@@ -50,6 +52,21 @@ public class AdminReservationService {
     @Transactional
     public boolean restoreReserved(Long id) {
         return reservationMapper.restoreReservedById(id) > 0;
+    }
+
+    @Transactional
+    public boolean softDelete(Long id, String deleteReason, String deletedBy) {
+        String normalizedReason = normalize(deleteReason);
+        String normalizedDeletedBy = normalize(deletedBy);
+        if (normalizedReason == null || normalizedDeletedBy == null) {
+            return false;
+        }
+        return reservationMapper.softDeleteById(id, normalizedReason, normalizedDeletedBy) > 0;
+    }
+
+    @Transactional
+    public boolean restoreDeleted(Long id) {
+        return reservationMapper.restoreDeletedById(id) > 0;
     }
 
     private String normalize(String value) {

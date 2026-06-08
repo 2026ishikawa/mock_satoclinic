@@ -1,6 +1,7 @@
 package com.example.satoclinic.model.reservation;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 public class ReservationDetail {
@@ -16,6 +17,9 @@ public class ReservationDetail {
     private String symptom;
     private String status;
     private String cancelReason;
+    private LocalDateTime deletedAt;
+    private String deletedBy;
+    private String deleteReason;
     private boolean agreedToPrivacyPolicy;
     private LocalDate reservationDate;
     private LocalTime reservationTime;
@@ -106,6 +110,34 @@ public class ReservationDetail {
 
     public void setCancelReason(String cancelReason) {
         this.cancelReason = cancelReason;
+    }
+
+    public LocalDateTime getDeletedAt() {
+        return deletedAt;
+    }
+
+    public void setDeletedAt(LocalDateTime deletedAt) {
+        this.deletedAt = deletedAt;
+    }
+
+    public String getDeletedBy() {
+        return deletedBy;
+    }
+
+    public void setDeletedBy(String deletedBy) {
+        this.deletedBy = deletedBy;
+    }
+
+    public String getDeleteReason() {
+        return deleteReason;
+    }
+
+    public void setDeleteReason(String deleteReason) {
+        this.deleteReason = deleteReason;
+    }
+
+    public boolean isDeleted() {
+        return deletedAt != null;
     }
 
     public boolean isAgreedToPrivacyPolicy() {

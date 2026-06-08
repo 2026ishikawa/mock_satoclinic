@@ -26,6 +26,7 @@ public interface ReservationSlotMapper {
             LEFT JOIN reservations r
               ON rs.id = r.reservation_slot_id
               AND r.status = 'RESERVED'
+              AND r.deleted_at IS NULL
             WHERE rs.slot_date = #{date}
               AND rs.is_active = TRUE
             GROUP BY

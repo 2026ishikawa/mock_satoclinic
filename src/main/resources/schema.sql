@@ -25,6 +25,9 @@ CREATE TABLE reservations (
   symptom VARCHAR(500),
   status VARCHAR(20) NOT NULL DEFAULT 'RESERVED',
   cancel_reason VARCHAR(30),
+  deleted_at TIMESTAMP,
+  deleted_by VARCHAR(100),
+  delete_reason VARCHAR(255),
   agreed_to_privacy_policy BOOLEAN NOT NULL DEFAULT FALSE,
   created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -47,3 +50,6 @@ CREATE INDEX idx_reservations_slot_status
 
 CREATE INDEX idx_reservations_status
   ON reservations (status);
+
+CREATE INDEX idx_reservations_deleted_at
+  ON reservations (deleted_at);

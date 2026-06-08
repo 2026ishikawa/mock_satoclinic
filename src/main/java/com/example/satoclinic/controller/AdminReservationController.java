@@ -1,5 +1,6 @@
 package com.example.satoclinic.controller;
 
+import java.security.Principal;
 import java.time.LocalDate;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -38,28 +39,35 @@ public class AdminReservationController {
             @RequestParam(value = "patientName", required = false) String patientName,
             @RequestParam(value = "reservationCode", required = false) String reservationCode,
             @RequestParam(value = "phoneNumber", required = false) String phoneNumber,
+            @RequestParam(value = "includeDeleted", defaultValue = "false") boolean includeDeleted,
             Model model) {
         List<AdminReservationSummary> reservations = adminReservationService.findReservations(
                 date,
                 status,
                 patientName,
                 reservationCode,
-                phoneNumber);
+                phoneNumber,
+                includeDeleted);
         model.addAttribute("reservations", reservations);
         model.addAttribute("selectedDate", date);
         model.addAttribute("selectedStatus", status);
         model.addAttribute("selectedPatientName", patientName);
         model.addAttribute("selectedReservationCode", reservationCode);
         model.addAttribute("selectedPhoneNumber", phoneNumber);
+        model.addAttribute("selectedIncludeDeleted", includeDeleted);
         model.addAttribute("statusOptions", List.of("RESERVED", "CANCELLED", "VISITED"));
         return "admin-reservations";
     }
 
     @GetMapping("/{id}")
-    public String detail(@PathVariable("id") Long id, Model model) {
-        ReservationDetail reservation = adminReservationService.findDetail(id);
+    public String detail(
+            @PathVariable("id") Long id,
+            @RequestParam(value = "includeDeleted", defaultValue = "false") boolean includeDeleted,
+            Model model) {
+        ReservationDetail reservation = adminReservationService.findDetail(id, includeDeleted);
         model.addAttribute("reservation", reservation);
         model.addAttribute("cancelReasonOptions", CANCEL_REASON_OPTIONS);
+        model.addAttribute("includeDeleted", includeDeleted);
         return "admin-reservation-detail";
     }
 
@@ -84,6 +92,24 @@ public class AdminReservationController {
     public String restoreReserved(@PathVariable("id") Long id, RedirectAttributes redirectAttributes) {
         boolean restored = adminReservationService.restoreReserved(id);
         redirectAttributes.addFlashAttribute("message", restored ? "予約済みに戻しました。" : "予約を更新できませんでした。");
+        return "redirect:/admin/reservations/" + id;
+    }
+
+    @PostMapping("/{id}/delete")
+    public String softDelete(
+            @PathVariable("id") Long id,
+            @RequestParam("deleteReason") String deleteReason,
+            Principal principal,
+            RedirectAttributes redirectAttributes) {
+        boolean deleted = adminReservationService.softDelete(id, deleteReason, principal != null ? principal.getName() : null);
+        redirectAttributes.addFlashAttribute("message", deleted ? "予約データを削除済みにしました。" : "予約データを削除できませんでした。");
+        return "redirect:/admin/reservations/" + id + "?includeDeleted=true";
+    }
+
+    @PostMapping("/{id}/restore-deleted")
+    public String restoreDeleted(@PathVariable("id") Long id, RedirectAttributes redirectAttributes) {
+        boolean restored = adminReservationService.restoreDeleted(id);
+        redirectAttributes.addFlashAttribute("message", restored ? "削除済みの予約データを復元しました。" : "削除済みの予約データを復元できませんでした。");
         return "redirect:/admin/reservations/" + id;
     }
 

@@ -27,13 +27,17 @@ public interface ReservationMapper {
               rs.slot_date AS reservation_date,
               rs.start_time AS reservation_time,
               r.visit_type,
-              r.status
+              r.status,
+              r.deleted_at
             FROM reservations r
             INNER JOIN reservation_slots rs
               ON r.reservation_slot_id = rs.id
             <where>
+              <if test="!includeDeleted">
+                r.deleted_at IS NULL
+              </if>
               <if test="date != null">
-                rs.slot_date = #{date}
+                AND rs.slot_date = #{date}
               </if>
               <if test="status != null and status != ''">
                 AND r.status = #{status}
@@ -45,7 +49,7 @@ public interface ReservationMapper {
                 AND r.reservation_code LIKE CONCAT('%', #{reservationCode}, '%')
               </if>
               <if test="phoneNumber != null and phoneNumber != ''">
-                AND REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(r.phone_number, '-', ''), ' ', ''), '　', ''), '(', ''), ')', '') LIKE CONCAT('%', #{phoneNumber}, '%')
+                AND REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(r.phone_number, '-', ''), ' ', ''), '縲', ''), '(', ''), ')', '') LIKE CONCAT('%', #{phoneNumber}, '%')
               </if>
             </where>
             ORDER BY rs.slot_date ASC, rs.start_time ASC, r.created_at ASC, r.id ASC
@@ -56,7 +60,8 @@ public interface ReservationMapper {
             @Param("status") String status,
             @Param("patientName") String patientName,
             @Param("reservationCode") String reservationCode,
-            @Param("phoneNumber") String phoneNumber);
+            @Param("phoneNumber") String phoneNumber,
+            @Param("includeDeleted") boolean includeDeleted);
 
     @Select("""
             SELECT COALESCE(MAX(CAST(SUBSTRING(r.reservation_code, 10, 4) AS INTEGER)), 0)
@@ -72,6 +77,7 @@ public interface ReservationMapper {
             FROM reservations
             WHERE reservation_slot_id = #{reservationSlotId}
               AND status = 'RESERVED'
+              AND deleted_at IS NULL
             """)
     int countReservedBySlotId(@Param("reservationSlotId") Long reservationSlotId);
 
@@ -79,11 +85,12 @@ public interface ReservationMapper {
             SELECT COUNT(*)
             FROM reservations
             WHERE reservation_slot_id = #{reservationSlotId}
-              AND REPLACE(REPLACE(TRIM(patient_name), ' ', ''), '　', '') = #{patientName}
-              AND REPLACE(REPLACE(TRIM(patient_kana), ' ', ''), '　', '') = #{patientKana}
+              AND REPLACE(REPLACE(TRIM(patient_name), ' ', ''), '縲', '') = #{patientName}
+              AND REPLACE(REPLACE(TRIM(patient_kana), ' ', ''), '縲', '') = #{patientKana}
               AND birth_date = #{birthDate}
-              AND REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(phone_number, '-', ''), ' ', ''), '　', ''), '(', ''), ')', '') = #{phoneNumber}
+              AND REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(phone_number, '-', ''), ' ', ''), '縲', ''), '(', ''), ')', '') = #{phoneNumber}
               AND status = 'RESERVED'
+              AND deleted_at IS NULL
             """)
     int countDuplicateReservedReservation(
             @Param("reservationSlotId") Long reservationSlotId,
@@ -138,6 +145,9 @@ public interface ReservationMapper {
               r.symptom,
               r.status,
               r.cancel_reason,
+              r.deleted_at,
+              r.deleted_by,
+              r.delete_reason,
               r.agreed_to_privacy_policy,
               rs.slot_date AS reservation_date,
               rs.start_time AS reservation_time
@@ -145,10 +155,12 @@ public interface ReservationMapper {
             INNER JOIN reservation_slots rs
               ON r.reservation_slot_id = rs.id
             WHERE r.reservation_code = #{reservationCode}
+              AND r.deleted_at IS NULL
             """)
     ReservationDetail findDetailByReservationCode(@Param("reservationCode") String reservationCode);
 
     @Select("""
+            <script>
             SELECT
               r.id,
               r.reservation_code,
@@ -161,6 +173,9 @@ public interface ReservationMapper {
               r.symptom,
               r.status,
               r.cancel_reason,
+              r.deleted_at,
+              r.deleted_by,
+              r.delete_reason,
               r.agreed_to_privacy_policy,
               rs.slot_date AS reservation_date,
               rs.start_time AS reservation_time
@@ -168,8 +183,12 @@ public interface ReservationMapper {
             INNER JOIN reservation_slots rs
               ON r.reservation_slot_id = rs.id
             WHERE r.id = #{id}
+            <if test="!includeDeleted">
+              AND r.deleted_at IS NULL
+            </if>
+            </script>
             """)
-    ReservationDetail findDetailById(@Param("id") Long id);
+    ReservationDetail findDetailById(@Param("id") Long id, @Param("includeDeleted") boolean includeDeleted);
 
     @Update("""
             UPDATE reservations
@@ -178,6 +197,7 @@ public interface ReservationMapper {
                 updated_at = CURRENT_TIMESTAMP
             WHERE id = #{id}
               AND status = 'RESERVED'
+              AND deleted_at IS NULL
             """)
     int cancelById(@Param("id") Long id, @Param("cancelReason") String cancelReason);
 
@@ -187,6 +207,7 @@ public interface ReservationMapper {
                 updated_at = CURRENT_TIMESTAMP
             WHERE id = #{id}
               AND status = 'RESERVED'
+              AND deleted_at IS NULL
             """)
     int markVisitedById(@Param("id") Long id);
 
@@ -197,6 +218,32 @@ public interface ReservationMapper {
                 updated_at = CURRENT_TIMESTAMP
             WHERE id = #{id}
               AND status IN ('VISITED', 'CANCELLED')
+              AND deleted_at IS NULL
             """)
     int restoreReservedById(@Param("id") Long id);
+
+    @Update("""
+            UPDATE reservations
+            SET deleted_at = CURRENT_TIMESTAMP,
+                deleted_by = #{deletedBy},
+                delete_reason = #{deleteReason},
+                updated_at = CURRENT_TIMESTAMP
+            WHERE id = #{id}
+              AND deleted_at IS NULL
+            """)
+    int softDeleteById(
+            @Param("id") Long id,
+            @Param("deleteReason") String deleteReason,
+            @Param("deletedBy") String deletedBy);
+
+    @Update("""
+            UPDATE reservations
+            SET deleted_at = NULL,
+                deleted_by = NULL,
+                delete_reason = NULL,
+                updated_at = CURRENT_TIMESTAMP
+            WHERE id = #{id}
+              AND deleted_at IS NOT NULL
+            """)
+    int restoreDeletedById(@Param("id") Long id);
 }

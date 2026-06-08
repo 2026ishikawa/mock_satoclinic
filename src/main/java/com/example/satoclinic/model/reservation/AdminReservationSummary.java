@@ -1,6 +1,7 @@
 package com.example.satoclinic.model.reservation;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 public class AdminReservationSummary {
@@ -16,6 +17,7 @@ public class AdminReservationSummary {
     private LocalTime reservationTime;
     private String visitType;
     private String status;
+    private LocalDateTime deletedAt;
 
     public Long getId() {
         return id;
@@ -97,5 +99,17 @@ public class AdminReservationSummary {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public LocalDateTime getDeletedAt() {
+        return deletedAt;
+    }
+
+    public void setDeletedAt(LocalDateTime deletedAt) {
+        this.deletedAt = deletedAt;
+    }
+
+    public boolean isDeleted() {
+        return deletedAt != null;
     }
 }

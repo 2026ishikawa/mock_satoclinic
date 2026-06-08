@@ -16,6 +16,9 @@ public class Reservation {
     private String visitType;
     private String symptom;
     private String status;
+    private LocalDateTime deletedAt;
+    private String deletedBy;
+    private String deleteReason;
     private boolean agreedToPrivacyPolicy;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
@@ -106,6 +109,30 @@ public class Reservation {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public LocalDateTime getDeletedAt() {
+        return deletedAt;
+    }
+
+    public void setDeletedAt(LocalDateTime deletedAt) {
+        this.deletedAt = deletedAt;
+    }
+
+    public String getDeletedBy() {
+        return deletedBy;
+    }
+
+    public void setDeletedBy(String deletedBy) {
+        this.deletedBy = deletedBy;
+    }
+
+    public String getDeleteReason() {
+        return deleteReason;
+    }
+
+    public void setDeleteReason(String deleteReason) {
+        this.deleteReason = deleteReason;
     }
 
     public boolean isAgreedToPrivacyPolicy() {

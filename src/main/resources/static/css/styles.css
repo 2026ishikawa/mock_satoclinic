@@ -4130,6 +4130,22 @@ body.sc-admin-reservations-page {
   border-radius: 8px;
 }
 
+.sc-admin-reservations-inline-textarea {
+  min-width: 280px;
+  padding: 10px 12px;
+  border: 1px solid #cfd8e3;
+  border-radius: 8px;
+  resize: vertical;
+  font: inherit;
+}
+
+.sc-admin-reservations-checkbox {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 700;
+}
+
 .sc-admin-reservations-status-badge {
   display: inline-block;
   min-width: 88px;
@@ -4153,6 +4169,11 @@ body.sc-admin-reservations-page {
 .sc-admin-reservations-status-badge.is-cancelled {
   background: #fdecec;
   color: #b23b3b;
+}
+
+.sc-admin-reservations-status-badge.is-deleted {
+  background: #f1f3f5;
+  color: #5f6b75;
 }
 
 .sc-admin-reservations-link {
@@ -4195,6 +4216,20 @@ body.sc-admin-reservations-page {
 
 .sc-admin-reservations-cancel:hover {
   background: #b42318;
+}
+
+.sc-admin-reservations-delete {
+  padding: 10px 16px;
+  border-radius: 8px;
+  background: #6c757d;
+  color: #fff;
+  font-weight: 700;
+  border: none;
+  box-shadow: 0 0 0 2px rgba(108, 117, 125, 0.12);
+}
+
+.sc-admin-reservations-delete:hover {
+  background: #545b62;
 }
 
 .sc-admin-reservations-visit {
