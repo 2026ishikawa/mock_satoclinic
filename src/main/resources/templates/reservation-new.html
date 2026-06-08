@@ -292,18 +292,30 @@
     <script>
       document.addEventListener("DOMContentLoaded", function () {
         const privacyCheckbox = document.getElementById("agreedToPrivacyPolicy");
+        const reservationDateInput = document.getElementById("reservationDate");
         const confirmButton = document.getElementById("reservationConfirmButton");
 
-        if (!privacyCheckbox || !confirmButton) {
+        if (!privacyCheckbox || !reservationDateInput || !confirmButton) {
           return;
         }
 
+        const isClosedDay = function (dateValue) {
+          if (!dateValue) {
+            return false;
+          }
+
+          const selectedDate = new Date(dateValue + "T00:00:00");
+          const dayOfWeek = selectedDate.getDay();
+          return dayOfWeek === 0 || dayOfWeek === 4;
+        };
+
         const syncConfirmButton = function () {
-          confirmButton.disabled = !privacyCheckbox.checked;
+          confirmButton.disabled = !privacyCheckbox.checked || isClosedDay(reservationDateInput.value);
         };
 
         syncConfirmButton();
         privacyCheckbox.addEventListener("change", syncConfirmButton);
+        reservationDateInput.addEventListener("change", syncConfirmButton);
       });
     </script>
   </body>
