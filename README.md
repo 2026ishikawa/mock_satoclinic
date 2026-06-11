@@ -2,8 +2,8 @@
 キャッチコピー：「地域に根ざした医療を、あなたとご家族に」
 
 ## 🌐 サイトURL
-[https://example.com](https://example.com)
-※準備中
+[https://mock-satoclinic-igg3.onrender.com](https://mock-satoclinic-igg3.onrender.com)
+※Renderで公開しているため、起動まで30秒程度時間がかかる場合があります。
 
 ## 📝 プロジェクト概要
 ポートフォリオ掲載を目的として、架空の医院を題材にWebサイトの制作をしました。
