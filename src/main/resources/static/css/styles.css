@@ -672,7 +672,7 @@ ul {
 }
 
 .reservation-tel-btn:hover {
-  background-color: var(--btn-tl-bg-hover);
+  background-color: var(--btn-tel-bg-hover);
 }
 
 .reservation-web-btn {
@@ -1210,7 +1210,7 @@ ul {
 .medical-contents {
   display: flex;
   flex-direction: column;
-  gap: 80px;
+  gap: 50px;
   align-items: center;
 }
 
@@ -1490,6 +1490,7 @@ ul {
   gap: 40px;
   align-items: center;
   max-width: 1240px;
+  margin: 0 auto;
   position: relative;
 }
 
@@ -1523,6 +1524,7 @@ ul {
   max-height: 270px;
   position: absolute;
   top: 40px;
+  font-size: 20px;
   font-weight: 500;
   z-index: 99;
 }
@@ -1541,6 +1543,8 @@ ul {
   font-size: 18px;
   letter-spacing: 0.9px;
   transition: background-color 0.3s;
+  position: relative;
+  top: 80px;
 }
 
 .about-btn .arrow-text {
@@ -1559,11 +1563,10 @@ ul {
         width: 65%;
         line-height: 1.7;
         margin-bottom: 30px;
+        font-size: 16px;
     }
     .about-btn {
-        position: absolute;
-        top: 220px;
-        left: 50px;
+        top: 100px;
     }
 }
 
@@ -1582,7 +1585,7 @@ ul {
   }
   .about-content {
     flex-direction: column-reverse;
-    gap: 30px;
+    gap: 20px;
   }
   .about-text {
     width: auto;
@@ -1625,6 +1628,7 @@ ul {
 .section-header.left {
   text-align: left;
   margin-bottom: 20px;
+  padding: 0 20px;
 }
 
 .section-subtitle.size {
@@ -1636,12 +1640,12 @@ ul {
 }
 
 .section-staff .lead {
-  padding: 0 0 40px;
+  padding: 0 20px 40px;
 }
 
 .staffRow {
   display: flex;
-  justify-content: flex-start;
+  justify-content: space-around;
   gap: 50px;
   flex-wrap: nowrap;
 }
@@ -1785,7 +1789,7 @@ ul {
     border-radius: 0 0 3px 3px;
   }
   .staffRow {
-    gap: 30px;
+    gap: 50px;
   }
   .staffCard {
     gap: 15px;
